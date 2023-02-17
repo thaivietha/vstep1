@@ -26,7 +26,7 @@
                 </ul>
             </div>
             <div class="table-responsive">
-                <table id="backend_ordersTable" class="table table-bordered table-striped">
+                <table id="myTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th style="text-align:center;">
@@ -54,13 +54,18 @@
 @push('after-scripts')
     <script>
         $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             var route = '{{route('admin.orders.get_data')}}';
 
             @if(request('offline_requests') == 1)
                 route = '{{route('admin.orders.get_data',['offline_requests' => 1])}}';
             @endif
 
-            $('#backend_ordersTable').DataTable({
+            $('#myTable').DataTable({
                 processing: true,
                 serverSide: true,
                 iDisplayLength: 10,
@@ -81,7 +86,10 @@
                     },
                     'colvis'
                 ],
-                ajax: route,
+                ajax: {
+                    url: route,
+                    type: 'POST',
+                },
                 columns: [
                     {
                         data: function (data) {

@@ -35,7 +35,7 @@ Route::group(['middleware' => 'role:administrator'], function () {
 
 
     //===== Orders Routes =====//
-    Route::get('get-orders-data', ['uses' => 'Admin\OrderController@getData', 'as' => 'orders.get_data']);
+    Route::post('get-orders-data', ['uses' => 'Admin\OrderController@getData', 'as' => 'orders.get_data']);
     Route::post('orders_mass_destroy', ['uses' => 'Admin\OrderController@massDestroy', 'as' => 'orders.mass_destroy']);
     Route::post('orders/complete', ['uses' => 'Admin\OrderController@complete', 'as' => 'orders.complete']);
     Route::delete('orders_perma_del/{id}', ['uses' => 'Admin\OrderController@perma_del', 'as' => 'orders.perma_del']);
