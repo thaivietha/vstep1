@@ -21,6 +21,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Resolvers\SocialUserResolver;
 use Coderello\SocialGrant\Resolvers\SocialUserResolverInterface;
+use Illuminate\Support\Facades\URL;
 
 /**
  * Class AppServiceProvider.
@@ -50,6 +51,8 @@ class AppServiceProvider extends ServiceProvider
          * setLocale for php. Enables ->formatLocalized() with localized values for dates
          */
         setlocale(LC_TIME, config('app.locale_php'));
+
+        URL::forceScheme('https');
 
 
         /*
