@@ -26,7 +26,7 @@
                 </ul>
             </div>
             <div class="table-responsive">
-                <table id="myTable" class="table table-bordered table-striped">
+                <table id="backend_ordersTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th style="text-align:center;">
@@ -60,7 +60,7 @@
                 route = '{{route('admin.orders.get_data',['offline_requests' => 1])}}';
             @endif
 
-            $('#myTable').DataTable({
+            $('#backend_ordersTable').DataTable({
                 processing: true,
                 serverSide: true,
                 iDisplayLength: 10,
