@@ -2571,42 +2571,57 @@ class ApiController extends Controller
 
     public function ChangePassword(Request $request)
     {
-        $data = $request->only(['OldPassword', 'NewPassword', 'ConfirmPassword']);
-        $user =  Auth::user();
-        if (Hash::check($data['OldPassword'], $user->password)) {
-            if ($data['NewPassword'] == $data['ConfirmPassword']) {
-                $user->update([
-                    'password' => $data['NewPassword']
-                ]);
+        try {
+            $data = $request->only(['OldPassword', 'NewPassword', 'ConfirmPassword']);
+            $user =  Auth::user();
+            if (Hash::check($data['OldPassword'], $user->password)) {
+                if ($data['NewPassword'] == $data['ConfirmPassword']) {
+                    $user->update([
+                        'password' => $data['NewPassword']
+                    ]);
+                    return response()->json([
+                        'msg' => 'Đổi mật khẩu thành công!'
+                    ]);
+                } else {
+                    return response()->json([
+                        'msg' => 'Mật khẩu không khớp!'
+                    ]);
+                }
+            }else{
                 return response()->json([
-                    'msg' => 'Đổi mật khẩu thành công!'
-                ]);
-            } else {
-                return response()->json([
-                    'msg' => 'Mật khẩu không khớp!'
+                    'msg' => 'Mật khẩu không khớp với mật khẩu cũ!'
                 ]);
             }
-        }else{
-            return response()->json([
-                'msg' => 'Mật khẩu không khớp với mật khẩu cũ!'
-            ]);
+        }catch (\Exception $e){
+            dd($e->getMessage());
         }
+
     }
 
 
     public function coursesByUser(){
-        $courses =  auth()->user()->purchasedCourses();
-        $coursesResource = CoursesResource::collection($courses);
-        return response()->json($coursesResource);
+        try {
+            $courses =  auth()->user()->purchasedCourses();
+            $coursesResource = CoursesResource::collection($courses);
+            return response()->json($coursesResource);
+        }catch (\Exception $e){
+            dd($e->getMessage());
+        }
+
     }
 
     public function lessonsByUser(){
-        $courses =  auth()->user()->purchasedCourses();
-        foreach ($courses as $course){
-            $lessons = $course->publishedLessons;
-            $lessonsResource = LessonsResource::collection($lessons);
+        try {
+            $courses =  auth()->user()->purchasedCourses();
+            foreach ($courses as $course){
+                $lessons = $course->publishedLessons;
+                $lessonsResource = LessonsResource::collection($lessons);
+            }
+            return response()->json($lessonsResource);
+        }catch (\Exception $e){
+            dd($e->getMessage());
         }
-        return response()->json($lessonsResource);
+
     }
     public function getzipfileIdLesson($id){
         try {
