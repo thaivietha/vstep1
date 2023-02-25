@@ -105,7 +105,7 @@
                     }
                 },
                 columns: [
-                    {data: "id", name: 'id', "orderable": false},
+                    {data: "id", name: 'id'},
                     {data: "first_name", name: 'first_name'},
                     {data: "last_name", name: 'last_name'},
                     {data: "email", name: "email"},
