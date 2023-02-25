@@ -52,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
          */
         setlocale(LC_TIME, config('app.locale_php'));
 
-//        URL::forceScheme('https');
+        URL::forceScheme('https');
 
 
         /*
