@@ -51,6 +51,7 @@ return array (
           'confirmed' => 'Confirmed',
           'send_confirmation_email' => 'Send Confirmation E-mail',
           'associated_roles' => 'Associated Roles',
+          'user_name' => 'User Name',
           'name' => 'Name',
           'other_permissions' => 'Other Permissions',
           'timezone' => 'Timezone',

@@ -6,8 +6,14 @@
                 <td><img src="{{ $user->picture }}" class="user-profile-image" height="150" /></td>
             </tr>
 
+
             <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.name')</th>
+                <th>@lang('labels.backend.access.users.tabs.content.overview.user_name')</th>
+                <td>{{ $user->username }}</td>
+            </tr>
+
+            <tr>
+                <th>@lang('labels.backend.access.users.tabs.content.overview.full_name')</th>
                 <td>{{ $user->name }}</td>
             </tr>
 

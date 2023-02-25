@@ -118,6 +118,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $this->userRepository->create($request->only(
+            'username',
             'first_name',
             'last_name',
             'email',
@@ -173,6 +174,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $this->userRepository->update($user, $request->only(
+            'username',
             'first_name',
             'last_name',
             'email',
