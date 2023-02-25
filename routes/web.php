@@ -10,6 +10,29 @@ use App\Http\Controllers\Frontend\HomeController;
 
 
 
+
+Route::get('/clear', function () {
+    try {
+        echo Artisan::call('optimize:clear');
+        echo Artisan::call('cache:clear');
+        echo Artisan::call('config:cache');
+        echo Artisan::call('route:cache');
+    } catch (Exception $exception) {
+        Log::error('clear ' . $exception->getMessage());
+    }
+
+});
+
+Route::get('/info', function () {
+    try {
+        echo phpinfo();
+    } catch (Exception $exception) {
+        Log::error('info ' . $exception->getMessage());
+    }
+
+});
+
+
 // Switch between the included languages
 Route::get('lang/{lang}', [LanguageController::class, 'swap']);
 
