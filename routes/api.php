@@ -120,7 +120,7 @@ Route::group(['prefix' => 'v1','namespace'=>'v1'],function (){
 
 
 Route::group(['namespace'=>'v1'],function (){
-    Route::post('Token', 'ApiController@token');
+    Route::post('/Token', 'ApiController@token');
     Route::get('/baihocs/getzipfile/{idBaihoc}', 'ApiController@getzipfileIdLesson');
 
     Route::group([

@@ -31,8 +31,4 @@ class LessonsResource extends JsonResource
 
     }
 
-    public static function allowedIncludes()
-    {
-        return ['baihoc', 'category'];
-    }
 }

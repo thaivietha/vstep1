@@ -209,6 +209,7 @@ class ApiController extends Controller
 
     public function token(Request $request)
     {
+//        dd(12);
         try {
             $request->validate([
                 'username' => 'required|string',
@@ -2617,7 +2618,7 @@ class ApiController extends Controller
                 $lessons = $course->publishedLessons;
                 $lessonsResource = LessonsResource::collection($lessons);
             }
-            return response()->json($lessonsResource);
+            return response()->json(@$lessonsResource);
         }catch (\Exception $e){
             dd($e->getMessage());
         }
