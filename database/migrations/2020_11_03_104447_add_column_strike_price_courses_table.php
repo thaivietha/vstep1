@@ -14,7 +14,7 @@ class AddColumnStrikePriceCoursesTable extends Migration
     public function up()
     {
         Schema::table('courses', function (Blueprint $table) {
-            $table->decimal('strike',15,2)->nullable()->after('price');
+            $table->decimal('strike',15,0)->nullable()->after('price');
         });
     }
 

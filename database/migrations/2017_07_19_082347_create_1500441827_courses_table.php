@@ -19,7 +19,7 @@ class Create1500441827CoursesTable extends Migration
                 $table->string('title');
                 $table->string('slug')->nullable();
                 $table->text('description')->nullable();
-                $table->decimal('price', 15, 2)->nullable();
+                $table->decimal('price', 15, 0)->nullable();
                 $table->string('course_image')->nullable();
                 $table->date('start_date')->nullable();
                 $table->integer('featured')->default(0)->nullable();

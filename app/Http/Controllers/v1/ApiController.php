@@ -209,17 +209,14 @@ class ApiController extends Controller
 
     public function token(Request $request)
     {
-
-
         try {
             $request->validate([
-                'email' => 'required|string|email',
+                'username' => 'required|string',
                 'password' => 'required|string',
             ]);
 
-
             $credentials =
-                request(['email', 'password']);
+                request(['username', 'password']);
             if (!Auth::attempt($credentials)) {
                 return response()->json([
                     'message' => 'Unauthorized'
