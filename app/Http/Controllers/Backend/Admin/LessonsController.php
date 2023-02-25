@@ -379,6 +379,9 @@ class LessonsController extends Controller
         if ($request->hasFile('add_pdf')) {
             $pdf = $lesson->mediaPDF;
             if ($pdf) {
+                if (File::exists(public_path('/storage/uploads/' . $pdf->name))) {
+                    File::delete(public_path('/storage/uploads/' . $pdf->name));
+                }
                 $pdf->delete();
             }
         }

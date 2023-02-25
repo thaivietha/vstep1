@@ -131,7 +131,15 @@ return [
         'symbol' => '฿',
         'name' => 'Thai baht',
         'country' => 'Thailand'
+    ],
+    [
+        'short_code' => 'VND',
+        'symbol' => '₫',
+        'name' => 'Việt Nam',
+        'country' => 'Vietnamese'
     ]
+
+
 
 
 ];

@@ -1,4 +1,5 @@
-<?php return array (
+<?php return function ($fontDir, $rootDir) {
+return array (
   'sans-serif' => array(
     'normal' => $rootDir . '/lib/fonts/Helvetica',
     'bold' => $rootDir . '/lib/fonts/Helvetica-Bold',
@@ -78,9 +79,11 @@
     'normal' => $rootDir . '/lib/fonts/DejaVuSerif',
   ),
   'lobster two' => array(
-    'normal' => $fontDir . '/d74bce80a4578c4055fc3abb06f1a5a8',
+    'normal' => $fontDir . '/lobster_two_normal_c1cb885528c4adc867d618b2adc17d24',
+    'bold' => $fontDir . '/lobster_two_bold_8e67982cbf76fce91dbe5e1d169d5807',
   ),
   'amiri' => array(
     'normal' => $fontDir . '/7065ab98453d16d0654b4a71c0981392',
   ),
-) ?>
+);
+}; ?>

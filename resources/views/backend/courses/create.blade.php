@@ -59,61 +59,61 @@
                 </div>
             </div>
 
-{{--            <div class="row">--}}
-{{--                <div class="col-12 col-lg-4 form-group">--}}
-{{--                    {!! Form::label('price',  trans('labels.backend.courses.fields.price').' (in '.$appCurrency["symbol"].')', ['class' => 'control-label']) !!}--}}
-{{--                    {!! Form::number('price', old('price'), ['class' => 'form-control', 'placeholder' => trans('labels.backend.courses.fields.price'),'step' => 'any', 'pattern' => "[0-9]"]) !!}--}}
-{{--                </div>--}}
-{{--                <div class="col-12 col-lg-4 form-group">--}}
-{{--                    {!! Form::label('strike',  trans('labels.backend.courses.fields.strike').' (in '.$appCurrency["symbol"].')', ['class' => 'control-label']) !!}--}}
-{{--                    {!! Form::number('strike', old('strike'), ['class' => 'form-control', 'placeholder' => trans('labels.backend.courses.fields.strike'),'step' => 'any', 'pattern' => "[0-9]"]) !!}--}}
-{{--                </div>--}}
-{{--                <div class="col-12 col-lg-4 form-group">--}}
-{{--                    {!! Form::label('course_image',  trans('labels.backend.courses.fields.course_image'), ['class' => 'control-label']) !!}--}}
-{{--                    {!! Form::file('course_image',  ['class' => 'form-control', 'accept' => 'image/jpeg,image/gif,image/png']) !!}--}}
-{{--                    {!! Form::hidden('course_image_max_size', 8) !!}--}}
-{{--                    {!! Form::hidden('course_image_max_width', 4000) !!}--}}
-{{--                    {!! Form::hidden('course_image_max_height', 4000) !!}--}}
+            <div class="row">
+                <div class="col-12 col-lg-4 form-group">
+                    {!! Form::label('price',  trans('labels.backend.courses.fields.price').' (in '.$appCurrency["symbol"].')', ['class' => 'control-label']) !!}
+                    {!! Form::number('price', old('price'), ['class' => 'form-control', 'placeholder' => trans('labels.backend.courses.fields.price'),'step' => 'any', 'pattern' => "[0-9]"]) !!}
+                </div>
+                <div class="col-12 col-lg-4 form-group">
+                    {!! Form::label('strike',  trans('labels.backend.courses.fields.strike').' (in '.$appCurrency["symbol"].')', ['class' => 'control-label']) !!}
+                    {!! Form::number('strike', old('strike'), ['class' => 'form-control', 'placeholder' => trans('labels.backend.courses.fields.strike'),'step' => 'any', 'pattern' => "[0-9]"]) !!}
+                </div>
+                <div class="col-12 col-lg-4 form-group">
+                    {!! Form::label('course_image',  trans('labels.backend.courses.fields.course_image'), ['class' => 'control-label']) !!}
+                    {!! Form::file('course_image',  ['class' => 'form-control', 'accept' => 'image/jpeg,image/gif,image/png']) !!}
+                    {!! Form::hidden('course_image_max_size', 8) !!}
+                    {!! Form::hidden('course_image_max_width', 4000) !!}
+                    {!! Form::hidden('course_image_max_height', 4000) !!}
 
-{{--                </div>--}}
-{{--                <div class="col-12 col-lg-4  form-group">--}}
-{{--                    {!! Form::label('start_date', trans('labels.backend.courses.fields.start_date').' (yyyy-mm-dd)', ['class' => 'control-label']) !!}--}}
-{{--                    {!! Form::text('start_date', old('start_date'), ['class' => 'form-control date','pattern' => '(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))', 'placeholder' => trans('labels.backend.courses.fields.start_date').' (Ex . 2019-01-01)', 'autocomplete' => 'off']) !!}--}}
+                </div>
+                <div class="col-12 col-lg-4  form-group">
+                    {!! Form::label('start_date', trans('labels.backend.courses.fields.start_date').' (yyyy-mm-dd)', ['class' => 'control-label']) !!}
+                    {!! Form::text('start_date', old('start_date'), ['class' => 'form-control date','pattern' => '(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))', 'placeholder' => trans('labels.backend.courses.fields.start_date').' (Ex . 2019-01-01)', 'autocomplete' => 'off']) !!}
 
-{{--                </div>--}}
-{{--                @if (Auth::user()->isAdmin())--}}
-{{--                    <div class="col-12 col-lg-4  form-group">--}}
-{{--                        {!! Form::label('expire_at', trans('labels.backend.courses.fields.expire_at').' (yyyy-mm-dd)', ['class' => 'control-label']) !!}--}}
-{{--                        {!! Form::text('expire_at', old('expire_at'), ['class' => 'form-control date','pattern' => '(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))', 'placeholder' => trans('labels.backend.courses.fields.expire_at').' (Ex . 2019-01-01)', 'autocomplete' => 'off']) !!}--}}
+                </div>
+                @if (Auth::user()->isAdmin())
+                    <div class="col-12 col-lg-4  form-group">
+                        {!! Form::label('expire_at', trans('labels.backend.courses.fields.expire_at').' (yyyy-mm-dd)', ['class' => 'control-label']) !!}
+                        {!! Form::text('expire_at', old('expire_at'), ['class' => 'form-control date','pattern' => '(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))', 'placeholder' => trans('labels.backend.courses.fields.expire_at').' (Ex . 2019-01-01)', 'autocomplete' => 'off']) !!}
 
-{{--                    </div>--}}
-{{--                @endif--}}
-{{--            </div>--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-md-12 form-group">--}}
-{{--                    {!! Form::label('add_video', trans('labels.backend.lessons.fields.add_video'), ['class' => 'control-label']) !!}--}}
+                    </div>
+                @endif
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    {!! Form::label('add_video', trans('labels.backend.lessons.fields.add_video'), ['class' => 'control-label']) !!}
 
-{{--                    {!! Form::select('media_type', ['youtube' => 'Youtube','vimeo' => 'Vimeo','upload' => 'Upload','embed' => 'Embed'],null,['class' => 'form-control', 'placeholder' => 'Select One','id'=>'media_type' ]) !!}--}}
+                    {!! Form::select('media_type', ['youtube' => 'Youtube','vimeo' => 'Vimeo','upload' => 'Upload','embed' => 'Embed'],null,['class' => 'form-control', 'placeholder' => 'Select One','id'=>'media_type' ]) !!}
 
-{{--                    {!! Form::text('video', old('video'), ['class' => 'form-control mt-3 d-none', 'placeholder' => trans('labels.backend.lessons.enter_video_url'),'id'=>'video'  ]) !!}--}}
+                    {!! Form::text('video', old('video'), ['class' => 'form-control mt-3 d-none', 'placeholder' => trans('labels.backend.lessons.enter_video_url'),'id'=>'video'  ]) !!}
 
 
-{{--                    {!! Form::file('video_file', ['class' => 'form-control mt-3 d-none', 'placeholder' => trans('labels.backend.lessons.enter_video_url'),'id'=>'video_file'  ]) !!}--}}
+                    {!! Form::file('video_file', ['class' => 'form-control mt-3 d-none', 'placeholder' => trans('labels.backend.lessons.enter_video_url'),'id'=>'video_file'  ]) !!}
 
-{{--                </div>--}}
-{{--                --}}{{--<div class="col-md-12 form-group d-none" id="video_subtitle_box">--}}
+                </div>
+                <div class="col-md-12 form-group d-none" id="video_subtitle_box">
 
-{{--                --}}{{--{!! Form::label('add_subtitle', trans('labels.backend.lessons.fields.add_subtitle'), ['class' => 'control-label']) !!}--}}
+                {!! Form::label('add_subtitle', trans('labels.backend.lessons.fields.add_subtitle'), ['class' => 'control-label']) !!}
 
-{{--                --}}{{--{!! Form::file('video_subtitle', ['class' => 'form-control', 'placeholder' => trans('labels.backend.lessons.video_subtitle'),'id'=>'video_subtitle'  ]) !!}--}}
+                {!! Form::file('video_subtitle', ['class' => 'form-control', 'placeholder' => trans('labels.backend.lessons.video_subtitle'),'id'=>'video_subtitle'  ]) !!}
 
-{{--                --}}{{--</div>--}}
-{{--                <div class="col-md-12 form-group">--}}
+                </div>
+                <div class="col-md-12 form-group">
 
-{{--                    @lang('labels.backend.lessons.video_guide')--}}
-{{--                </div>--}}
+                    @lang('labels.backend.lessons.video_guide')
+                </div>
 
-{{--            </div>--}}
+            </div>
 
             <div class="row">
                 <div class="col-12 form-group">

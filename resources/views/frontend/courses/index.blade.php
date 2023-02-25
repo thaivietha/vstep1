@@ -120,7 +120,7 @@
                                                                 @else
                                                                     <span>
                                                                         {!!  $course->strikePrice  !!}
-                                                                        {{$appCurrency['symbol'].' '.$course->price}}
+                                                                        {{$appCurrency['symbol'].' '.number_format($course->price)}}
                                                                     </span>
                                                                 @endif
                                                             </div>
@@ -151,7 +151,7 @@
                                                                         @lang('labels.frontend.course.students')</a></span>
 
                                                             </div>
-                                                            @include('frontend.layouts.partials.wishlist',['course' => $course->id, 'price' => $course->price])
+                                                            @include('frontend.layouts.partials.wishlist',['course' => $course->id, 'price' => number_format($course->price)])
                                                         </div>
                                                     </div>
                                                 </div>
@@ -195,7 +195,7 @@
                                                                             {{trans('labels.backend.courses.fields.free')}}
                                                                         @else
                                                                             {!!  $course->strikePrice  !!}
-                                                                            {{$appCurrency['symbol'].' '.$course->price}}
+                                                                            {{$appCurrency['symbol'].' '.number_format($course->price)}}
                                                                         @endif
                                                                     </a></span>
 
@@ -330,6 +330,7 @@
                                                 @endif
 
                                         </div>
+
                                         <div class="best-course-text" style="left: 0;right: 0;">
                                             <div class="course-title mb20 headline relative-position">
                                                 <h3>

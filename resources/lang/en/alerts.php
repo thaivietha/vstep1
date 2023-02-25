@@ -1,9 +1,9 @@
 <?php
 
 return array (
-  'backend' =>
+  'backend' => 
   array (
-    'general' =>
+    'general' => 
     array (
       'created' => 'Created successfully.',
       'slug_exist' => 'Record with same slug exist, please update the slug.',
@@ -18,13 +18,13 @@ return array (
       'delete_warning_bundle' => 'You can not delete Bundle. Students are already enrolled. Unpublish the Bundle instead',
       'teacher_delete_warning' => 'You can not delete teacher. Courses are already added. Change the status instead',
     ),
-    'roles' =>
+    'roles' => 
     array (
       'created' => 'The role was successfully created.',
       'updated' => 'The role was successfully updated.',
       'deleted' => 'The role was successfully deleted.',
     ),
-    'users' =>
+    'users' => 
     array (
       'cant_resend_confirmation' => 'The application is currently set to manually approve users.',
       'confirmation_email' => 'A new confirmation e-mail has been sent to the address on file.',
@@ -39,17 +39,18 @@ return array (
       'deleted_permanently' => 'The user was deleted permanently.',
       'restored' => 'The user was successfully restored.',
     ),
-    'stripe_plan' => array(
-      'stripe_credentials' => 'Stripe credentials not available'
-    )
+    'stripe_plan' => 
+    array (
+      'stripe_credentials' => 'Stripe credentials not available',
+    ),
   ),
-  'frontend' =>
+  'frontend' => 
   array (
-    'contact' =>
+    'contact' => 
     array (
       'sent' => 'Your information was successfully sent. We will respond back to the e-mail provided as soon as we can.',
     ),
-    'course' =>
+    'course' => 
     array (
       'completed' => 'Congratulations! You\'ve successfully completed course. Checkout your certificate in dashboard',
       'slot_booking' => 'Live lesson slot booking successfully',
@@ -64,9 +65,10 @@ return array (
     ),
     'duplicate_course' => 'is already course purchased.',
     'duplicate_bundle' => 'is already bundle purchased.',
-    'wishlist' => array(
-        'exist' => 'This course already in wishlist',
-        'added' => 'Course added successfully in wishlist'
-    )
+    'wishlist' => 
+    array (
+      'exist' => 'This course already in wishlist',
+      'added' => 'Course added successfully in wishlist',
+    ),
   ),
 );

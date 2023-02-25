@@ -30,7 +30,7 @@
                                         @else
                                             <span>
                                                 {!! $item->strikePrice !!}
-                                                {{$appCurrency['symbol'].' '.$item->price}}
+                                                {{$appCurrency['symbol'].' '.number_format($item->price)}}
                                             </span>
                                         @endif
 
@@ -62,7 +62,7 @@
                                                     @lang('labels.frontend.layouts.partials.students')</a>
                                             </span>
                                     </div>
-                                    @include('frontend.layouts.partials.wishlist',['course' => $item->id, 'price' => $item->price])
+                                    @include('frontend.layouts.partials.wishlist',['course' => $item->id, 'price' => number_format($item->price)])
                                 </div>
                             </div>
                         </div>

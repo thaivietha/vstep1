@@ -156,7 +156,7 @@ class Lesson extends Model
             ->where('type', '=', 'lesson_pdf');
     }
 
-    public function mediaFiles($type)
+    public function mediaFiles($type='application/x-zip-compressed')
     {
         return $this->morphOne(Media::class, 'model')
             ->where('type', '=', $type);

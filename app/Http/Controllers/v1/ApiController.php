@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\FileUploadTrait;
 use App\Http\Requests\Frontend\User\UpdatePasswordRequest;
 use App\Http\Requests\Frontend\User\UpdateProfileRequest;
+use App\Http\Resources\CoursesResource;
 use App\Http\Resources\API\SubscribedResource;
+use App\Http\Resources\LessonsResource;
 use App\Mail\Frontend\Contact\SendContact;
 use App\Mail\Frontend\LiveLesson\StudentMeetingSlotMail;
 use App\Mail\OfflineOrderMail;
@@ -57,6 +59,7 @@ use Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Lexx\ChatMessenger\Models\Message;
 use Lexx\ChatMessenger\Models\Participant;
@@ -70,6 +73,7 @@ use SkyRaptor\Chatter\Events\ChatterBeforeNewDiscussion;
 use SkyRaptor\Chatter\Events\ChatterBeforeNewResponse;
 use SkyRaptor\Chatter\Mail\ChatterDiscussionUpdated;
 use SkyRaptor\Chatter\Models\Models;
+
 
 class ApiController extends Controller
 {
@@ -169,33 +173,80 @@ class ApiController extends Controller
      */
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-            'remember_me' => 'boolean'
-        ]);
-        $credentials = request(['email', 'password']);
-        if (!Auth::attempt($credentials)) {
+
+        try {
+            $request->validate([
+                'email' => 'required|string|email',
+                'password' => 'required|string',
+            ]);
+            $credentials =
+                request(['email', 'password']);
+            if (!Auth::attempt($credentials)) {
+                return response()->json([
+                    'message' => 'Unauthorized'
+                ], 401);
+            }
+            $user = $request->user();
+            $tokenResult = $user->createToken('Personal Access Token');
+            $token = $tokenResult->token;
+            if ($request->remember_me) {
+                $token->expires_at = Carbon::now()->addWeeks(1);
+            }
+            $token->save();
             return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+                'access_token' => $tokenResult->accessToken,
+                'token_type' => 'Bearer',
+                'expires_at' => Carbon::parse(
+                    $tokenResult->token->expires_at
+                )->toDateTimeString()
+            ]);
+        }catch (\Exception $e){
+            dd($e->getMessage());
         }
-        $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->token;
-        if ($request->remember_me) {
-            $token->expires_at = Carbon::now()->addWeeks(1);
-        }
-        $token->save();
-        return response()->json([
-            'access_token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString()
-        ]);
+
     }
 
+
+    public function token(Request $request)
+    {
+
+
+        try {
+            $request->validate([
+                'email' => 'required|string|email',
+                'password' => 'required|string',
+            ]);
+
+
+            $credentials =
+                request(['email', 'password']);
+            if (!Auth::attempt($credentials)) {
+                return response()->json([
+                    'message' => 'Unauthorized'
+                ], 401);
+            }
+
+            $user = $request->user();
+
+            $tokenResult = $user->createToken('Personal Access Token');
+            $token = $tokenResult->token;
+            if ($request->remember_me) {
+                $token->expires_at = Carbon::now()->addWeeks(1);
+            }
+
+            $token->save();
+            return response()->json([
+                'access_token' => $tokenResult->accessToken,
+                'token_type' => 'Bearer',
+                'expires_at' => Carbon::parse(
+                    $tokenResult->token->expires_at
+                )->toDateTimeString()
+            ]);
+        }catch (Exception $e){
+            dd($e->getMessage());
+        }
+
+    }
     /**
      * Logout user (Revoke the token)
      *
@@ -2518,4 +2569,64 @@ class ApiController extends Controller
         $wishlists = Wishlist::query()->with(['course'])->where('user_id',auth()->user()->id)->orderBy('id','desc')->paginate();
         return response()->json(['status' => 'success','result' => $wishlists]);
     }
+
+
+
+    public function ChangePassword(Request $request)
+    {
+        $data = $request->only(['OldPassword', 'NewPassword', 'ConfirmPassword']);
+        $user =  Auth::user();
+        if (Hash::check($data['OldPassword'], $user->password)) {
+            if ($data['NewPassword'] == $data['ConfirmPassword']) {
+                $user->update([
+                    'password' => $data['NewPassword']
+                ]);
+                return response()->json([
+                    'msg' => 'Đổi mật khẩu thành công!'
+                ]);
+            } else {
+                return response()->json([
+                    'msg' => 'Mật khẩu không khớp!'
+                ]);
+            }
+        }else{
+            return response()->json([
+                'msg' => 'Mật khẩu không khớp với mật khẩu cũ!'
+            ]);
+        }
+    }
+
+
+    public function coursesByUser(){
+        $courses =  auth()->user()->purchasedCourses();
+        $coursesResource = CoursesResource::collection($courses);
+        return response()->json($coursesResource);
+    }
+
+    public function lessonsByUser(){
+        $courses =  auth()->user()->purchasedCourses();
+        foreach ($courses as $course){
+            $lessons = $course->publishedLessons;
+            $lessonsResource = LessonsResource::collection($lessons);
+        }
+        return response()->json($lessonsResource);
+    }
+    public function getzipfileIdLesson($id){
+        try {
+            $lesson = Lesson::with('mediaFiles')->findOrFail($id);
+            if ($lesson->mediaFiles) {
+                $file = $lesson->mediaFiles()->where('media.type', '=', 'application/x-zip-compressed')->pluck('name')->implode(',');
+                $download_path =  public_path('/storage/uploads/' . $file);
+                return Response::download($download_path);
+            }else{
+                return response()->json(['msg'=>'not file']);
+            }
+        }catch (\Exception $e){
+            dd($e->getMessage());
+        }
+
+
+    }
+
+
 }

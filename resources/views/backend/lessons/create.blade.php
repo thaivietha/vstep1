@@ -125,45 +125,45 @@
 
 {{--            'accept' => "image/jpeg,image/gif,image/png,application/msword,audio/mpeg,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint,application/pdf,video/mp4"--}}
 
-            {{--            <div class="row">--}}
-{{--                <div class="col-12 form-group">--}}
-{{--                    {!! Form::label('pdf_files', trans('labels.backend.lessons.fields.add_pdf'), ['class' => 'control-label']) !!}--}}
-{{--                    {!! Form::file('add_pdf', [--}}
-{{--                        'class' => 'form-control file-upload',--}}
-{{--                         'id' => 'add_pdf',--}}
-{{--                        'accept' => "application/pdf"--}}
+                        <div class="row">
+                <div class="col-12 form-group">
+                    {!! Form::label('pdf_files', trans('labels.backend.lessons.fields.add_pdf'), ['class' => 'control-label']) !!}
+                    {!! Form::file('add_pdf', [
+                        'class' => 'form-control file-upload',
+                         'id' => 'add_pdf',
+                        'accept' => "application/pdf"
 
-{{--                        ]) !!}--}}
-{{--                </div>--}}
-{{--            </div>--}}
+                        ]) !!}
+                </div>
+            </div>
 
-{{--            <div class="row">--}}
-{{--                <div class="col-12 form-group">--}}
-{{--                    {!! Form::label('audio_files', trans('labels.backend.lessons.fields.add_audio'), ['class' => 'control-label']) !!}--}}
-{{--                    {!! Form::file('add_audio', [--}}
-{{--                        'class' => 'form-control file-upload',--}}
-{{--                         'id' => 'add_audio',--}}
-{{--                        'accept' => "audio/mpeg3"--}}
+            <div class="row">
+                <div class="col-12 form-group">
+                    {!! Form::label('audio_files', trans('labels.backend.lessons.fields.add_audio'), ['class' => 'control-label']) !!}
+                    {!! Form::file('add_audio', [
+                        'class' => 'form-control file-upload',
+                         'id' => 'add_audio',
+                        'accept' => "audio/mpeg3"
 
-{{--                        ]) !!}--}}
-{{--                </div>--}}
-{{--            </div>--}}
+                        ]) !!}
+                </div>
+            </div>
 
-{{--            <div class="row">--}}
-{{--                <div class="col-md-12 form-group">--}}
-{{--                    {!! Form::label('add_video', trans('labels.backend.lessons.fields.add_video'), ['class' => 'control-label']) !!}--}}
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    {!! Form::label('add_video', trans('labels.backend.lessons.fields.add_video'), ['class' => 'control-label']) !!}
 
-{{--                    {!! Form::select('media_type', ['youtube' => 'Youtube','vimeo' => 'Vimeo','upload' => 'Upload','embed' => 'Embed'],null,['class' => 'form-control', 'placeholder' => 'Select One','id'=>'media_type' ]) !!}--}}
+                    {!! Form::select('media_type', ['youtube' => 'Youtube','vimeo' => 'Vimeo','upload' => 'Upload','embed' => 'Embed'],null,['class' => 'form-control', 'placeholder' => 'Select One','id'=>'media_type' ]) !!}
 
-{{--                    {!! Form::text('video', old('video'), ['class' => 'form-control mt-3 d-none', 'placeholder' => trans('labels.backend.lessons.enter_video_url'),'id'=>'video'  ]) !!}--}}
+                    {!! Form::text('video', old('video'), ['class' => 'form-control mt-3 d-none', 'placeholder' => trans('labels.backend.lessons.enter_video_url'),'id'=>'video'  ]) !!}
 
 
-{{--                    {!! Form::file('video_file', ['class' => 'form-control mt-3 d-none', 'placeholder' => trans('labels.backend.lessons.enter_video_url'),'id'=>'video_file'  ]) !!}--}}
+                    {!! Form::file('video_file', ['class' => 'form-control mt-3 d-none', 'placeholder' => trans('labels.backend.lessons.enter_video_url'),'id'=>'video_file'  ]) !!}
 
-{{--                    @lang('labels.backend.lessons.video_guide')--}}
+                    @lang('labels.backend.lessons.video_guide')
 
-{{--                </div>--}}
-{{--            </div>--}}
+                </div>
+            </div>
 
             <div class="row">
 

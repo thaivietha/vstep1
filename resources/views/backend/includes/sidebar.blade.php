@@ -43,8 +43,8 @@
                     </a>
                 </li>
             @endcan
-{{--            @if((!$logged_in_user->hasRole('student')) && ($logged_in_user->hasRole('teacher') || $logged_in_user->isAdmin() || $logged_in_user->hasAnyPermission(['course_access','lesson_access','test_access','question_access','bundle_access'])))--}}
-            @if((!$logged_in_user->hasRole('student')) && ($logged_in_user->hasRole('teacher') || $logged_in_user->isAdmin() || $logged_in_user->hasAnyPermission(['course_access','lesson_access'])))
+            @if((!$logged_in_user->hasRole('student')) && ($logged_in_user->hasRole('teacher') || $logged_in_user->isAdmin() || $logged_in_user->hasAnyPermission(['course_access','lesson_access','test_access','question_access','bundle_access'])))
+{{--            @if((!$logged_in_user->hasRole('student')) && ($logged_in_user->hasRole('teacher') || $logged_in_user->isAdmin() || $logged_in_user->hasAnyPermission(['course_access','lesson_access'])))--}}
                 {{--@if($logged_in_user->hasRole('teacher') || $logged_in_user->isAdmin() || $logged_in_user->hasAnyPermission(['course_access','lesson_access','test_access','question_access','bundle_access']))--}}
 
 {{--                <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern(['user/courses*','user/lessons*','user/tests*','user/questions*','user/live-lessons*','user/live-lesson-slots*']), 'open') }}">--}}
@@ -76,24 +76,24 @@
                             </li>
                         @endcan
 
-{{--                        @can('test_access')--}}
-{{--                            <li class="nav-item ">--}}
-{{--                                <a class="nav-link {{ $request->segment(2) == 'tests' ? 'active' : '' }}"--}}
-{{--                                   href="{{ route('admin.tests.index') }}">--}}
-{{--                                    <span class="title">@lang('menus.backend.sidebar.tests.title')</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        @endcan--}}
+                        @can('test_access')
+                            <li class="nav-item ">
+                                <a class="nav-link {{ $request->segment(2) == 'tests' ? 'active' : '' }}"
+                                   href="{{ route('admin.tests.index') }}">
+                                    <span class="title">@lang('menus.backend.sidebar.tests.title')</span>
+                                </a>
+                            </li>
+                        @endcan
 
 
-{{--                        @can('question_access')--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link {{ $request->segment(2) == 'questions' ? 'active' : '' }}"--}}
-{{--                                   href="{{ route('admin.questions.index') }}">--}}
-{{--                                    <span class="title">@lang('menus.backend.sidebar.questions.title')</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        @endcan--}}
+                        @can('question_access')
+                            <li class="nav-item">
+                                <a class="nav-link {{ $request->segment(2) == 'questions' ? 'active' : '' }}"
+                                   href="{{ route('admin.questions.index') }}">
+                                    <span class="title">@lang('menus.backend.sidebar.questions.title')</span>
+                                </a>
+                            </li>
+                        @endcan
 
 
 {{--                        @can('live_lesson_access')--}}
@@ -117,38 +117,38 @@
                     </ul>
                 </li>
 
-{{--                @can('bundle_access')--}}
-{{--                    <li class="nav-item ">--}}
-{{--                        <a class="nav-link {{ $request->segment(2) == 'bundles' ? 'active' : '' }}"--}}
-{{--                           href="{{ route('admin.bundles.index') }}">--}}
-{{--                            <i class="nav-icon icon-layers"></i>--}}
-{{--                            <span class="title">@lang('menus.backend.sidebar.bundles.title')</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                @endcan--}}
+                @can('bundle_access')
+                    <li class="nav-item ">
+                        <a class="nav-link {{ $request->segment(2) == 'bundles' ? 'active' : '' }}"
+                           href="{{ route('admin.bundles.index') }}">
+                            <i class="nav-icon icon-layers"></i>
+                            <span class="title">@lang('menus.backend.sidebar.bundles.title')</span>
+                        </a>
+                    </li>
+                @endcan
 
-{{--                @if($logged_in_user->hasRole('teacher') || $logged_in_user->isAdmin())--}}
-{{--                    <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern(['user/reports*']), 'open') }}">--}}
-{{--                        <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/*')) }}"--}}
-{{--                           href="#">--}}
-{{--                            <i class="nav-icon icon-pie-chart"></i>@lang('menus.backend.sidebar.reports.title')--}}
+                @if($logged_in_user->hasRole('teacher') || $logged_in_user->isAdmin())
+                    <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern(['user/reports*']), 'open') }}">
+                        <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/*')) }}"
+                           href="#">
+                            <i class="nav-icon icon-pie-chart"></i>@lang('menus.backend.sidebar.reports.title')
 
-{{--                        </a>--}}
-{{--                        <ul class="nav-dropdown-items">--}}
-{{--                            <li class="nav-item ">--}}
-{{--                                <a class="nav-link {{ $request->segment(1) == 'sales' ? 'active' : '' }}"--}}
-{{--                                   href="{{ route('admin.reports.sales') }}">--}}
-{{--                                    @lang('menus.backend.sidebar.reports.sales')--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item ">--}}
-{{--                                <a class="nav-link {{ $request->segment(1) == 'students' ? 'active' : '' }}"--}}
-{{--                                   href="{{ route('admin.reports.students') }}">@lang('menus.backend.sidebar.reports.students')--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
-{{--                @endif--}}
+                        </a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item ">
+                                <a class="nav-link {{ $request->segment(1) == 'sales' ? 'active' : '' }}"
+                                   href="{{ route('admin.reports.sales') }}">
+                                    @lang('menus.backend.sidebar.reports.sales')
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link {{ $request->segment(1) == 'students' ? 'active' : '' }}"
+                                   href="{{ route('admin.reports.students') }}">@lang('menus.backend.sidebar.reports.students')
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
 
             @endif
 
@@ -290,13 +290,13 @@
                                 class="title">@lang('menus.backend.sidebar.invoices.title')</span>
                     </a>
                 </li>
-{{--                <li class="nav-item ">--}}
-{{--                    <a class="nav-link {{ $request->segment(1) == 'certificates' ? 'active' : '' }}"--}}
-{{--                       href="{{ route('admin.certificates.index') }}">--}}
-{{--                        <i class="nav-icon icon-badge"></i> <span--}}
-{{--                                class="title">@lang('menus.backend.sidebar.certificates.title')</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+                <li class="nav-item ">
+                    <a class="nav-link {{ $request->segment(1) == 'certificates' ? 'active' : '' }}"
+                       href="{{ route('admin.certificates.index') }}">
+                        <i class="nav-icon icon-badge"></i> <span
+                                class="title">@lang('menus.backend.sidebar.certificates.title')</span>
+                    </a>
+                </li>
             @endif
             @if ($logged_in_user->hasRole('teacher'))
                 <li class="nav-item ">

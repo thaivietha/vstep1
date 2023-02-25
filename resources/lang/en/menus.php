@@ -1,202 +1,202 @@
 <?php
 
 return array (
-  'backend' =>
+  'backend' => 
   array (
-    'sidebar' =>
+    'sidebar' => 
     array (
       'general' => 'General',
       'dashboard' => 'Dashboard',
-      'courses' =>
+      'courses' => 
       array (
         'management' => 'Courses Management',
         'title' => 'Courses',
         'manage' => 'Manage Courses',
       ),
-      'site-management' =>
+      'site-management' => 
       array (
         'title' => 'Site Management',
       ),
-      'menu-manager' =>
+      'menu-manager' => 
       array (
         'title' => 'Menu Manager',
       ),
       'system' => 'System',
-      'settings' =>
+      'settings' => 
       array (
         'title' => 'Settings',
         'general' => 'General',
         'social-login' => 'Social Login',
         'zoom_setting' => 'Zoom Setting',
       ),
-      'debug-site' =>
+      'debug-site' => 
       array (
         'title' => 'Debug Site',
       ),
       'history' => 'History',
-      'lessons' =>
+      'lessons' => 
       array (
         'title' => 'Lessons',
       ),
-      'questions' =>
+      'questions' => 
       array (
         'title' => 'Questions',
       ),
-      'questions-options' =>
+      'questions-options' => 
       array (
         'title' => 'Questions Options',
       ),
-      'tests' =>
+      'tests' => 
       array (
         'title' => 'Tests',
       ),
-      'change-password' =>
+      'change-password' => 
       array (
         'title' => 'Change Password',
       ),
-      'account' =>
+      'account' => 
       array (
         'title' => 'Account',
       ),
-      'messages' =>
+      'messages' => 
       array (
         'title' => 'Messages',
       ),
-      'orders' =>
+      'orders' => 
       array (
         'title' => 'Orders',
       ),
-      'categories' =>
+      'categories' => 
       array (
         'title' => 'Categories',
       ),
-      'teachers' =>
+      'teachers' => 
       array (
         'title' => 'Teachers',
       ),
-      'hero-slider' =>
+      'hero-slider' => 
       array (
         'title' => 'Hero Slider',
       ),
-      'sponsors' =>
+      'sponsors' => 
       array (
         'title' => 'Sponsors',
       ),
-      'testimonials' =>
+      'testimonials' => 
       array (
         'title' => 'Testimonials',
       ),
-      'blogs' =>
+      'blogs' => 
       array (
         'title' => 'Blog',
       ),
-      'faqs' =>
+      'faqs' => 
       array (
         'title' => 'FAQs',
       ),
-      'reasons' =>
+      'reasons' => 
       array (
         'title' => 'Reasons',
       ),
-      'contact' =>
+      'contact' => 
       array (
         'title' => 'Contact',
       ),
-      'footer' =>
+      'footer' => 
       array (
         'title' => 'Footer',
       ),
-      'newsletter-configuration' =>
+      'newsletter-configuration' => 
       array (
         'title' => 'Newsletter Configuration',
       ),
-      'invoices' =>
+      'invoices' => 
       array (
         'title' => 'Invoices',
       ),
-      'certificates' =>
+      'certificates' => 
       array (
         'title' => 'Certificates',
       ),
-      'contacts' =>
+      'contacts' => 
       array (
         'title' => 'Leads',
       ),
-      'pages' =>
+      'pages' => 
       array (
         'title' => 'Pages Manager',
       ),
-      'reviews' =>
+      'reviews' => 
       array (
         'title' => 'Reviews',
       ),
-      'translations' =>
+      'translations' => 
       array (
         'title' => 'Translation Manager',
       ),
-      'update' =>
+      'update' => 
       array (
         'title' => 'Update',
       ),
-      'backup' =>
+      'backup' => 
       array (
         'title' => 'Backup',
       ),
-      'bundles' =>
+      'bundles' => 
       array (
         'title' => 'Bundles',
       ),
-      'reports' =>
+      'reports' => 
       array (
         'title' => 'Reports',
         'students' => 'Students',
         'sales' => 'Sales',
       ),
-      'coupons' =>
+      'coupons' => 
       array (
         'title' => 'Coupons',
       ),
-      'tax' =>
+      'tax' => 
       array (
         'title' => 'Tax',
       ),
-      'sitemap' =>
+      'sitemap' => 
       array (
         'title' => 'Sitemap',
       ),
-      'forums-category' =>
+      'forums-category' => 
       array (
         'title' => 'Forums Categories',
       ),
-      'payments' =>
+      'payments' => 
       array (
         'title' => 'Payments',
       ),
-      'payments_requests' =>
+      'payments_requests' => 
       array (
         'title' => 'Payment Requests',
       ),
-     'live_lessons' =>
-     array(
-        'title' => 'Live Lessons'
-     ),
-    'live_lesson_slots' =>
-    array(
-        'title' => 'Live Lesson Slots'
+      'live_lessons' => 
+      array (
+        'title' => 'Live Lessons',
+      ),
+      'live_lesson_slots' => 
+      array (
+        'title' => 'Live Lesson Slots',
+      ),
+      'subscription' => 
+      array (
+        'title' => 'Subscription',
+      ),
+      'wishlist' => 
+      array (
+        'title' => 'Wishlist',
+      ),
     ),
-    'subscription' =>
-    array(
-        'title' => 'Subscription'
-    ),
-    'wishlist' =>
-    array(
-        'title' => 'Wishlist'
-    )
-    ),
-    'access' =>
+    'access' => 
     array (
       'title' => 'Access',
-      'roles' =>
+      'roles' => 
       array (
         'management' => 'Role Management',
         'create' => 'Create Role',
@@ -204,7 +204,7 @@ return array (
         'all' => 'All Roles',
         'main' => 'Roles',
       ),
-      'users' =>
+      'users' => 
       array (
         'deactivated' => 'Deactivated Users',
         'deleted' => 'Deleted Users',
@@ -216,22 +216,22 @@ return array (
         'main' => 'Users',
       ),
     ),
-    'log-viewer' =>
+    'log-viewer' => 
     array (
       'dashboard' => 'Debug dashboard',
       'logs' => 'Logs',
       'main' => 'Log Viewer',
     ),
-    'stripe' =>
-    array(
-        'title' => 'Stripe',
-        'plan' => 'Plans',
+    'stripe' => 
+    array (
+      'title' => 'Stripe',
+      'plan' => 'Plans',
     ),
   ),
-  'language-picker' =>
+  'language-picker' => 
   array (
     'language' => 'Language',
-    'langs' =>
+    'langs' => 
     array (
       'ar' => 'Arabic',
       'zh' => 'Chinese',

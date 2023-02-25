@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::get('/user', function (Request $request) {
+    return $request->user();
+});
 
 
 Route::group(['prefix' => 'v1','namespace'=>'v1'],function (){
@@ -25,7 +25,7 @@ Route::group(['prefix' => 'v1','namespace'=>'v1'],function (){
         'prefix' => 'auth'
     ], function () {
 
-//    Route::post('login', 'ApiController@login');
+        Route::post('login', 'ApiController@login');
         Route::post('signup-form', 'ApiController@signupForm');
         Route::post('signup-save', 'ApiController@signup');
 
@@ -37,7 +37,9 @@ Route::group(['prefix' => 'v1','namespace'=>'v1'],function (){
         });
     });
 
-    Route::group(['middleware' => 'auth:api'],function (){
+    Route::group([
+            'middleware' => 'auth:api'
+        ],function (){
         Route::post('courses','ApiController@getCourses');
         Route::post('bundles','ApiController@getBundles');
         Route::post('search','ApiController@search');
@@ -106,4 +108,21 @@ Route::group(['prefix' => 'v1','namespace'=>'v1'],function (){
     Route::post('send-reset-link','ApiController');
     Route::post('configs','ApiController@getConfigs');
 });
+
+
+Route::group(['namespace'=>'v1'],function (){
+    Route::post('Token', 'ApiController@token');
+    Route::get('/baihocs/getzipfile/{idBaihoc}', 'ApiController@getzipfileIdLesson');
+
+    Route::group([
+        'middleware' => 'auth:api'
+    ],function () {
+        Route::post('Account/ChangePassword', 'ApiController@ChangePassword');
+        Route::get('/khoahocs/{userName}', 'ApiController@coursesByUser');
+        Route::get('/baihocs/get/{userName}', 'ApiController@lessonsByUser');
+
+
+    });
+});
+
 

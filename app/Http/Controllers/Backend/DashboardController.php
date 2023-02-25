@@ -59,6 +59,7 @@ class DashboardController extends Controller
 
 
 
+
                 $unreadThreads = [];
                 $threads = [];
                 if(auth()->user()->threads){

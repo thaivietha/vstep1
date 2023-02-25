@@ -72,6 +72,7 @@ class CoursesController extends Controller
         $continue_course = NULL;
         $recent_news = Blog::orderBy('created_at', 'desc')->take(2)->get();
         $course = Course::withoutGlobalScope('filter')->where('slug', $course_slug)->with('publishedLessons')->firstOrFail();
+        $course->price = number_format($course->price);
         $purchased_course = \Auth::check() && $course->students()->where('user_id', \Auth::id())->count() > 0;
         if (($course->published == 0) && ($purchased_course == false)) {
             abort(404);
@@ -105,6 +106,7 @@ class CoursesController extends Controller
             }
             $checkSubcribePlan = auth()->user()->checkPlanSubcribeUser();
         }
+//        dd($course);
         $courseInPlan = courseOrBundlePlanExits($course->id,'');
         return view($this->path . '.courses.course', compact('course', 'purchased_course', 'recent_news', 'course_rating', 'completed_lessons', 'total_ratings', 'is_reviewed', 'lessons', 'continue_course', 'checkSubcribePlan','courseInPlan'));
     }
