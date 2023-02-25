@@ -20,7 +20,7 @@ class LessonsResource extends JsonResource
             'Id' => $this->id,
             'TenBaiHoc' => $this->title,
             'IdKhoaHoc' => $this->course_id,
-//                'STT' => $this->baihoc_stt,
+            'STT' => 1,
             'Link1' => $this->backup_link_1,
             'Link2' => $this->backup_link_2,
             'file' => $this->mediaFiles ? $this->mediaFiles->name : null,
