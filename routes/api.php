@@ -14,7 +14,12 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/check', function () {
-    return 1;
+    try {
+        return 1;
+    }catch (\Exception $e){
+        return $e->getMessage();
+    }
+
 });
 
 Route::get('/user', function (Request $request) {
