@@ -103,6 +103,7 @@ class UserRepository extends BaseRepository
     {
         return DB::transaction(function () use ($data) {
             $user = parent::create([
+                'username' => $data['username'],
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'email' => $data['email'],
@@ -165,6 +166,7 @@ class UserRepository extends BaseRepository
 
         return DB::transaction(function () use ($user, $data) {
             if ($user->update([
+                'username' => $data['username'],
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'email' => $data['email'],
