@@ -24,6 +24,7 @@ class UserTableSeeder extends Seeder
 
         // Add the master administrator, user id of 1
         User::create([
+            'username'          => 'admin',
             'first_name'        => 'Admin',
             'last_name'         => 'Istrator',
             'email'             => 'admin@vstep.com',
@@ -33,6 +34,7 @@ class UserTableSeeder extends Seeder
         ]);
 
         User::create([
+            'username'          => 'teacher',
             'first_name'        => 'Teacher',
             'last_name'         => 'User',
             'email'             => 'teacher@vstep.com',
@@ -42,6 +44,7 @@ class UserTableSeeder extends Seeder
         ]);
 
         User::create([
+            'username'          => 'student',
             'first_name'        => 'Student',
             'last_name'         => 'User',
             'email'             => 'student@vstep.com',
