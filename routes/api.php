@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/check', function () {
+    return 1;
+});
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 });
