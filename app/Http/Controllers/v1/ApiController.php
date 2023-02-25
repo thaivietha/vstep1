@@ -2613,12 +2613,18 @@ class ApiController extends Controller
 
     public function lessonsByUser(){
         try {
-            $courses =  auth()->user()->purchasedCourses();
-            foreach ($courses as $course){
-                $lessons = $course->publishedLessons;
-                $lessonsResource = LessonsResource::collection($lessons);
+            $user = auth()->user();
+            $courses =  $user->purchasedCourses();
+            $lessonsResource ='';
+            if($courses){
+                foreach ($courses as $course){
+                    $lessons = $course->publishedLessons;
+                    $lessonsResource = LessonsResource::collection($lessons);
+                }
             }
-            return response()->json(@$lessonsResource);
+            return response()->json($lessonsResource);
+
+
         }catch (\Exception $e){
             dd($e->getMessage());
         }
