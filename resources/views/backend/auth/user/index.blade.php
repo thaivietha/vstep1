@@ -70,6 +70,11 @@
     <script>
 
         $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             var route = '{{route('admin.auth.user.getData')}}';
 
             var myTable = $('#myTable').DataTable({
@@ -95,6 +100,7 @@
                 ],
                 ajax: {
                     url: route,
+                    type: 'post',
                     data: function (d) {
                         d.role = $('#roles').val();
                     }

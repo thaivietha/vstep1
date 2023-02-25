@@ -34,7 +34,7 @@ Route::group([
          */
         Route::get('user', [UserController::class, 'index'])->name('user.index');
         Route::get('user/create', [UserController::class, 'create'])->name('user.create');
-        Route::get('user/get-data', [UserController::class, 'getData'])->name('user.getData');
+        Route::post('user/get-data', [UserController::class, 'getData'])->name('user.getData');
         Route::post('user', [UserController::class, 'store'])->name('user.store');
 
         /*
