@@ -142,6 +142,7 @@ return array (
           'id' => 'ID',
           'last_updated' => 'Last Updated',
           'name' => 'Name',
+          'user_name' => 'User Name',
           'first_name' => 'First Name',
           'last_name' => 'Last Name',
           'no_deactivated' => 'No Deactivated Users',

@@ -41,13 +41,11 @@
                             <thead>
                             <tr>
                                 <th>@lang('labels.general.id')</th>
-                                <th>@lang('labels.backend.access.users.table.first_name')</th>
-                                <th>@lang('labels.backend.access.users.table.last_name')</th>
+                                <th>@lang('labels.backend.access.users.table.user_name')</th>
                                 <th>@lang('labels.backend.access.users.table.email')</th>
                                 <th>@lang('labels.backend.access.users.table.confirmed')</th>
                                 <th>@lang('labels.backend.access.users.table.roles')</th>
                                 <th>@lang('labels.backend.access.users.table.other_permissions')</th>
-                                <th>@lang('labels.backend.access.users.table.social')</th>
                                 <th>@lang('labels.backend.access.users.table.last_updated')</th>
                                 <th>@lang('labels.general.actions')</th>
                             </tr>
@@ -106,13 +104,11 @@
                 },
                 columns: [
                     {data: "id", name: 'id'},
-                    {data: "first_name", name: 'first_name'},
-                    {data: "last_name", name: 'last_name'},
+                    {data: "username", name: "username"},
                     {data: "email", name: "email"},
                     {data: "confirmed_label", name: "confirmed_label"},
                     {data: "roles_label", name: "roles.name"},
                     {data: "permissions_label", name: "permissions.name"},
-                    {data: "social_buttons", name: "social_accounts.provider", "searchable": false},
                     {data: "last_updated", name: "last_updated"},
                     {data: "actions", name: "actions", "searchable": false}
                 ],
