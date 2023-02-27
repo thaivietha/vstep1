@@ -201,7 +201,7 @@ class ApiController extends Controller
                 )->toDateTimeString()
             ]);
         }catch (\Exception $e){
-            dd($e->getMessage());
+            \Log::error($e->getMessage());
         }
 
     }
@@ -209,7 +209,6 @@ class ApiController extends Controller
 
     public function token(Request $request)
     {
-//        dd(12);
         try {
             $request->validate([
                 'username' => 'required|string',
@@ -240,8 +239,8 @@ class ApiController extends Controller
                     $tokenResult->token->expires_at
                 )->toDateTimeString()
             ]);
-        }catch (Exception $e){
-            dd($e->getMessage());
+        }catch (\Exception $e){
+            \Log::error($e->getMessage());
         }
 
     }
@@ -2594,7 +2593,7 @@ class ApiController extends Controller
                 ]);
             }
         }catch (\Exception $e){
-            dd($e->getMessage());
+            \Log::error($e->getMessage());
         }
 
     }
@@ -2606,7 +2605,7 @@ class ApiController extends Controller
             $coursesResource = CoursesResource::collection($courses);
             return response()->json($coursesResource);
         }catch (\Exception $e){
-            dd($e->getMessage());
+            \Log::error($e->getMessage());
         }
 
     }
@@ -2626,7 +2625,7 @@ class ApiController extends Controller
 
 
         }catch (\Exception $e){
-            dd($e->getMessage());
+            \Log::error($e->getMessage());
         }
 
     }
@@ -2641,7 +2640,7 @@ class ApiController extends Controller
                 return response()->json(['msg'=>'not file']);
             }
         }catch (\Exception $e){
-            dd($e->getMessage());
+            \Log::error($e->getMessage());
         }
 
 
