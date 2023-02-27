@@ -47,13 +47,13 @@ class ConfigSeeder extends Seeder
             5 =>
                 array(
                     'name' => 'primary_email',
-                    'value' => 'info@neonlms.com',
+                    'value' => 'info@vstep.com',
                     'status' => 1,
                 ),
             6 =>
                 array(
                     'name' => 'secondary_email',
-                    'value' => 'mail@neonlms.info',
+                    'value' => 'mail@vstep.info',
                     'status' => 1,
                 ),
             7 =>

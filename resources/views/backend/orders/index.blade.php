@@ -9,6 +9,10 @@
     <div class="card">
         <div class="card-header">
             <h3 class="page-title d-inline mb-0">@lang('labels.backend.orders.title')</h3>
+            <div class="float-right">
+                <a href="{{ route('admin.orders.create') }}"
+                   class="btn btn-success">@lang('strings.backend.general.app_add_new')</a>
+            </div>
 
         </div>
         <div class="card-body">

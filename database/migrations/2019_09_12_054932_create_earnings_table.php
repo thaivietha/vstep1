@@ -18,9 +18,9 @@ class CreateEarningsTable extends Migration
             $table->unsignedInteger('order_id')->nullable();
             $table->unsignedInteger('course_id')->nullable();
             $table->unsignedInteger('user_id')->nullable();
-            $table->decimal('course_price', 8, 2);
-            $table->decimal('amount', 5, 2);
-            $table->decimal('rate', 5, 2);
+            $table->decimal('course_price', 15, 2);
+            $table->decimal('amount', 15, 2);
+            $table->decimal('rate', 15, 2);
             $table->timestamps();
             $table->softDeletes();
 

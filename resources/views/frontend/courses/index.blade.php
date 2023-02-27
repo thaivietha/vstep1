@@ -132,14 +132,18 @@
                                                                     @endfor
                                                                 </ul>
                                                             </div>
+
+
                                                             <div class="course-details-btn">
                                                                 <a href="{{ route('courses.show', [$course->slug]) }}">@lang('labels.frontend.course.course_detail')
                                                                     <i class="fas fa-arrow-right"></i></a>
                                                             </div>
                                                             <div class="blakish-overlay"></div>
                                                         </div>
+
                                                         <div class="best-course-text">
                                                             <div class="course-title mb20 headline relative-position">
+
                                                                 <h3>
                                                                     <a href="{{ route('courses.show', [$course->slug]) }}">{{$course->title}}</a>
                                                                 </h3>
@@ -151,6 +155,9 @@
                                                                         @lang('labels.frontend.course.students')</a></span>
 
                                                             </div>
+
+
+
                                                             @include('frontend.layouts.partials.wishlist',['course' => $course->id, 'price' => number_format($course->price)])
                                                         </div>
                                                     </div>

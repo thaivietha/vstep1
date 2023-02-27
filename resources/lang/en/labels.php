@@ -1678,9 +1678,7 @@ return array (
   'lang' => 
   array (
     'en' => 'English',
-    'sp' => 'Spanish',
-    'fr' => 'French',
-    'ar' => 'Arabic',
+    'vi' => 'Vietnamese',
   ),
   'teacher' => 
   array (
