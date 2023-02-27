@@ -2599,20 +2599,25 @@ class ApiController extends Controller
     }
 
 
-    public function coursesByUser(){
+    public function coursesByUser($userName){
         try {
-            $courses =  auth()->user()->purchasedCourses();
-            $coursesResource = CoursesResource::collection($courses);
-            return response()->json($coursesResource);
+            $user = User::where('username',$userName)->first();
+            if($user){
+                $courses =  $user->purchasedCourses();
+                $coursesResource = CoursesResource::collection($courses);
+                return response()->json($coursesResource);
+            }
+
         }catch (\Exception $e){
             \Log::error($e->getMessage().'user: '.auth()->user());
         }
 
     }
 
-    public function lessonsByUser(){
+    public function lessonsByUser($userName){
         try {
-            $user = auth()->user();
+//            $user = auth()->user();
+            $user = User::where('username',$userName)->first();
             $courses =  $user->purchasedCourses();
             $lessonsResource ='';
             if($courses){
