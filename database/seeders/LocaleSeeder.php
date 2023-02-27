@@ -22,27 +22,13 @@ class LocaleSeeder extends Seeder
             ],
 
             [
-                'name' => 'Spanish',
-                'short_name' => 'es',
+                'name' => 'Vietnamese',
+                'short_name' => 'vi',
                 'display_type' => 'ltr',
                 'is_default' => 0,
 
             ],
 
-            [
-                'name' => 'French',
-                'short_name' => 'fr',
-                'display_type' => 'ltr',
-                'is_default' => 0,
-
-            ],
-            [
-                'name' => 'Arabic',
-                'short_name' => 'ar',
-                'display_type' => 'rtl',
-                'is_default' => 0,
-
-            ],
         ];
 
         foreach ($locales as $item) {
