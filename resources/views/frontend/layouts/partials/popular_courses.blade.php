@@ -20,7 +20,7 @@
                                 @else
                                    <span>
                                         {!!  $item->strikePrice  !!}
-                                       {{$appCurrency['symbol'].' '.$item->price}}
+                                       {{$appCurrency['symbol'].' '.number_format($item->price)}}
                                    </span>
                                 @endif
                             </div>
