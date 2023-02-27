@@ -2605,7 +2605,7 @@ class ApiController extends Controller
             $coursesResource = CoursesResource::collection($courses);
             return response()->json($coursesResource);
         }catch (\Exception $e){
-            \Log::error($e->getMessage());
+            \Log::error($e->getMessage().'user: '.auth()->user());
         }
 
     }
@@ -2625,7 +2625,7 @@ class ApiController extends Controller
 
 
         }catch (\Exception $e){
-            \Log::error($e->getMessage());
+            \Log::error($e->getMessage().'user: '.auth()->user());
         }
 
     }
