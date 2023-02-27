@@ -1,10 +1,11 @@
 <div class="in-total font-weight-normal mb-3">@lang('labels.frontend.cart.price')
     <small class="text-muted">
-        ({{Cart::getContent()->count()}}{{(Cart::getContent()->count() > 1) ? ' '.trans('labels.frontend.cart.items') : ' '.trans('labels.frontend.cart.item')}})
+        ({{Cart::getContent()->count()}}{{(Cart::getContent()->count() > 1) ? ' '.trans('labels.frontend.cart.items') : ' '.trans('labels.frontend.cart.item')}}
+        )
     </small>
     <span class="font-weight-bold">
                                                 @if(isset($total))
-            {{$appCurrency['symbol'].' '.$total}}
+            {{$appCurrency['symbol'].' '.number_format($total)}}
         @endif
                                             </span>
 </div>
@@ -12,7 +13,7 @@
     @foreach(Cart::getConditionsByType('coupon') as $condition)
         <div class="in-total font-weight-normal  mb-3"> {{ $condition->getValue().' '.$condition->getName()}}
             <span class="font-weight-bold">{{ $appCurrency['symbol'].' '.number_format($condition->getCalculatedValue($total))}}</span>
-         <i style="cursor: pointer" id="removeCoupon" class="fa text-danger fa-times-circle"></i>
+            <i style="cursor: pointer" id="removeCoupon" class="fa text-danger fa-times-circle"></i>
         </div>
     @endforeach
 

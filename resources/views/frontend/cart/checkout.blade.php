@@ -109,7 +109,7 @@
                                                                             href="#">@if($course->free == 1)
                                                                             <span>{{trans('labels.backend.bundles.fields.free')}}</span>
                                                                         @else
-                                                                            <span> {{$appCurrency['symbol'].' '.$course->price}}</span>
+                                                                            <span> {{$appCurrency['symbol'].' '.number_format($course->price)}}</span>
                                                                         @endif</a></span>
                                                                 <span class="bold-font">{{$course->category->name}}</span>
                                                                 <div class="course-rate ul-li">
