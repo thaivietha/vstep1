@@ -291,12 +291,12 @@ class CartController extends Controller
             $content['total'] =  number_format(Cart::session(auth()->user()->id)->getTotal(),2);
             $content['reference_no'] = $order->reference_no;
 
-            try {
-                \Mail::to(auth()->user()->email)->send(new OfflineOrderMail($content));
-                $this->adminOrderMail($order);
-            } catch (\Exception $e) {
-                \Log::info($e->getMessage() . ' for order ' . $order->id);
-            }
+//            try {
+//                \Mail::to(auth()->user()->email)->send(new OfflineOrderMail($content));
+//                $this->adminOrderMail($order);
+//            } catch (\Exception $e) {
+//                \Log::info($e->getMessage() . ' for order ' . $order->id);
+//            }
 
             Cart::session(auth()->user()->id)->clear();
             \Session::flash('success', trans('labels.frontend.cart.offline_request'));
