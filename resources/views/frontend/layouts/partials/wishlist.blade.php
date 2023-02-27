@@ -3,7 +3,7 @@
     <form name="wishlist-form" action="{{ route('add-to-wishlist') }}" method="POST">
     @csrf
         <input type="hidden" name="course_id" value="{{ $course }}">
-        <input type="hidden" name="price" value="{{ number_format($price) }}">
+        <input type="hidden" name="price" value="{{ $price }}">
     <button type="submit" class="btn gradient-bg text-white font-weight-bold wishlist-btn">
         <i class="far fa-heart"></i>
         @lang('strings.frontend.general.add_to_wishlist')
