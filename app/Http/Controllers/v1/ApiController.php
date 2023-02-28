@@ -227,7 +227,9 @@ class ApiController extends Controller
 
             $tokenResult = $user->createToken('Personal Access Token');
             $token = $tokenResult->token;
-            $token->expires_at = Carbon::now()->addHour();
+            if ($request->remember_me) {
+                $token->expires_at = Carbon::now()->addWeeks(1);
+            }
 
             $token->save();
             return response()->json([
@@ -2599,7 +2601,8 @@ class ApiController extends Controller
 
     public function coursesByUser($userName){
         try {
-            $user = User::where('username',$userName)->first();
+            $user = auth()->user();
+//            $user = User::where('username',$userName)->first();
             if($user){
                 $courses =  $user->purchasedCourses();
                 $coursesResource = CoursesResource::collection($courses);
@@ -2615,19 +2618,16 @@ class ApiController extends Controller
 
     public function lessonsByUser($userName){
         try {
-//            $user = auth()->user();
-            $user = User::where('username',$userName)->first();
+            $user = auth()->user();
+//            $user = User::where('username',$userName)->first();
             $courses =  $user->purchasedCourses();
             $lessonsResource ='';
             if($courses){
                 foreach ($courses as $course){
                     $lessons = $course->publishedLessons;
-//                    dd($lessons->load('course'));
                     $lessonsResource = LessonsResource::collection($lessons->load('course'));
                 }
             }
-            \Log::error('user:  '.auth()->user().'coursesByUser: '. \request()->header('Authorization'));
-
             return response()->json($lessonsResource);
 
 
@@ -2649,8 +2649,6 @@ class ApiController extends Controller
         }catch (\Exception $e){
             \Log::error($e->getMessage());
         }
-
-
     }
 
 
