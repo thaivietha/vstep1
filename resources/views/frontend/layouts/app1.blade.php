@@ -120,7 +120,7 @@
                             <nav class="navbar-menu float-right">
                                 <div class="nav-menu ul-li">
                                     <ul>
-                                        @if(count($custom_menus) > 0 )
+                                        @if(isset($custom_menus) && count($custom_menus) > 0 )
                                             @foreach($custom_menus as $menu)
                                                 {{--@if(is_array($menu['id']) && $menu['id'] == $menu['parent'])--}}
                                                     {{--@if($menu->subs && (count($menu->subs) > 0))--}}
@@ -210,7 +210,7 @@
                                 </div>
                                 <nav>
                                     <ul>
-                                        @if(count($custom_menus) > 0 )
+                                        @if(isset($custom_menus) && count($custom_menus) > 0 )
                                             @foreach($custom_menus as $menu)
                                                 @if($menu['id'] == $menu['parent'])
                                                     @if(count($menu->subs) > 0)

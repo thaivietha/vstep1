@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Admin;
 use App\Helpers\General\EarningHelper;
 use App\Http\Requests\Admin\StoreCategoriesRequest;
 use App\Http\Requests\Admin\StoreOrdersRequest;
+use App\Mail\Frontend\AdminOrederMail;
 use App\Mail\OfflineOrderMail;
 use App\Models\Auth\User;
 use App\Models\Bundle;
@@ -200,13 +201,12 @@ class OrderController extends Controller
         $content['total'] =  number_format($amount);
         $content['reference_no'] = $order->reference_no;
 
-//        try {
-//            $user = User::find($request->user_id);
-//            \Mail::to($user->email)->send(new OfflineOrderMail($content));
-//            $this->adminOrderMail($order);
-//        } catch (\Exception $e) {
-//            \Log::info($e->getMessage() . ' for order ' . $order->id);
-//        }
+        try {
+            $user = User::find($request->user_id);
+            \Mail::to($user->email)->send(new OfflineOrderMail($content));
+        } catch (\Exception $e) {
+            \Log::info($e->getMessage() . ' for order ' . $order->id);
+        }
 
         $order->payment_type = 3;
         $order->amount = $amount;
@@ -335,4 +335,5 @@ class OrderController extends Controller
         }
         return false;
     }
+
 }

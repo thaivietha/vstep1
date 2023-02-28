@@ -2569,11 +2569,12 @@ class ApiController extends Controller
 
 
 
-    public function ChangePassword(Request $request)
+    public function ChangePassword(Request $request,$userName)
     {
         try {
             $data = $request->only(['OldPassword', 'NewPassword', 'ConfirmPassword']);
-            $user =  Auth::user();
+//            $user =  Auth::user();
+            $user = User::where('username',$userName)->first();
             if (Hash::check($data['OldPassword'], $user->password)) {
                 if ($data['NewPassword'] == $data['ConfirmPassword']) {
                     $user->update([
@@ -2634,8 +2635,8 @@ class ApiController extends Controller
         }catch (\Exception $e){
             \Log::error($e->getMessage().'user: '.auth()->user());
         }
-
     }
+
     public function getzipfileIdLesson($id){
         try {
             $lesson = Lesson::with('mediaFiles')->where('uuid',$id)->first();

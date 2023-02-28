@@ -18382,63 +18382,847 @@
      
 }
 
-    namespace Harimayco\Menu\Facades { 
+    namespace Spatie\Menu\Laravel\Facades { 
             /**
      * 
      *
      */ 
         class Menu {
                     /**
+         * Set all relevant children active based on the current request's URL.
+         * 
+         * /, /about, /contact => request to /about will set the about link active.
+         * 
+         * /en, /en/about, /en/contact => request to /en won't set /en active if the
+         *                                request root is set to /en.
+         *
+         * @param string $requestRoot If the link's URL is an exact match with the
+         *                            request root, the link won't be set active.
+         *                            This behavior is to avoid having home links
+         *                            active on every request.
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function setActiveFromRequest($requestRoot = '/')
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setActiveFromRequest($requestRoot);
+        }
+                    /**
          * 
          *
+         * @static 
+         */ 
+        public static function url($path, $text, $parameters = [], $secure = null)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->url($path, $text, $parameters, $secure);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function action($action, $text, $parameters = [], $absolute = true)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->action($action, $text, $parameters, $absolute);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function route($name, $text, $parameters = [], $absolute = true)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->route($name, $text, $parameters, $absolute);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function view($name, $data = [])
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->view($name, $data);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function urlIf($condition, $path, $text, $parameters = [], $secure = null)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->urlIf($condition, $path, $text, $parameters, $secure);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function actionIf($condition, $action, $text, $parameters = [], $absolute = true)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->actionIf($condition, $action, $text, $parameters, $absolute);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function routeIf($condition, $name, $text, $parameters = [], $absolute = true)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->routeIf($condition, $name, $text, $parameters, $absolute);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function viewIf($condition, $name, $data = null)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->viewIf($condition, $name, $data);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function addIfCan($authorization, $item)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->addIfCan($authorization, $item);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function linkIfCan($authorization, $url, $text)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->linkIfCan($authorization, $url, $text);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function htmlIfCan($authorization, $html)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->htmlIfCan($authorization, $html);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function submenuIfCan($authorization, $header, $menu = null)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->submenuIfCan($authorization, $header, $menu);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function urlIfCan($authorization, $path, $text, $parameters = [], $secure = null)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->urlIfCan($authorization, $path, $text, $parameters, $secure);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function actionIfCan($authorization, $action, $text, $parameters = [], $absolute = true)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->actionIfCan($authorization, $action, $text, $parameters, $absolute);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function routeIfCan($authorization, $name, $text, $parameters = [], $absolute = true)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->routeIfCan($authorization, $name, $text, $parameters, $absolute);
+        }
+                    /**
+         * 
+         *
+         * @internal param $condition
+         * @static 
+         */ 
+        public static function viewIfCan($authorization, $name, $data = null)
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->viewIfCan($authorization, $name, $data);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function toHtml()
+        {
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->toHtml();
+        }
+                    /**
+         * Create a new menu, optionally prefilled with items.
+         *
+         * @param array $items
+         * @return static 
+         * @static 
+         */ 
+        public static function new($items = [])
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        return \Spatie\Menu\Laravel\Menu::new($items);
+        }
+                    /**
+         * Build a new menu from an array. The callback receives a menu instance as
+         * the accumulator, the array item as the second parameter, and the item's
+         * key as the third.
+         *
+         * @param array|\Iterator $items
+         * @param callable $callback
+         * @param \Spatie\Menu\Menu|null $initial
+         * @return static 
+         * @static 
+         */ 
+        public static function build($items, $callback, $initial = null)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        return \Spatie\Menu\Laravel\Menu::build($items, $callback, $initial);
+        }
+                    /**
+         * Fill a menu from an array. The callback receives a menu instance as
+         * the accumulator, the array item as the second parameter, and the item's
+         * key as the third.
+         *
+         * @param array|\Iterator $items
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function fill($items, $callback)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->fill($items, $callback);
+        }
+                    /**
+         * Add an item to the menu. This also applies all registered filters to the
+         * item.
+         *
+         * @param \Spatie\Menu\Item $item
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function add($item)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->add($item);
+        }
+                    /**
+         * Add an item to the menu if a (non-strict) condition is met.
+         *
+         * @param bool|callable $condition
+         * @param \Spatie\Menu\Item $item
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function addIf($condition, $item)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->addIf($condition, $item);
+        }
+                    /**
+         * Shortcut function to add a plain link to the menu.
+         *
+         * @param string $url
+         * @param string $text
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function link($url, $text)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->link($url, $text);
+        }
+                    /**
+         * Shortcut function to add an empty item to the menu.
+         *
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function empty()
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->empty();
+        }
+                    /**
+         * Add a link to the menu if a (non-strict) condition is met.
+         *
+         * @param bool|callable $condition
+         * @param string $url
+         * @param string $text
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function linkIf($condition, $url, $text)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->linkIf($condition, $url, $text);
+        }
+                    /**
+         * Shortcut function to add raw html to the menu.
+         *
+         * @param string $html
+         * @param array $parentAttributes
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function html($html, $parentAttributes = [])
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->html($html, $parentAttributes);
+        }
+                    /**
+         * Add a chunk of html if a (non-strict) condition is met.
+         *
+         * @param bool|callable $condition
+         * @param string $html
+         * @param array $parentAttributes
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function htmlIf($condition, $html, $parentAttributes = [])
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->htmlIf($condition, $html, $parentAttributes);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function submenu($header, $menu = null)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->submenu($header, $menu);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function submenuIf($condition, $header, $menu = null)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->submenuIf($condition, $header, $menu);
+        }
+                    /**
+         * Iterate over all the items and apply a callback. If you typehint the
+         * item parameter in the callable, it wil only be applied to items of that
+         * type.
+         *
+         * @param callable $callable
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function each($callable)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->each($callable);
+        }
+                    /**
+         * Register a filter to the menu. When an item is added, all filters will be
+         * applied to the item. If you typehint the item parameter in the callable, it
+         * will only be applied to items of that type.
+         *
+         * @param callable $callable
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function registerFilter($callable)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->registerFilter($callable);
+        }
+                    /**
+         * Apply a callable to all existing items, and register it as a filter so it
+         * will get applied to all new items too. If you typehint the item parameter
+         * in the callable, it wil only be applied to items of that type.
+         *
+         * @param callable $callable
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function applyToAll($callable)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->applyToAll($callable);
+        }
+                    /**
+         * Wrap the entire menu in an html element. This is another level of
+         * wrapping above the `wrapperTag`.
+         *
+         * @param string $element
+         * @param array $attributes
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function wrap($element, $attributes = [])
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->wrap($element, $attributes);
+        }
+                    /**
+         * Determine whether the menu is active.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isActive()
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->isActive();
+        }
+                    /**
+         * A menu can be active but not exact-active, unless its prepend is.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isExactActive()
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->isExactActive();
+        }
+                    /**
+         * Set multiple items in the menu as active based on a callable that filters
+         * through items. If you typehint the item parameter in the callable, it will
+         * only be applied to items of that type.
+         *
+         * @param callable|string $urlOrCallable
+         * @param string $root
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function setActive($urlOrCallable, $root = '/')
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setActive($urlOrCallable, $root);
+        }
+                    /**
+         * Set the class name that will be used on exact-active items for this menu.
+         *
+         * @param string $class
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function setExactActiveClass($class)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setExactActiveClass($class);
+        }
+                    /**
+         * Set all relevant children active based on the current request's URL.
+         * 
+         * /, /about, /contact => request to /about will set the about link active.
+         * 
+         * /en, /en/about, /en/contact => request to /en won't set /en active if the
+         *                                request root is set to /en.
+         *
+         * @param string $url The current request url.
+         * @param string $root If the link's URL is an exact match with the request
+         *                     root, the link won't be set active. This behavior is
+         *                     to avoid having home links active on every request.
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function setActiveFromUrl($url, $root = '/')
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setActiveFromUrl($url, $root);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setActiveFromCallable($callable)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setActiveFromCallable($callable);
+        }
+                    /**
+         * Set the class name that will be used on active items for this menu.
+         *
+         * @param string $class
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function setActiveClass($class)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setActiveClass($class);
+        }
+                    /**
+         * Add a class to all items in the menu.
+         *
+         * @param string $class
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function addItemClass($class)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->addItemClass($class);
+        }
+                    /**
+         * Set an attribute on all items in the menu.
+         *
+         * @param string $attribute
+         * @param string $value
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function setItemAttribute($attribute, $value = '')
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setItemAttribute($attribute, $value);
+        }
+                    /**
+         * Add a parent class to all items in the menu.
+         *
+         * @param string $class
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function addItemParentClass($class)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->addItemParentClass($class);
+        }
+                    /**
+         * Add a parent attribute to all items in the menu.
+         *
+         * @param string $attribute
+         * @param string $value
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function setItemParentAttribute($attribute, $value = '')
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setItemParentAttribute($attribute, $value);
+        }
+                    /**
+         * Set tag for items wrapper.
+         *
+         * @param string|null $wrapperTagName
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function setWrapperTag($wrapperTagName = null)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setWrapperTag($wrapperTagName);
+        }
+                    /**
+         * Unset tag for items wrapper.
+         *
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function withoutWrapperTag()
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->withoutWrapperTag();
+        }
+                    /**
+         * Set the parent tag name.
+         *
+         * @param string|null $parentTagName
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function setParentTag($parentTagName = null)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setParentTag($parentTagName);
+        }
+                    /**
+         * Render items without a parent tag.
+         *
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function withoutParentTag()
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->withoutParentTag();
+        }
+                    /**
+         * Set whether active class should (also) be on link.
+         *
+         * @param bool $activeClassOnLink
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function setActiveClassOnLink($activeClassOnLink = true)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setActiveClassOnLink($activeClassOnLink);
+        }
+                    /**
+         * Set whether active class should (also) be on parent.
+         *
+         * @param $activeClassOnParent
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function setActiveClassOnParent($activeClassOnParent = true)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setActiveClassOnParent($activeClassOnParent);
+        }
+                    /**
+         * 
+         *
+         * @param bool $condition
+         * @param callable $callable
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function if($condition, $callable)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->if($condition, $callable);
+        }
+                    /**
+         * Create a empty blueprint of the menu (copies `filters` and `activeClass`).
+         *
+         * @return static 
+         * @static 
+         */ 
+        public static function blueprint()
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->blueprint();
+        }
+                    /**
+         * Render the menu.
+         *
+         * @return string 
          * @static 
          */ 
         public static function render()
-        {
-                        /** @var \Harimayco\Menu\WMenu $instance */
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
                         return $instance->render();
         }
                     /**
-         * 
+         * The amount of items in the menu.
          *
+         * @return int 
          * @static 
          */ 
-        public static function scripts()
-        {
-                        /** @var \Harimayco\Menu\WMenu $instance */
-                        return $instance->scripts();
+        public static function count()
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->count();
         }
                     /**
          * 
          *
          * @static 
          */ 
-        public static function select($name = 'menu', $menulist = [])
-        {
-                        /** @var \Harimayco\Menu\WMenu $instance */
-                        return $instance->select($name, $menulist);
+        public static function getIterator()
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->getIterator();
         }
                     /**
-         * Returns empty array if menu not found now.
          * 
-         * Thanks @sovichet
          *
-         * @param $name
+         * @static 
+         */ 
+        public static function setAttribute($attribute, $value = '')
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setAttribute($attribute, $value);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setAttributes($attributes)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setAttributes($attributes);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function addClass($class)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->addClass($class);
+        }
+                    /**
+         * Return an array of attributes to apply on the parent. This generally means
+         * the attributes that should be applied on the <li> tag.
+         *
          * @return array 
          * @static 
          */ 
-        public static function getByName($name)
-        {
-                        return \Harimayco\Menu\WMenu::getByName($name);
+        public static function parentAttributes()
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->parentAttributes();
         }
                     /**
          * 
          *
          * @static 
          */ 
-        public static function get($menu_id)
+        public static function setParentAttribute($attribute, $value = '')
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setParentAttribute($attribute, $value);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setParentAttributes($attributes)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->setParentAttributes($attributes);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function addParentClass($class)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->addParentClass($class);
+        }
+                    /**
+         * Prepend the anchor with a string of html on render.
+         *
+         * @param string|\Spatie\Menu\Item $prepend
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function prepend($prepend)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->prepend($prepend);
+        }
+                    /**
+         * Prepend the text with a string of html on render if a certain condition is
+         * met.
+         *
+         * @param mixed $condition
+         * @param string|\Spatie\Menu\Item $prepend
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function prependIf($condition, $prepend)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->prependIf($condition, $prepend);
+        }
+                    /**
+         * Append a text of html to the menu on render.
+         *
+         * @param string|\Spatie\Menu\Item $append
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function append($append)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->append($append);
+        }
+                    /**
+         * Append the text with a string of html on render if a certain condition is
+         * met.
+         *
+         * @param bool|callable $condition
+         * @param string|\Spatie\Menu\Item $append
+         * @return \Spatie\Menu\Laravel\Menu 
+         * @static 
+         */ 
+        public static function appendIf($condition, $append)
+        {            //Method inherited from \Spatie\Menu\Menu         
+                        /** @var \Spatie\Menu\Laravel\Menu $instance */
+                        return $instance->appendIf($condition, $append);
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
         {
-                        return \Harimayco\Menu\WMenu::get($menu_id);
+                        \Spatie\Menu\Laravel\Menu::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Spatie\Menu\Laravel\Menu::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Spatie\Menu\Laravel\Menu::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Spatie\Menu\Laravel\Menu::flushMacros();
         }
          
     }
@@ -19152,234 +19936,6 @@
      
 }
 
-    namespace DaveJamesMiller\Breadcrumbs\Facades { 
-            /**
-     * Breadcrumbs facade - allows easy access to the Manager instance.
-     *
-     * @method static array getCurrentRoute()
-     * @mixin \Illuminate\Support\Traits\Macroable
-     * @see BreadcrumbsManager
-     */ 
-        class Breadcrumbs {
-                    /**
-         * Register a breadcrumb-generating callback for a page.
-         *
-         * @param string $name The name of the page.
-         * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
-         *     accept additional parameters.
-         * @return void 
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
-         *     used.
-         * @static 
-         */ 
-        public static function for($name, $callback)
-        {
-                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
-                        $instance->for($name, $callback);
-        }
-                    /**
-         * Register a breadcrumb-generating callback for a page.
-         * 
-         * For backwards-compatibility with v5.0.0 and below.
-         *
-         * @param string $name The name of the page.
-         * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
-         *     accept additional parameters.
-         * @return void 
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
-         *     used.
-         * @see self::for()
-         * @static 
-         */ 
-        public static function register($name, $callback)
-        {
-                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
-                        $instance->register($name, $callback);
-        }
-                    /**
-         * Register a closure to call before generating breadcrumbs for the current page.
-         * 
-         * For example, this can be used to always prepend the homepage without needing to manually add it to each page.
-         *
-         * @param callable $callback The callback, which should accept a Generator instance as the first and only parameter.
-         * @return void 
-         * @static 
-         */ 
-        public static function before($callback)
-        {
-                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
-                        $instance->before($callback);
-        }
-                    /**
-         * Register a closure to call after generating breadcrumbs for the current page.
-         * 
-         * For example, this can be used to append the current page number when using pagination.
-         *
-         * @param callable $callback The callback, which should accept a Generator instance as the first and only parameter.
-         * @return void 
-         * @static 
-         */ 
-        public static function after($callback)
-        {
-                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
-                        $instance->after($callback);
-        }
-                    /**
-         * Check if a breadcrumb with the given name exists.
-         * 
-         * If no name is given, defaults to the current route name.
-         *
-         * @param string|null $name The page name.
-         * @return bool Whether there is a registered callback with that name.
-         * @static 
-         */ 
-        public static function exists($name = null)
-        {
-                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
-                        return $instance->exists($name);
-        }
-                    /**
-         * Generate a set of breadcrumbs for a page.
-         *
-         * @param string|null $name The name of the current page.
-         * @param mixed $params The parameters to pass to the closure for the current page.
-         * @return \Illuminate\Support\Collection The generated breadcrumbs.
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route
-         *     doesn't have an associated name.
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names
-         *     are) not registered.
-         * @static 
-         */ 
-        public static function generate($name = null, ...$params)
-        {
-                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
-                        return $instance->generate($name, ...$params);
-        }
-                    /**
-         * Render breadcrumbs for a page with the specified view.
-         *
-         * @param string $view The name of the view to render.
-         * @param string|null $name The name of the current page.
-         * @param mixed $params The parameters to pass to the closure for the current page.
-         * @return \Illuminate\Support\HtmlString The generated HTML.
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't have an associated name.
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\ViewNotSetException if no view has been set.
-         * @static 
-         */ 
-        public static function view($view, $name = null, ...$params)
-        {
-                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
-                        return $instance->view($view, $name, ...$params);
-        }
-                    /**
-         * Render breadcrumbs for a page with the default view.
-         *
-         * @param string|null $name The name of the current page.
-         * @param mixed $params The parameters to pass to the closure for the current page.
-         * @return \Illuminate\Support\HtmlString The generated HTML.
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't have an associated name.
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\ViewNotSetException if no view has been set.
-         * @static 
-         */ 
-        public static function render($name = null, ...$params)
-        {
-                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
-                        return $instance->render($name, ...$params);
-        }
-                    /**
-         * Get the last breadcrumb for the current page.
-         * 
-         * Optionally pass a
-         *
-         * @return \stdClass|null The breadcrumb for the current page.
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\UnnamedRouteException if the current route doesn't have an associated name.
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
-         * @static 
-         */ 
-        public static function current()
-        {
-                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
-                        return $instance->current();
-        }
-                    /**
-         * Set the current route name and parameters to use when calling render() or generate() with no parameters.
-         *
-         * @param string $name The name of the current page.
-         * @param mixed $params The parameters to pass to the closure for the current page.
-         * @return void 
-         * @static 
-         */ 
-        public static function setCurrentRoute($name, ...$params)
-        {
-                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
-                        $instance->setCurrentRoute($name, ...$params);
-        }
-                    /**
-         * Clear the previously set route name and parameters to use when calling render() or generate() with no parameters.
-         * 
-         * Next time it will revert to the default behaviour of using the current route from Laravel.
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function clearCurrentRoute()
-        {
-                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
-                        $instance->clearCurrentRoute();
-        }
-                    /**
-         * Register a custom macro.
-         *
-         * @param string $name
-         * @param object|callable $macro
-         * @return void 
-         * @static 
-         */ 
-        public static function macro($name, $macro)
-        {
-                        \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::macro($name, $macro);
-        }
-                    /**
-         * Mix another object into the class.
-         *
-         * @param object $mixin
-         * @param bool $replace
-         * @return void 
-         * @throws \ReflectionException
-         * @static 
-         */ 
-        public static function mixin($mixin, $replace = true)
-        {
-                        \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::mixin($mixin, $replace);
-        }
-                    /**
-         * Checks if macro is registered.
-         *
-         * @param string $name
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasMacro($name)
-        {
-                        return \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::hasMacro($name);
-        }
-                    /**
-         * Flush the existing macros.
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function flushMacros()
-        {
-                        \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::flushMacros();
-        }
-         
-    }
-     
-}
-
     namespace Facade\Ignition\Facades { 
             /**
      * Class Flare.
@@ -19689,728 +20245,107 @@
      */ 
         class Rave {
                     /**
-         * Generates a checksum value for the information to be sent to the payment gateway
+         * Generates a unique reference
          *
-         * @param $redirectURL
-         * @return object 
-         * @static 
-         */ 
-        public static function createCheckSum($redirectURL)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->createCheckSum($redirectURL);
-        }
-                    /**
-         * Generates the final json to be used in configuring the payment call to the rave payment gateway
-         *
-         * @param $redirectURL
+         * @param $transactionPrefix
          * @return string 
          * @static 
          */ 
-        public static function initialize($redirectURL)
+        public static function generateReference($transactionPrefix = null)
         {
                         /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->initialize($redirectURL);
+                        return $instance->generateReference($transactionPrefix);
         }
                     /**
-         * Handle canceled payments with this method
+         * Reaches out to Flutterwave to initialize a payment
          *
-         * @param string $referenceNumber This should be the reference number of the transaction that was canceled
          * @param $data
-         * @return mixed 
-         * @static 
-         */ 
-        public static function paymentCanceled($referenceNumber, $data = null)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->paymentCanceled($referenceNumber, $data);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getReferenceNumber()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getReferenceNumber();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function createReferenceNumber()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->createReferenceNumber();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setPrefix($value, $override)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setPrefix($value, $override);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setAmount($value)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setAmount($value);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getAmount()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getAmount();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setKeys($public, $secret)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setKeys($public, $secret);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setPaymentMethod($method)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setPaymentMethod($method);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getPaymentMethod()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getPaymentMethod();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setDescription($description)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setDescription($description);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getDescription()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getDescription();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setLogo($logo)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setLogo($logo);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getLogo()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getLogo();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setTitle($title)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setTitle($title);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getTitle()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getTitle();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setCountry($country)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setCountry($country);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getCountry()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getCountry();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setPhoneNumber($phone)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setPhoneNumber($phone);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getPhoneNumber()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getPhoneNumber();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setFirstName($name)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setFirstName($name);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getFirstName()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getFirstName();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setLastName($name)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setLastName($name);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getLastName()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getLastName();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setEmail($email)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setEmail($email);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getEmail()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getEmail();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setCurrency($currency)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setCurrency($currency);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getCurrency()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getCurrency();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setPayButtonText($text)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setPayButtonText($text);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getPayButtonText()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getPayButtonText();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setMetaData($data)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setMetaData($data);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getMetaData()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getMetaData();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setRedirectUrl($url)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->setRedirectUrl($url);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getRedirectUrl()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getRedirectUrl();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function eventHandler($class)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->eventHandler($class);
-        }
-                    /**
-         * Refunds
-         *
          * @return object 
          * @static 
          */ 
-        public static function refund()
+        public static function initializePayment($data)
         {
                         /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->refund();
+                        return $instance->initializePayment($data);
         }
                     /**
-         * Exchange Rates
+         * Gets a transaction ID depending on the redirect structure
          *
+         * @return string 
+         * @static 
+         */ 
+        public static function getTransactionIDFromCallback()
+        {
+                        /** @var \KingFlamez\Rave\Rave $instance */
+                        return $instance->getTransactionIDFromCallback();
+        }
+                    /**
+         * Reaches out to Flutterwave to verify a transaction
+         *
+         * @param $id
          * @return object 
          * @static 
          */ 
-        public static function exchangeRates()
+        public static function verifyTransaction($id)
         {
                         /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->exchangeRates();
+                        return $instance->verifyTransaction($id);
         }
                     /**
-         * Receive Webhook
+         * Confirms webhook `verifi-hash` is the same as the environment variable
          *
-         * @param $secrethash
-         * @return object 
+         * @param $data
+         * @return boolean 
          * @static 
          */ 
-        public static function receiveWebhook()
+        public static function verifyWebhook()
         {
                         /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->receiveWebhook();
+                        return $instance->verifyWebhook();
         }
                     /**
-         * Used for KYC to validate bvn
+         * Payments
          *
-         * @param string $bvn the customers bvn
-         * @return object 
+         * @return \KingFlamez\Rave\Helpers\Payments 
          * @static 
          */ 
-        public static function validateBVN($bvn)
+        public static function payments()
         {
                         /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->validateBVN($bvn);
+                        return $instance->payments();
         }
                     /**
-         * Verifies a transaction with the transaction reference
+         * Banks
          *
-         * @param string $referenceNumber This should be the reference number of the transaction you want to verify
-         * @return object 
+         * @return \KingFlamez\Rave\Helpers\Banks 
          * @static 
          */ 
-        public static function verifyTransaction($referenceNumber)
+        public static function banks()
         {
                         /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->verifyTransaction($referenceNumber);
+                        return $instance->banks();
         }
                     /**
-         * Creates a payment plan
+         * Transfers
          *
-         * @return object 
+         * @return \KingFlamez\Rave\Helpers\Transfers 
          * @static 
          */ 
-        public static function createPaymentPlan()
+        public static function transfers()
         {
                         /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->createPaymentPlan();
+                        return $instance->transfers();
         }
                     /**
-         * Edits a payment plan
+         * Beneficiary
          *
-         * @param \KingFlamez\Rave\id $id This is the payment plan id
-         * @return object 
+         * @return \KingFlamez\Rave\Helpers\Beneficiary 
          * @static 
          */ 
-        public static function editPaymentPlan($id)
+        public static function beneficiaries()
         {
                         /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->editPaymentPlan($id);
-        }
-                    /**
-         * Cancels a payment plan
-         *
-         * @param \KingFlamez\Rave\id $id This is the payment plan id
-         * @return object 
-         * @static 
-         */ 
-        public static function cancelPaymentPlan($id)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->cancelPaymentPlan($id);
-        }
-                    /**
-         * List all the payment plans
-         *
-         * @return object 
-         * @static 
-         */ 
-        public static function listPaymentPlans()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->listPaymentPlans();
-        }
-                    /**
-         * Fetches a payment plan
-         *
-         * @return object 
-         * @static 
-         */ 
-        public static function fetchPaymentPlan($id = '', $q = '')
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->fetchPaymentPlan($id, $q);
-        }
-                    /**
-         * List all the subscriptions
-         *
-         * @return object 
-         * @static 
-         */ 
-        public static function listSubscriptions()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->listSubscriptions();
-        }
-                    /**
-         * Fetches a subscription
-         *
-         * @return object 
-         * @static 
-         */ 
-        public static function fetchSubscription($id = '', $email = '')
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->fetchSubscription($id, $email);
-        }
-                    /**
-         * Cancels a subscription
-         *
-         * @param \KingFlamez\Rave\id $id This is the subscription id
-         * @return object 
-         * @static 
-         */ 
-        public static function cancelSubscription($id)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->cancelSubscription($id);
-        }
-                    /**
-         * Activates a subscription
-         *
-         * @param \KingFlamez\Rave\id $id This is the subscription id
-         * @return object 
-         * @static 
-         */ 
-        public static function activateSubscription($id)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->activateSubscription($id);
-        }
-                    /**
-         * Registers a new sub account on Rave.
-         *
-         * @return mixed|object 
-         * @throws \Unirest\Exception
-         * @static 
-         */ 
-        public static function createSubAccount()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->createSubAccount();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function listSubAccount()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->listSubAccount();
-        }
-                    /**
-         * Fetches a sub account
-         *
-         * @return object 
-         * @static 
-         */ 
-        public static function fetchSubAccount($id)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->fetchSubAccount($id);
-        }
-                    /**
-         * Initialiate a transfer
-         *
-         * @return object 
-         * @static 
-         */ 
-        public static function initiateTransfer($arrdata)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->initiateTransfer($arrdata);
-        }
-                    /**
-         * Initialiate a bulk transfer
-         *
-         * @return object 
-         * @static 
-         */ 
-        public static function bulkTransfer($arrdata)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->bulkTransfer($arrdata);
-        }
-                    /**
-         * Fetches a transfer
-         *
-         * @return object 
-         * @static 
-         */ 
-        public static function fetchTransfer($id = '', $q = '', $reference = '')
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->fetchTransfer($id, $q, $reference);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function listTransfers()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->listTransfers();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function retrieveStatusofBulkTransfers($patch_id = '')
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->retrieveStatusofBulkTransfers($patch_id);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getApplicableTransferFee($currency)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getApplicableTransferFee($currency);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getTransferBalance($currency)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getTransferBalance($currency);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function accountVerification($arrdata)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->accountVerification($arrdata);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function preAuthouriseCard($arrdata)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->preAuthouriseCard($arrdata);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function capture($arrdata)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->capture($arrdata);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function refundPreAuthCard($arrdata)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->refundPreAuthCard($arrdata);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getFees($arrdata)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->getFees($arrdata);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function listofDirectBankCharge()
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->listofDirectBankCharge();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function exchangeRate($arrdata)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->exchangeRate($arrdata);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function listTransactions($arrdata)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->listTransactions($arrdata);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function listofBankForTransfer($country)
-        {
-                        /** @var \KingFlamez\Rave\Rave $instance */
-                        return $instance->listofBankForTransfer($country);
+                        return $instance->beneficiaries();
         }
          
     }
@@ -25001,10 +24936,9 @@ namespace  {
             class Excel extends \Maatwebsite\Excel\Facades\Excel {}
             class Agent extends \Jenssegers\Agent\Facades\Agent {}
             class Cart extends \Darryldecode\Cart\Facades\CartFacade {}
-            class Menu extends \Harimayco\Menu\Facades\Menu {}
+            class Menu extends \Spatie\Menu\Laravel\Facades\Menu {}
             class PDF extends \Barryvdh\DomPDF\Facade {}
             class Debugbar extends \Barryvdh\Debugbar\Facade {}
-            class Breadcrumbs extends \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Rave extends \KingFlamez\Rave\Facades\Rave {}
             class Zoom extends \MacsiDigital\Zoom\Facades\Zoom {}

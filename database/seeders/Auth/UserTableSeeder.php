@@ -54,6 +54,7 @@ class UserTableSeeder extends Seeder
         ]);
 
         User::create([
+            'username'          => 'user',
             'first_name'        => 'Normal',
             'last_name'         => 'User',
             'email'             => 'user@vstep.com',
