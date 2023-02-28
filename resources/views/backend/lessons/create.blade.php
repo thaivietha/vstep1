@@ -170,7 +170,7 @@
                 <div class="col-12 col-lg-3 form-group">
                     <div class="checkbox">
                         {!! Form::hidden('published', 0) !!}
-                        {!! Form::checkbox('published', 1, false, []) !!}
+                        {!! Form::checkbox('published', 1, true, []) !!}
                         {!! Form::label('published', trans('labels.backend.lessons.fields.published'), ['class' => 'checkbox control-label font-weight-bold']) !!}
                     </div>
                 </div>
