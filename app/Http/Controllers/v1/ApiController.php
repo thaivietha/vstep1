@@ -2601,8 +2601,8 @@ class ApiController extends Controller
 
     public function coursesByUser($userName){
         try {
-            $user = auth()->user();
-//            $user = User::where('username',$userName)->first();
+//            $user = auth()->user();
+            $user = User::where('username',$userName)->first();
             if($user){
                 $courses =  $user->purchasedCourses();
                 $coursesResource = CoursesResource::collection($courses);
@@ -2618,8 +2618,8 @@ class ApiController extends Controller
 
     public function lessonsByUser($userName){
         try {
-            $user = auth()->user();
-//            $user = User::where('username',$userName)->first();
+//            $user = auth()->user();
+            $user = User::where('username',$userName)->first();
             $courses =  $user->purchasedCourses();
             $lessonsResource ='';
             if($courses){
