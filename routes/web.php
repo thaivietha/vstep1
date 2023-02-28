@@ -13,12 +13,13 @@ use App\Http\Controllers\Frontend\HomeController;
 
 Route::get('/clear', function () {
     try {
-        echo Artisan::call('optimize:clear');
-        echo Artisan::call('cache:clear');
-        echo Artisan::call('config:cache');
-        echo Artisan::call('route:cache');
+        Artisan::call('optimize:clear');
+        Artisan::call('cache:clear');
+        Artisan::call('config:cache');
+        Artisan::call('route:cache');
+        dd(Artisan::output());
     } catch (Exception $exception) {
-        Log::error('clear ' . $exception->getMessage());
+        dd($exception->getMessage());
     }
 
 });
@@ -30,6 +31,18 @@ Route::get('/info', function () {
         Log::error('info ' . $exception->getMessage());
     }
 
+});
+Route::get('/clear-passport', function () {
+    try {
+        $com = 'passport:purge';
+        if(isset($_GET['days'])){
+            $com = 'passport:purge --days='.$_GET['days'];
+        }
+        Artisan::call($com);
+        dd(Artisan::output());
+    } catch (Exception $exception) {
+        Log::error('clear-passport ' . $exception->getMessage());
+    }
 });
 
 

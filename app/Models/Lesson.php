@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 //use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Support\Facades\File;
 use Mtownsend\ReadTime\ReadTime;
+use Ramsey\Uuid\Uuid as PackageUuid;
 
 
 /**
@@ -30,10 +31,15 @@ class Lesson extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'slug', 'lesson_image', 'short_text', 'full_text', 'position', 'downloadable_files', 'free_lesson', 'published', 'course_id','backup_link_1','backup_link_2','downloadable_files_pass'];
+    protected $fillable = ['uuid','title', 'slug', 'lesson_image', 'short_text', 'full_text', 'position', 'downloadable_files', 'free_lesson', 'published', 'course_id','backup_link_1','backup_link_2','downloadable_files_pass'];
 
     protected $appends = ['image','lesson_readtime'];
 
+
+    public function getUuidName()
+    {
+        return property_exists($this, 'uuidName') ? $this->uuidName : 'uuid';
+    }
 
     /**
      * Perform any actions required after the model boots.
@@ -42,6 +48,9 @@ class Lesson extends Model
      */
     protected static function booted()
     {
+        static::creating(function ($model) {
+            $model->{$model->getUuidName()} = PackageUuid::uuid4()->toString();
+        });
 
         static::deleting(function ($lesson) { // before delete() method call this
             if ($lesson->isForceDeleting()) {

@@ -92,56 +92,56 @@ class PermissionRoleTableSeeder extends Seeder
             ['id' => 49, 'name' => 'order_view',],
             ['id' => 50, 'name' => 'order_delete',],
 
-            ['id' => 51, 'name' => 'view backend',],
+            ['id' => 51, 'name' => 'view backend',], //47
 
-            ['id' => 52, 'name' => 'category_access',],
-            ['id' => 53, 'name' => 'category_create',],
-            ['id' => 54, 'name' => 'category_edit',],
-            ['id' => 55, 'name' => 'category_view',],
-            ['id' => 56, 'name' => 'category_delete',],
+            ['id' => 52, 'name' => 'category_access',], //48
+            ['id' => 53, 'name' => 'category_create',],//49
+            ['id' => 54, 'name' => 'category_edit',],//50
+            ['id' => 55, 'name' => 'category_view',],//51
+            ['id' => 56, 'name' => 'category_delete',],//52
 
-            ['id' => 57, 'name' => 'blog_access',],
-            ['id' => 58, 'name' => 'blog_create',],
-            ['id' => 59, 'name' => 'blog_edit',],
-            ['id' => 60, 'name' => 'blog_view',],
-            ['id' => 61, 'name' => 'blog_delete',],
+            ['id' => 57, 'name' => 'blog_access',], //53
+            ['id' => 58, 'name' => 'blog_create',],//54
+            ['id' => 59, 'name' => 'blog_edit',],//55
+            ['id' => 60, 'name' => 'blog_view',],//56
+            ['id' => 61, 'name' => 'blog_delete',],//57
 
-            ['id' => 62, 'name' => 'reason_access',],
-            ['id' => 63, 'name' => 'reason_create',],
-            ['id' => 64, 'name' => 'reason_edit',],
-            ['id' => 65, 'name' => 'reason_view',],
-            ['id' => 66, 'name' => 'reason_delete',],
+            ['id' => 62, 'name' => 'reason_access',], //58
+            ['id' => 63, 'name' => 'reason_create',],//59
+            ['id' => 64, 'name' => 'reason_edit',],//60
+            ['id' => 65, 'name' => 'reason_view',],//61
+            ['id' => 66, 'name' => 'reason_delete',],//62
 
-            ['id' => 67, 'name' => 'page_access',],
-            ['id' => 68, 'name' => 'page_create',],
-            ['id' => 69, 'name' => 'page_edit',],
-            ['id' => 70, 'name' => 'page_view',],
-            ['id' => 71, 'name' => 'page_delete',],
+            ['id' => 67, 'name' => 'page_access',],//63
+            ['id' => 68, 'name' => 'page_create',],//64
+            ['id' => 69, 'name' => 'page_edit',],//65
+            ['id' => 70, 'name' => 'page_view',],//66
+            ['id' => 71, 'name' => 'page_delete',],//67
 
-            ['id' => 72, 'name' => 'bundle_access',],
-            ['id' => 73, 'name' => 'bundle_create',],
-            ['id' => 74, 'name' => 'bundle_edit',],
-            ['id' => 75, 'name' => 'bundle_view',],
-            ['id' => 76, 'name' => 'bundle_delete',],
+            ['id' => 72, 'name' => 'bundle_access',],//68
+            ['id' => 73, 'name' => 'bundle_create',],//69
+            ['id' => 74, 'name' => 'bundle_edit',],//70
+            ['id' => 75, 'name' => 'bundle_view',],//71
+            ['id' => 76, 'name' => 'bundle_delete',],//72
 
-            ['id' => 77, 'name' => 'live_lesson_access'],
-            ['id' => 78, 'name' => 'live_lesson_create'],
-            ['id' => 79, 'name' => 'live_lesson_edit'],
-            ['id' => 80, 'name' => 'live_lesson_view'],
-            ['id' => 81, 'name' => 'live_lesson_delete'],
+            ['id' => 77, 'name' => 'live_lesson_access'],//73
+            ['id' => 78, 'name' => 'live_lesson_create'],//74
+            ['id' => 79, 'name' => 'live_lesson_edit'],//75
+            ['id' => 80, 'name' => 'live_lesson_view'],//76
+            ['id' => 81, 'name' => 'live_lesson_delete'],//77
 
-            ['id' => 82, 'name' => 'live_lesson_slot_access'],
-            ['id' => 83, 'name' => 'live_lesson_slot_create'],
-            ['id' => 84, 'name' => 'live_lesson_slot_edit'],
-            ['id' => 85, 'name' => 'live_lesson_slot_view'],
-            ['id' => 86, 'name' => 'live_lesson_slot_delete'],
+            ['id' => 82, 'name' => 'live_lesson_slot_access'], //78
+            ['id' => 83, 'name' => 'live_lesson_slot_create'],//79
+            ['id' => 84, 'name' => 'live_lesson_slot_edit'],//80
+            ['id' => 85, 'name' => 'live_lesson_slot_view'],//81
+            ['id' => 86, 'name' => 'live_lesson_slot_delete'],//82
 
-            ['id' => 87, 'name' => 'stripe_plan_access'],
-            ['id' => 88, 'name' => 'stripe_plan_create'],
-            ['id' => 89, 'name' => 'stripe_plan_edit'],
-            ['id' => 90, 'name' => 'stripe_plan_view'],
-            ['id' => 91, 'name' => 'stripe_plan_delete'],
-            ['id' => 92, 'name' => 'stripe_plan_restore'],
+            ['id' => 87, 'name' => 'stripe_plan_access'],//83
+            ['id' => 88, 'name' => 'stripe_plan_create'],//84
+            ['id' => 89, 'name' => 'stripe_plan_edit'],//85
+            ['id' => 90, 'name' => 'stripe_plan_view'],//86
+            ['id' => 91, 'name' => 'stripe_plan_delete'],//87
+            ['id' => 92, 'name' => 'stripe_plan_restore'],//88
         ];
 
         foreach ($permissions as $item) {
@@ -150,9 +150,10 @@ class PermissionRoleTableSeeder extends Seeder
 
 //        $admin_permissions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67];
 
-        $teacher_permissions = [1, 21, 22, 23, 24,25, 26, 27, 28, 29,30, 31, 32, 33, 34,35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47, 48, 49, 51, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82];
+//        $teacher_permissions = [1, 21, 22, 23, 24,25, 26, 27, 28, 29,30, 31, 32, 33, 34,35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47, 48, 49, 51, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82];
+        $teacher_permissions = [1, 21, 22, 23, 24,25, 26, 27, 28, 29,30, 31, 32, 33, 34,35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 51, 52, 53, 55, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86];
 
-        $student_permission = [47];
+        $student_permission = [51];
 
 
         $admin->syncPermissions(Permission::all());

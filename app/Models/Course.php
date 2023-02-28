@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Ramsey\Uuid\Uuid as PackageUuid;
 
 /**
  * Class Course
@@ -27,12 +28,16 @@ class Course extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['category_id', 'title', 'slug', 'description', 'price', 'course_image','course_video', 'start_date', 'published', 'free','featured', 'trending', 'popular', 'meta_title', 'meta_description', 'meta_keywords', 'expire_at','strike'];
+    protected $fillable = ['uuid','category_id', 'title', 'slug', 'description', 'price', 'course_image','course_video', 'start_date', 'published', 'free','featured', 'trending', 'popular', 'meta_title', 'meta_description', 'meta_keywords', 'expire_at','strike'];
 
     protected $appends = ['image'];
 
 //    protected $dates = ['expire_at'];
 
+    public function getUuidName()
+    {
+        return property_exists($this, 'uuidName') ? $this->uuidName : 'uuid';
+    }
 
     /**
      * Perform any actions required after the model boots.
@@ -41,6 +46,10 @@ class Course extends Model
      */
     protected static function booted()
     {
+        static::creating(function ($model) {
+            $model->{$model->getUuidName()} = PackageUuid::uuid4()->toString();
+        });
+
         if (auth()->check()) {
             if (auth()->user()->hasRole('teacher')) {
                 static::addGlobalScope('filter', function (Builder $builder) {

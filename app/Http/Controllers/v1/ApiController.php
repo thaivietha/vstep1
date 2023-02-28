@@ -227,9 +227,7 @@ class ApiController extends Controller
 
             $tokenResult = $user->createToken('Personal Access Token');
             $token = $tokenResult->token;
-            if ($request->remember_me) {
-                $token->expires_at = Carbon::now()->addWeeks(1);
-            }
+            $token->expires_at = Carbon::now()->addHour();
 
             $token->save();
             return response()->json([
@@ -2608,6 +2606,7 @@ class ApiController extends Controller
                 return response()->json($coursesResource);
             }
 
+
         }catch (\Exception $e){
             \Log::error($e->getMessage().'user: '.auth()->user());
         }
@@ -2623,9 +2622,12 @@ class ApiController extends Controller
             if($courses){
                 foreach ($courses as $course){
                     $lessons = $course->publishedLessons;
-                    $lessonsResource = LessonsResource::collection($lessons);
+//                    dd($lessons->load('course'));
+                    $lessonsResource = LessonsResource::collection($lessons->load('course'));
                 }
             }
+            \Log::error('user:  '.auth()->user().'coursesByUser: '. \request()->header('Authorization'));
+
             return response()->json($lessonsResource);
 
 
@@ -2636,7 +2638,7 @@ class ApiController extends Controller
     }
     public function getzipfileIdLesson($id){
         try {
-            $lesson = Lesson::with('mediaFiles')->findOrFail($id);
+            $lesson = Lesson::with('mediaFiles')->where('uuid',$id)->first();
             if ($lesson->mediaFiles) {
                 $file = $lesson->mediaFiles()->where('media.type', '=', 'application/x-zip-compressed')->pluck('name')->implode(',');
                 $download_path =  public_path('/storage/uploads/' . $file);

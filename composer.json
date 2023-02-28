@@ -48,6 +48,7 @@
         "omnipay/paypal": "^3.0",
         "omnipay/stripe": "^3.1",
         "paragonie/certainty": "^2",
+        "pierrocknroll/lavarel-passport-purge-command": "@dev",
         "razorpay/razorpay": "^2.5",
         "sendgrid/sendgrid": "~7",
         "skyraptor/chatter": "^0.5.11",

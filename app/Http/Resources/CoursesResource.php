@@ -17,9 +17,9 @@ class CoursesResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'Id' => $this->id,
+            'Id' => $this->uuid,
             'TenKhoaHoc' => $this->title,
-//            'STT' => $this->stt,
+//            'STT' => 1,
             'Count' => count($this->publishedLessons),
             'TrangThai' => $this->published,
 
