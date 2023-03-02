@@ -228,6 +228,9 @@ Route::post('lessons_restore/{id}', ['uses' => 'Admin\LessonsController@restore'
 Route::delete('lessons_perma_del/{id}', ['uses' => 'Admin\LessonsController@perma_del', 'as' => 'lessons.perma_del']);
 
 Route::post('lessons_upload_file', ['uses' => 'Admin\LessonsController@uploadFile', 'as' => 'lessons.upload_file']);
+Route::get('delete-files-lesson', ['uses' => 'Admin\LessonsController@deleteOrphanFiles', 'as' => 'lessons.deleteFiles']);
+//Route::get('delete-files-lesson','LessonsController@deleteOrphanFiles')->name('lessons.deleteFiles');
+
 
 
 

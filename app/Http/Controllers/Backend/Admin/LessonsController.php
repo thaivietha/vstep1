@@ -8,6 +8,7 @@ use App\Models\Lesson;
 use App\Models\Media;
 use App\Models\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -539,6 +540,17 @@ class LessonsController extends Controller
             'success'=>'Thêm mới thành công',
             'mediaID'=> $upload
         ]);
-//
+    }
+
+    public function deleteOrphanFiles() {
+        $filesDelete = Media::where('model_id',null)->get();
+            foreach ($filesDelete as $file) {
+                $destinationPath = public_path() . '/storage/uploads/'.$file->file_name;
+                echo '<br>'.$file->file_name;
+                if (file_exists($destinationPath)) {
+                    unlink($destinationPath);
+                }
+                $file->delete();
+            }
     }
 }
