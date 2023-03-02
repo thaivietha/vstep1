@@ -227,9 +227,9 @@ class ApiController extends Controller
 
             $tokenResult = $user->createToken('Personal Access Token');
             $token = $tokenResult->token;
-            if ($request->remember_me) {
-                $token->expires_at = Carbon::now()->addWeeks(1);
-            }
+//            if ($request->remember_me) {
+            $token->expires_at = Carbon::now()->addHour();
+//            }
 
             $token->save();
             return response()->json([
@@ -2573,8 +2573,8 @@ class ApiController extends Controller
     {
         try {
             $data = $request->only(['OldPassword', 'NewPassword', 'ConfirmPassword']);
-//            $user =  Auth::user();
-            $user = User::where('username',$userName)->first();
+            $user =  Auth::user();
+//            $user = User::where('username',$userName)->first();
             if (Hash::check($data['OldPassword'], $user->password)) {
                 if ($data['NewPassword'] == $data['ConfirmPassword']) {
                     $user->update([
@@ -2602,8 +2602,8 @@ class ApiController extends Controller
 
     public function coursesByUser($userName){
         try {
-//            $user = auth()->user();
-            $user = User::where('username',$userName)->first();
+            $user = auth()->user();
+//            $user = User::where('username',$userName)->first();
             if($user){
                 $courses =  $user->purchasedCourses();
                 $coursesResource = CoursesResource::collection($courses);
@@ -2617,8 +2617,8 @@ class ApiController extends Controller
 
     public function lessonsByUser($userName){
         try {
-//            $user = auth()->user();
-            $user = User::where('username',$userName)->first();
+            $user = auth()->user();
+//            $user = User::where('username',$userName)->first();
             $courses =  $user->purchasedCourses();
 
             $result = $lessons = array();
