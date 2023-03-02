@@ -2569,12 +2569,15 @@ class ApiController extends Controller
 
 
 
-    public function ChangePassword(Request $request,$userName)
+    public function ChangePassword(Request $request,$userName = null)
     {
         try {
             $data = $request->only(['OldPassword', 'NewPassword', 'ConfirmPassword']);
-            $user =  Auth::user();
-//            $user = User::where('username',$userName)->first();
+            if(!$userName){
+                $user = auth()->user();
+            }else{
+                $user = User::where('username',$userName)->first();
+            }
             if (Hash::check($data['OldPassword'], $user->password)) {
                 if ($data['NewPassword'] == $data['ConfirmPassword']) {
                     $user->update([
@@ -2602,25 +2605,29 @@ class ApiController extends Controller
 
     public function coursesByUser($userName){
         try {
-            $user = auth()->user();
-//            $user = User::where('username',$userName)->first();
-            if($user){
-                $courses =  $user->purchasedCourses();
-                $coursesResource = CoursesResource::collection($courses);
-                return response()->json($coursesResource);
+            if(!$userName){
+                $user = auth()->user();
+            }else{
+                $user = User::where('username',$userName)->first();
             }
+            $courses =  $user->purchasedCourses();
+            $coursesResource = CoursesResource::collection($courses);
+            return response()->json($coursesResource);
         }catch (\Exception $e){
             \Log::error($e->getMessage().'user: '.auth()->user());
         }
 
     }
 
-    public function lessonsByUser($userName){
+    public function lessonsByUser($userName = null){
         try {
-            $user = auth()->user();
-//            $user = User::where('username',$userName)->first();
-            $courses =  $user->purchasedCourses();
+            if(!$userName){
+                $user = auth()->user();
+            }else{
+                $user = User::where('username',$userName)->first();
+            }
 
+            $courses =  $user->purchasedCourses();
             $result = $lessons = array();
             if($courses){
                 foreach ($courses as $course){

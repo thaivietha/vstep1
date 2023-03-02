@@ -126,9 +126,9 @@ Route::group(['namespace'=>'v1'],function (){
     Route::group([
         'middleware' => 'auth:api'
     ],function () {
-        Route::post('/Account/ChangePassword/{userName}', 'ApiController@ChangePassword');
-        Route::get('/khoahocs/{userName}', 'ApiController@coursesByUser');
-        Route::get('/baihocs/get/{userName}', 'ApiController@lessonsByUser');
+        Route::post('/Account/ChangePassword/{userName?}', 'ApiController@ChangePassword');
+        Route::get('/khoahocs/{userName?}', 'ApiController@coursesByUser');
+        Route::get('/baihocs/get/{userName?}', 'ApiController@lessonsByUser');
     });
 });
 
