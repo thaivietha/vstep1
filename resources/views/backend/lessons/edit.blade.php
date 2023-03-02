@@ -104,25 +104,29 @@
             </div>
             <div class="row">
                 <div class="col-12 col-lg-6 form-group">
-                    {!! Form::label('downloadable_files', trans('labels.backend.lessons.fields.downloadable_files').' '.trans('labels.backend.lessons.max_file_size'), ['class' => 'control-label']) !!}
-                    {!! Form::file('downloadable_files[]', [
+                    {!! Form::label('lessons_file', trans('labels.backend.lessons.fields.downloadable_files').' '.trans('labels.backend.lessons.max_file_size'), ['class' => 'control-label']) !!}
+                    {!! Form::file('lessons_file', [
 
                         'class' => 'form-control file-upload',
-                        'id' => 'downloadable_files',
+                        'id' => 'lessons_file',
                         'accept' => ".zip"
                         ]) !!}
+
+                    <div style="display: none;height: 10px" class="progress mt-3" >
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%; height: 100%">75%</div>
+                    </div>
                     <div class="photo-block mt-3">
-                        <div class="files-list">
-                            @if(count($lesson->downloadableMedia) > 0)
-                                @foreach($lesson->downloadableMedia as $media)
-                                    <p class="form-group">
-                                        <a href="{{ asset('storage/uploads/files'.$media->name) }}"
-                                           target="_blank">{{ $media->name }}
-                                            ({{ $media->size }} KB)</a>
-                                        <a href="#" data-media-id="{{$media->id}}"
-                                           class="btn btn-xs btn-danger delete remove-file">@lang('labels.backend.lessons.remove')</a>
-                                    </p>
-                                @endforeach
+                        <div class="files-list" id="files_list">
+                            @if($lesson->lessonsFiles)
+                                <p class="form-group">
+                                    <input type="hidden" id="mediaID" value="{{ $lesson->lessonsFiles->id }}" />
+                                    <a href="{{ $lesson->lessonsFiles->url }}"
+                                       target="_blank">{{ $lesson->lessonsFiles->name }}
+                                        ({{ formatSizeUnits($lesson->lessonsFiles->size) }} )</a>
+                                    <a href="#" data-media-id="{{$lesson->lessonsFiles->id}}"
+                                       class="btn btn-xs btn-danger delete remove-file">@lang('labels.backend.lessons.remove')</a>
+                                </p>
+
                             @endif
                         </div>
                     </div>
@@ -240,8 +244,8 @@
 @stop
 
 @push('after-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/resumablejs@1.1.0/resumable.min.js"></script>
     <script src="{{asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
-
     <script type="text/javascript" src="{{asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
     <script type="text/javascript" src="{{asset('/vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>
     <script src="{{asset('/vendor/laravel-filemanager/js/lfm.js')}}"></script>
@@ -269,6 +273,7 @@
                         function (data, status) {
                             if (data.success) {
                                 parent.remove();
+                                $("#lessons_file").prop("disabled",false);
                             } else {
                                 alert('Something Went Wrong')
                             }
@@ -322,6 +327,84 @@
                 $('#video').addClass('d-none').attr('required', false)
             }
         })
+
+
+
+
+        if($("#mediaID").val() != null){
+            $("#lessons_file").prop("disabled",true);
+        }else {
+            $("#lessons_file").prop("disabled",false);
+        }
+
+
+        let browseFile = $('#lessons_file');
+        let resumable = new Resumable({
+            target: '{{ route('admin.lessons.upload_file') }}',
+            query: {
+                _token: '{{ csrf_token() }}',
+            },// CSRF token
+            fileType: ['zip'],
+            chunkSize: 10 * 1024 * 1024, // default is 1*1024*1024, this should be less than your maximum limit in php.ini
+            headers: {
+                'Accept': 'application/json'
+            },
+            testChunks: false,
+            maxFiles: 1,
+            fileParameterName: 'lessons_file',
+            throttleProgressCallbacks: 1,
+        });
+
+        resumable.assignBrowse(browseFile[0]);
+
+        resumable.on('fileAdded', function (file) { // trigger when file picked
+            showProgress();
+            resumable.upload() // to actually start uploading.
+        });
+
+        resumable.on('fileProgress', function (file) { // trigger when file progress update
+            updateProgress(Math.floor(file.progress() * 100));
+        });
+
+        resumable.on('fileSuccess', function (file, response) { // trigger when file upload complete
+            response = JSON.parse(response)
+            var mediaID = response.mediaID
+            var html = '<p class="form-group">' +
+                '<input type="hidden" id="mediaID" name="mediaID" value="'+mediaID.id+'" />'+
+                '<a href="'+mediaID.url+'" target="_blank"> '+mediaID.name+' ('+ formatSizeUnits(mediaID.size)+')</a>' +
+                '<a href="#" data-media-id="'+ mediaID.id+'"' +
+                'class="btn btn-xs btn-danger delete remove-file">@lang('labels.backend.lessons.remove')</a></p>';
+            $("#files_list").html(html)
+            $("#lessons_file").prop("disabled",true);
+
+            hideProgress()
+
+        });
+        resumable.on('fileError', function (file, response) { // trigger when there is any error
+            alert('file uploading error.')
+        });
+
+
+        let progress = $('.progress');
+
+        function showProgress() {
+            progress.find('.progress-bar').css('width', '0%');
+            progress.find('.progress-bar').html('0%');
+            progress.find('.progress-bar').removeClass('bg-success');
+            progress.show();
+        }
+
+        function updateProgress(value) {
+            progress.find('.progress-bar').css('width', `${value}%`)
+            progress.find('.progress-bar').html(`${value}%`)
+        }
+
+        function hideProgress() {
+            progress.hide();
+        }
+
+
+
 
     </script>
 @endpush

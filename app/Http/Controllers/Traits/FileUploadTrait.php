@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Traits;
 use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
 trait FileUploadTrait
 {
@@ -65,26 +69,33 @@ trait FileUploadTrait
     }
 
 
-    public function saveAllFiles(Request $request, $downloadable_file_input = null, $model_type = null, $model = null)
+    public function saveAllFiles(Request $request, $downloadable_file_input = null, $model_type = null, $model = null,$folder=null)
     {
+
+
         ini_set('memory_limit', '-1');
         if (!file_exists(public_path('storage/uploads'))) {
             mkdir(public_path('storage/uploads'), 0777);
-            mkdir(public_path('storage/upload/thumb'), 0777);
+            mkdir(public_path('storage/uploads/thumb'), 0777);
         }
+        if($folder){
+            if (!file_exists(public_path('storage/uploads/'.$folder))) {
+                mkdir(public_path('storage/uploads/'.$folder), 0777,true);
+            }
+        }
+
         $finalRequest = $request;
 
         foreach ($request->all() as $key => $value) {
 
             if ($request->hasFile($key)) {
-
                 if ($key == $downloadable_file_input) {
                     foreach ($request->file($key) as $item) {
                         if($model){
                             $file = $model->mediaFiles;
                             if ($file){
-                                if (File::exists(public_path('/storage/uploads/' . $file->name))) {
-                                    File::delete(public_path('/storage/uploads/' . $file->name));
+                                if (File::exists(public_path('/storage/uploads/' . $file->file_name))) {
+                                    File::delete(public_path('/storage/uploads/' . $file->file_name));
                                 }
                                 $file->delete();
                             }
@@ -93,14 +104,14 @@ trait FileUploadTrait
                         $extension = array_last(explode('.', $item->getClientOriginalName()));
                         $filename = md5(time()) . '.' . $extension; // a unique file name
                         $size = $item->getSize() / 1024;
-                        $item->move(public_path('storage/uploads'), $filename);
+                        $item->move(public_path('storage/uploads/'.$folder), $filename);
                         Media::create([
                             'model_type' => $model_type,
                             'model_id' => $model->id,
                             'name' => $filename,
-                            'url' => asset('storage/uploads/' . $filename),
+                            'url' => asset('storage/uploads/'.$folder.'/' . $filename),
                             'type' => $item->getClientMimeType(),
-                            'file_name' => $filename,
+                            'file_name' => $folder.'/'.$filename,
                             'size' => $size,
                         ]);
                     }
@@ -180,5 +191,42 @@ trait FileUploadTrait
         }
 
         return $finalRequest;
+    }
+
+
+    public function saveLessonsFile(Request $request,$model_type){
+
+        $receiver = new FileReceiver('lessons_file', $request, HandlerFactory::classFromRequest($request));
+        if (!$receiver->isUploaded()) {
+            throw new UploadMissingFileException();
+        }
+        $fileReceived = $receiver->receive(); // receive file
+        if ($fileReceived->isFinished()) { // file uploading is complete / all chunks are uploaded
+            $file = $fileReceived->getFile(); // get file
+            $extension = $file->getClientOriginalExtension();
+            $fileName = md5(time()) . '.' . $extension; // a unique file name
+
+            $disk = Storage::disk('uploads');
+            $path = $disk->putFileAs('files', $file, $fileName);
+            $size = $file->getSize() / 1024;
+
+            $media = Media::create([
+                'model_type' => $model_type,
+                'name' => $fileName,
+                'url' => asset('storage/uploads/' . $path),
+                'type' => $file->getClientMimeType(),
+                'file_name' => $path,
+                'size' => $size,
+            ]);
+
+            // delete chunked file
+            unlink($file->getPathname());
+            return  $media;
+        }
+        $handler = $fileReceived->handler();
+        return [
+            'done' => $handler->getPercentageDone(),
+            'status' => true
+        ];
     }
 }

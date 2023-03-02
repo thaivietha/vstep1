@@ -160,6 +160,7 @@ class LessonsController extends Controller
             return back()->withFlashDanger(__('alerts.backend.general.slug_exist'));
         }
 
+
         $lesson = Lesson::create($request->except('downloadable_files', 'lesson_image')
             + ['position' => Lesson::where('course_id', $request->course_id)->max('position') + 1]);
 
@@ -226,7 +227,13 @@ class LessonsController extends Controller
             }
         }
 
-        $request = $this->saveAllFiles($request, 'downloadable_files', Lesson::class, $lesson);
+//        $request = $this->saveAllFiles($request, 'downloadable_files', Lesson::class, $lesson,$folder);
+
+        if ($request->mediaID) {
+            $media = Media::find($request->mediaID);
+            $media->model_id = $lesson->id;
+            $media->save();
+        }
 
         if (($request->slug == "") || $request->slug == null) {
             $lesson->slug = str_slug($request->title);
@@ -386,8 +393,12 @@ class LessonsController extends Controller
             }
         }
 
-        $request = $this->saveAllFiles($request, 'downloadable_files', Lesson::class, $lesson);
-
+//        $request = $this->saveAllFiles($request, 'downloadable_files', Lesson::class, $lesson,$folder);
+        if ($request->mediaID) {
+            $media = Media::find($request->mediaID);
+            $media->model_id = $lesson->id;
+            $media->save();
+        }
         $sequence = 1;
         if (count($lesson->course->courseTimeline) > 0) {
             $sequence = $lesson->course->courseTimeline->max('sequence');
@@ -519,5 +530,15 @@ class LessonsController extends Controller
 
 
         return back()->withFlashSuccess(trans('alerts.backend.general.deleted'));
+    }
+
+    public function uploadFile(Request $request){
+
+        $upload = $this->saveLessonsFile($request,Lesson::class);
+        return response()->json([
+            'success'=>'Thêm mới thành công',
+            'mediaID'=> $upload
+        ]);
+//
     }
 }

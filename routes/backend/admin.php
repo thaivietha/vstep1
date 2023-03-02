@@ -227,6 +227,10 @@ Route::post('lessons_mass_destroy', ['uses' => 'Admin\LessonsController@massDest
 Route::post('lessons_restore/{id}', ['uses' => 'Admin\LessonsController@restore', 'as' => 'lessons.restore']);
 Route::delete('lessons_perma_del/{id}', ['uses' => 'Admin\LessonsController@perma_del', 'as' => 'lessons.perma_del']);
 
+Route::post('lessons_upload_file', ['uses' => 'Admin\LessonsController@uploadFile', 'as' => 'lessons.upload_file']);
+
+
+
 
 //===== Questions Routes =====//
 Route::resource('questions', 'Admin\QuestionsController');

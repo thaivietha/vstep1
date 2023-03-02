@@ -66,11 +66,14 @@ trait FileUploadTrait
     }
 
 
-    public function saveAllFiles(Request $request, $downloadable_file_input = null, $model_type = null, $model = null)
+    public function saveAllFiles(Request $request, $downloadable_file_input = null, $model_type = null, $model = null,$folder= null)
     {
         if (!file_exists(public_path('storage/uploads'))) {
             mkdir(public_path('storage/uploads'), 0777);
             mkdir(public_path('storage/upload/thumb'), 0777);
+        }
+        if($folder){
+            mkdir(public_path('storage/uploads/'.$folder), 0777,true);
         }
         $finalRequest = $request;
 
@@ -81,8 +84,6 @@ trait FileUploadTrait
                 if ($key == $downloadable_file_input) {
                     foreach ($request->file($key) as $item) {
                         $extension = array_last(explode('.',$item->getClientOriginalName()));
-//                        $name = array_first(explode('.',$item->getClientOriginalName()));
-//                        $filename = time() . '-' . str_slug($name).'.'.$extension;
                         $filename = md5(time()) . '.' . $extension; // a unique file name
                         $size = $item->getSize() / 1024;
                         $item->move(public_path('storage/uploads'), $filename);

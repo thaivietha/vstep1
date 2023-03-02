@@ -79,7 +79,13 @@ return [
             'driver' => 'dropbox',
             'token' => env('DROPBOX_ACCESS_TOKEN'),
             'app_secret' => env('DROPBOX_SECRET'),
-        ]
+        ],
+        'uploads' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads'),
+            'url' => env('APP_URL') . '/storage/uploads',
+            'visibility' => 'public',
+        ],
 
 
     ],

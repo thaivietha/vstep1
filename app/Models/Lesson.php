@@ -150,6 +150,15 @@ class Lesson extends Model
             ->whereNotIn('type', $types);
     }
 
+    public function lessonsFiles()
+    {
+        $types = ['youtube', 'vimeo', 'upload', 'embed', 'lesson_pdf', 'lesson_audio'];
+
+        return $this->morphOne(Media::class, 'model')
+            ->whereNotIn('type', $types);
+    }
+
+
 
     public function mediaVideo()
     {
