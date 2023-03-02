@@ -371,7 +371,7 @@
             var mediaID = response.mediaID
             var html = '<p class="form-group">' +
                 '<input type="hidden" id="mediaID" name="mediaID" value="'+mediaID.id+'" />'+
-                '<a href="'+mediaID.url+'" target="_blank"> '+mediaID.name+' ('+ formatSizeUnits(mediaID.size)+')</a>' +
+                '<a href="'+mediaID.url+'" target="_blank"> '+mediaID.name+' ('+ mediaID.size+'KB)</a>' +
                 '<a href="#" data-media-id="'+ mediaID.id+'"' +
                 'class="btn btn-xs btn-danger delete remove-file">@lang('labels.backend.lessons.remove')</a></p>';
             $("#files_list").html(html)
