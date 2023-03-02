@@ -235,7 +235,7 @@
                     {!! Form::label('published', trans('labels.backend.lessons.fields.published'), ['class' => 'control-label control-label font-weight-bold']) !!}
                 </div>
                 <div class="col-12  text-left form-group">
-                    {!! Form::submit(trans('strings.backend.general.app_update'), ['class' => 'btn  btn-primary']) !!}
+                    {!! Form::submit(trans('strings.backend.general.app_update'), ['class' => 'btn  btn-primary','id'=>'update_lesson']) !!}
                 </div>
             </div>
         </div>
@@ -376,6 +376,8 @@
                 'class="btn btn-xs btn-danger delete remove-file">@lang('labels.backend.lessons.remove')</a></p>';
             $("#files_list").html(html)
             $("#lessons_file").prop("disabled",true);
+            $("#update_lesson").prop("disabled",false);
+
 
             hideProgress()
 
@@ -388,6 +390,7 @@
         let progress = $('.progress');
 
         function showProgress() {
+            $("#update_lesson").prop("disabled",true);
             progress.find('.progress-bar').css('width', '0%');
             progress.find('.progress-bar').html('0%');
             progress.find('.progress-bar').removeClass('bg-success');

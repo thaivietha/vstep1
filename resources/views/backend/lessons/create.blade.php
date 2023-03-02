@@ -178,7 +178,7 @@
                     </div>
                 </div>
                 <div class="col-12  text-left form-group">
-                    {!! Form::submit(trans('strings.backend.general.app_save'), ['class' => 'btn  btn-danger']) !!}
+                    {!! Form::submit(trans('strings.backend.general.app_save'), ['class' => 'btn  btn-danger', 'id' => 'create_lesson']) !!}
                 </div>
             </div>
         </div>
@@ -296,6 +296,7 @@
                 'class="btn btn-xs btn-danger delete remove-file">@lang('labels.backend.lessons.remove')</a></p>';
                 $("#files_list").html(html)
             $("#lessons_file").prop("disabled",true);
+            $("#create_lesson").prop("disabled",false);
 
             hideProgress()
 
@@ -308,6 +309,7 @@
         let progress = $('.progress');
 
         function showProgress() {
+            $("#create_lesson").prop("disabled",true);
             progress.find('.progress-bar').css('width', '0%');
             progress.find('.progress-bar').html('0%');
             progress.find('.progress-bar').removeClass('bg-success');
