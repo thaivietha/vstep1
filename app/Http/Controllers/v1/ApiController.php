@@ -2609,8 +2609,6 @@ class ApiController extends Controller
                 $coursesResource = CoursesResource::collection($courses);
                 return response()->json($coursesResource);
             }
-
-
         }catch (\Exception $e){
             \Log::error($e->getMessage().'user: '.auth()->user());
         }
@@ -2622,16 +2620,18 @@ class ApiController extends Controller
 //            $user = auth()->user();
             $user = User::where('username',$userName)->first();
             $courses =  $user->purchasedCourses();
-            $lessonsResource ='';
+
+            $result = $lessons = array();
             if($courses){
                 foreach ($courses as $course){
-                    $lessons = $course->publishedLessons;
-                    $lessonsResource = LessonsResource::collection($lessons->load('course'));
+                    $lessons[] = $course->publishedLessons->load('course','lessonsFiles');
                 }
             }
+            foreach($lessons as $arr){
+                $result = array_merge($result , $arr->toArray());
+            }
+            $lessonsResource = lessonsResource::collection($result);
             return response()->json($lessonsResource);
-
-
         }catch (\Exception $e){
             \Log::error($e->getMessage().'user: '.auth()->user());
         }
@@ -2639,10 +2639,12 @@ class ApiController extends Controller
 
     public function getzipfileIdLesson($id){
         try {
-            $lesson = Lesson::with('mediaFiles')->where('uuid',$id)->first();
-            if ($lesson->mediaFiles) {
-                $file = $lesson->mediaFiles()->where('media.type', '=', 'application/x-zip-compressed')->pluck('name')->implode(',');
-                $download_path =  public_path('/storage/uploads/' . $file);
+            $lesson = Lesson::with('lessonsFiles')->where('uuid',$id)->first();
+
+            if ($lesson->lessonsFiles) {
+                $file = $lesson->lessonsFiles()->where('model_id', '=', $lesson->id)->pluck('name')->implode(',');
+
+                $download_path =  public_path('/storage/uploads/files/' . $file);
                 return Response::download($download_path);
             }else{
                 return response()->json(['msg'=>'not file']);
