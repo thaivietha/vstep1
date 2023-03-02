@@ -70,14 +70,14 @@
 
                             <th>@lang('labels.backend.lessons.fields.downloadable_files')</th>
                             <td>
-                                @if(count($lesson->downloadableMedia) > 0 )
-                                    @foreach($lesson->downloadableMedia as $media)
-                                        <p class="form-group">
-                                            <a href="{{ asset('storage/uploads/'.$media->name) }}"
-                                               target="_blank">{{ $media->name }}
-                                                ({{ $media->size }} KB)</a>
-                                        </p>
-                                    @endforeach
+                                @if($lesson->lessonsFiles)
+
+                                    <p class="form-group">
+                                        <a href="{{ $lesson->lessonsFiles->url }}"
+                                           target="_blank">{{ $lesson->lessonsFiles->name }}
+                                            ({{ formatSizeUnits($lesson->lessonsFiles->size) }})</a>
+                                    </p>
+
                                 @else
                                     <p>No Files</p>
                                 @endif
