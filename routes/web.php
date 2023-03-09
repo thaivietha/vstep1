@@ -13,11 +13,19 @@ use App\Http\Controllers\Frontend\HomeController;
 
 Route::get('/clear', function () {
     try {
-        Artisan::call('optimize:clear');
+
+
+        $out = '';
         Artisan::call('cache:clear');
-        Artisan::call('config:cache');
-        Artisan::call('route:cache');
-        dd(Artisan::output());
+
+        $out .= Artisan::output().'<br>';
+        Artisan::call('view:clear');
+        $out .= Artisan::output().'<br>';
+        Artisan::call('config:clear');
+        $out .= Artisan::output().'<br>';
+        Artisan::call('route:clear');
+        $out .= Artisan::output().'<br>';
+        return $out;
     } catch (Exception $exception) {
         dd($exception->getMessage());
     }
@@ -30,8 +38,8 @@ Route::get('/info', function () {
     } catch (Exception $exception) {
         Log::error('info ' . $exception->getMessage());
     }
-
 });
+
 Route::get('/clear-passport', function () {
     try {
         $com = 'passport:purge';
