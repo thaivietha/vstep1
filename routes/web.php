@@ -54,6 +54,16 @@ Route::get('/clear-passport', function () {
 });
 
 
+Route::get('/install-passport', function () {
+    try {
+        $com = 'passport:install';
+        Artisan::call($com);
+        dd(Artisan::output());
+    } catch (Exception $exception) {
+        Log::error('clear-passport ' . $exception->getMessage());
+    }
+});
+
 // Switch between the included languages
 Route::get('lang/{lang}', [LanguageController::class, 'swap']);
 
