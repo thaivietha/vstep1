@@ -76,24 +76,24 @@
                             </li>
                         @endcan
 
-                        @can('test_access')
-                            <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'tests' ? 'active' : '' }}"
-                                   href="{{ route('admin.tests.index') }}">
-                                    <span class="title">@lang('menus.backend.sidebar.tests.title')</span>
-                                </a>
-                            </li>
-                        @endcan
+{{--                        @can('test_access')--}}
+{{--                            <li class="nav-item ">--}}
+{{--                                <a class="nav-link {{ $request->segment(2) == 'tests' ? 'active' : '' }}"--}}
+{{--                                   href="{{ route('admin.tests.index') }}">--}}
+{{--                                    <span class="title">@lang('menus.backend.sidebar.tests.title')</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        @endcan--}}
 
 
-                        @can('question_access')
-                            <li class="nav-item">
-                                <a class="nav-link {{ $request->segment(2) == 'questions' ? 'active' : '' }}"
-                                   href="{{ route('admin.questions.index') }}">
-                                    <span class="title">@lang('menus.backend.sidebar.questions.title')</span>
-                                </a>
-                            </li>
-                        @endcan
+{{--                        @can('question_access')--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link {{ $request->segment(2) == 'questions' ? 'active' : '' }}"--}}
+{{--                                   href="{{ route('admin.questions.index') }}">--}}
+{{--                                    <span class="title">@lang('menus.backend.sidebar.questions.title')</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        @endcan--}}
 
 
 {{--                        @can('live_lesson_access')--}}
@@ -117,15 +117,15 @@
                     </ul>
                 </li>
 
-                @can('bundle_access')
-                    <li class="nav-item ">
-                        <a class="nav-link {{ $request->segment(2) == 'bundles' ? 'active' : '' }}"
-                           href="{{ route('admin.bundles.index') }}">
-                            <i class="nav-icon icon-layers"></i>
-                            <span class="title">@lang('menus.backend.sidebar.bundles.title')</span>
-                        </a>
-                    </li>
-                @endcan
+{{--                @can('bundle_access')--}}
+{{--                    <li class="nav-item ">--}}
+{{--                        <a class="nav-link {{ $request->segment(2) == 'bundles' ? 'active' : '' }}"--}}
+{{--                           href="{{ route('admin.bundles.index') }}">--}}
+{{--                            <i class="nav-icon icon-layers"></i>--}}
+{{--                            <span class="title">@lang('menus.backend.sidebar.bundles.title')</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
 
                 @if($logged_in_user->hasRole('teacher') || $logged_in_user->isAdmin())
                     <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern(['user/reports*']), 'open') }}">
