@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\View;
 use App\Resolvers\SocialUserResolver;
 use Coderello\SocialGrant\Resolvers\SocialUserResolverInterface;
 use Illuminate\Support\Facades\URL;
+use Laravel\Passport\Console\ClientCommand;
+use Laravel\Passport\Console\InstallCommand;
+use Laravel\Passport\Console\KeysCommand;
+use Laravel\Passport\Passport;
 
 /**
  * Class AppServiceProvider.
@@ -52,8 +56,15 @@ class AppServiceProvider extends ServiceProvider
          */
         setlocale(LC_TIME, config('app.locale_php'));
 
-        URL::forceScheme('https');
+//        URL::forceScheme('https');
 
+        URL::forceScheme('https');
+        Passport::routes();
+        $this->commands([
+            InstallCommand::class,
+            ClientCommand::class,
+            KeysCommand::class,
+        ]);
 
         /*
          * Set the session variable for whether or not the app is using RTL support

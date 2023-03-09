@@ -56,7 +56,7 @@ Route::get('/clear-passport', function () {
 
 Route::get('/install-passport', function () {
     try {
-        $com = 'passport:install';
+        $com = 'passport:install --force';
         Artisan::call($com);
         dd(Artisan::output());
     } catch (Exception $exception) {
