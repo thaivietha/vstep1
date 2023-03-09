@@ -150,6 +150,7 @@
 
                 </div>
             </div>
+{{--
 
             <div class="row">
                 <div class="col-12 form-group">
@@ -227,6 +228,7 @@
                     @lang('labels.backend.lessons.video_guide')
                 </div>
             </div>
+--}}
 
             <div class="row">
                 <div class="col-12 col-lg-3  form-group">
