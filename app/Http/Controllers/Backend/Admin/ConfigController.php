@@ -47,11 +47,12 @@ class ConfigController extends Controller
                 $sendgrid_list_id = Config::where('sendgrid_list_id')->first();
                 $sendgrid_list_id->value = $response->id;
                 $sendgrid_list_id->save();
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 \Log::info($e->getMessage());
             }
 
         }
+
         $requests = $this->saveLogos($request);
         $switchInputs = ['access_registration','mailchimp_double_opt_in','access_users_change_email','access_users_confirm_email','access_captcha_registration','access_users_requires_approval','services__stripe__active','paypal__active','payment_offline_active','backup__status','access__captcha__registration','retest','lesson_timer','show_offers','onesignal_status','access__users__registration_mail','access__users__order_mail','services__instamojo__active','services__razorpay__active','services__cashfree__active','services__payu__active','flutter__active'];
 

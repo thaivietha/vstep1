@@ -347,7 +347,7 @@ return [
     | Logos
     | For entire frontend.
     |--------------------------------------------------------------------------
-    *
+    */
     'logo_b_image' => 'logo-b-image.png',
     'logo_w_image' => 'logo-w-image.png',
     'logo_white_image' => 'logo-white.png',

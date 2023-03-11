@@ -93,8 +93,8 @@
             <div class="container">
                 <div class="navbar-default d-inline-block w-100">
                     <div class="navbar-header float-left">
-                        <a class="navbar-brand text-uppercase" href="{{url('/')}}"><img
-                                    src="{{asset("storage/logos/".config('logo_white_image'))}}" alt="logo"></a>
+                        <a class="navbar-brand text-uppercase" href="{{url('/')}}">
+                            <img src="{{asset("storage/logos/".config('logo_white_image'))}}" style="max-height:50px; width:auto;" alt="logo"></a>
                     </div><!-- /.navbar-header -->
                     <div class="header-info ul-li float-right">
                         @php

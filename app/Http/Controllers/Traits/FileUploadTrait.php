@@ -179,11 +179,11 @@ trait FileUploadTrait
             mkdir(public_path('storage/logos'), 0777);
         }
         $finalRequest = $request;
-
         foreach ($request->all() as $key => $value) {
             if ($request->hasFile($key)) {
                 $extension = array_last(explode('.', $request->file($key)->getClientOriginalName()));
-                $filename = md5(time()) . '.' . $extension; // a unique file name
+//                $filename = md5(time()) . '.' . $extension; // a unique file name
+                $filename = $key. '.' . $extension; // a unique file name
                 $request->file($key)->move(public_path('storage/logos'), $filename);
                 $finalRequest = new Request(array_merge($finalRequest->all(), [$key => $filename]));
 

@@ -99,7 +99,7 @@
                             <div class="navbar-header float-left">
                                 <a class="navbar-brand text-uppercase" href="{{url('/')}}">
                                     {{--<img src="{{asset("storage/logos/".config('logo_w_image'))}}" alt="logo">--}}
-                                    <img src="{{asset("storage/logos/".config('logo_w_image'))}}" alt="logo">
+                                    <img src="{{asset("storage/logos/".config('logo_w_image'))}}" style="max-height:50px; width:auto;"   alt="logo">
                                 </a>
                             </div><!-- /.navbar-header -->
 

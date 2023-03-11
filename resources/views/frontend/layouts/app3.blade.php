@@ -51,7 +51,8 @@
         <link href="{{asset('assets/css/colors/color-9.css')}}" rel="alternate stylesheet" type="text/css"
               title="color-9">
 
-        <link href="{{asset('/vendor/unisharp/laravel-ckeditor/plugins/codesnippet/lib/highlight/styles/monokai.css') }}" rel="stylesheet">
+        <link href="{{asset('/vendor/unisharp/laravel-ckeditor/plugins/codesnippet/lib/highlight/styles/monokai.css') }}"
+              rel="stylesheet">
         <script src="{{asset('/vendor/unisharp/laravel-ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
         <script>hljs.initHighlightingOnLoad();</script>
 
@@ -67,18 +68,22 @@
             {!! config('onesignal_data') !!}
         @endif
 
-    @if(config('google_analytics_id') != "")
+        @if(config('google_analytics_id') != "")
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{config('google_analytics_id')}}"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{config('google_analytics_id')}}"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
 
-            gtag('config', '{{config('google_analytics_id')}}');
-        </script>
-    @endif
+                function gtag() {
+                    dataLayer.push(arguments);
+                }
+
+                gtag('js', new Date());
+
+                gtag('config', '{{config('google_analytics_id')}}');
+            </script>
+        @endif
 
 
         @if(!empty(config('custom_css')))
@@ -112,7 +117,7 @@
                                     <ul class="d-inline-block w-100 bg-white">
                                         @if(count($locales) > 1)
 
-                                        <li class="menu-item-has-children ul-li-block">
+                                            <li class="menu-item-has-children ul-li-block">
                                                 <a href="#">
                                                     <span class="d-md-down-none">@lang('menus.language-picker.language')
                                                         ({{ strtoupper(app()->getLocale()) }})</span>
@@ -139,8 +144,8 @@
                     <div class="container">
                         <div class="navbar-default">
                             <div class="navbar-header float-left">
-                                <a class="navbar-brand text-uppercase" href="{{url('/')}}"><img
-                                            src="{{asset("storage/logos/".config('logo_b_image'))}}" alt="logo"></a>
+                                <a class="navbar-brand text-uppercase" href="{{url('/')}}">
+                                    <img src="{{asset("storage/logos/".config('logo_b_image'))}}"  style="max-height:50px; width:auto;" alt="logo"></a>
                             </div><!-- /.navbar-header -->
                             <div class="cart-search float-right ul-li">
                                 <ul>
@@ -190,29 +195,31 @@
                                                     <a href="{{ route('admin.dashboard') }}">@lang('navs.frontend.dashboard')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('frontend.auth.logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+                                                    <a href="{{ route('frontend.auth.logout') }}"><i
+                                                                class="fas fa-sign-out-alt"></i></a>
                                                 </li>
                                             @else
-                                            <li class="menu-item-has-children ul-li-block">
-                                                <a href="#!">{{ $logged_in_user->name }}</a>
-                                                <ul class="sub-menu">
-                                                    @can('view backend')
+                                                <li class="menu-item-has-children ul-li-block">
+                                                    <a href="#!">{{ $logged_in_user->name }}</a>
+                                                    <ul class="sub-menu">
+                                                        @can('view backend')
+                                                            <li>
+                                                                <a href="{{ route('admin.dashboard') }}">@lang('navs.frontend.dashboard')</a>
+                                                            </li>
+                                                        @endcan
+
+
                                                         <li>
-                                                            <a href="{{ route('admin.dashboard') }}">@lang('navs.frontend.dashboard')</a>
+                                                            <a href="{{ route('frontend.auth.logout') }}">@lang('navs.general.logout')</a>
                                                         </li>
-                                                    @endcan
-
-
-                                                    <li>
-                                                        <a href="{{ route('frontend.auth.logout') }}">@lang('navs.general.logout')</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
+                                                    </ul>
+                                                </li>
                                             @endif
                                         @else
                                             <li class="log-in mt-0">
                                                 @if(!auth()->check())
-                                                    <a id="openLoginModal" data-target="#myModal" href="#">@lang('navs.general.login')</a>
+                                                    <a id="openLoginModal" data-target="#myModal"
+                                                       href="#">@lang('navs.general.login')</a>
                                                     <!-- The Modal -->
                                                     {{--@include('frontend.layouts.modals.loginModal')--}}
 
@@ -239,7 +246,7 @@
                                                                class="nav-link {{ active_class(Active::checkRoute('frontend.user.dashboard')) }}"
                                                                id="menu-{{$menu->id}}">{{trans('custom-menu.'.$menu_name.'.'.str_slug($menu->label))}}</a>
                                                         </li>
-                                                     @else
+                                                    @else
                                                         <li class="">
                                                             <a href="#!">{{trans('custom-menu.'.$menu_name.'.'.str_slug($menu->label))}}</a>
                                                             <ul class="">
@@ -271,29 +278,30 @@
                                             </li>
                                         @else
                                             <li class="">
-                                                <a id="openLoginModal" data-target="#myModal" href="#">@lang('navs.general.login')</a>
+                                                <a id="openLoginModal" data-target="#myModal"
+                                                   href="#">@lang('navs.general.login')</a>
                                                 <!-- The Modal -->
                                             </li>
                                         @endif
 
-                                            @if(count($locales) > 1)
-                                                <li class="menu-item-has-children ul-li-block">
-                                                    <a href="#">
+                                        @if(count($locales) > 1)
+                                            <li class="menu-item-has-children ul-li-block">
+                                                <a href="#">
                                                     <span class="d-md-down-none">@lang('menus.language-picker.language')
                                                         ({{ strtoupper(app()->getLocale()) }})</span>
-                                                    </a>
-                                                    <ul class="">
-                                                        @foreach($locales as $lang)
-                                                            @if($lang != app()->getLocale())
-                                                                <li>
-                                                                    <a href="{{ '/lang/'.$lang }}"
-                                                                       class=""> @lang('menus.language-picker.langs.'.$lang)</a>
-                                                                </li>
-                                                            @endif
-                                                        @endforeach
-                                                    </ul>
-                                                </li>
-                                            @endif
+                                                </a>
+                                                <ul class="">
+                                                    @foreach($locales as $lang)
+                                                        @if($lang != app()->getLocale())
+                                                            <li>
+                                                                <a href="{{ '/lang/'.$lang }}"
+                                                                   class=""> @lang('menus.language-picker.langs.'.$lang)</a>
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </nav>
                             </div>
@@ -354,7 +362,7 @@
     <script>
         @if((session()->has('show_login')) && (session('show_login') == true))
         $('#myModal').modal('show');
-                @endif
+        @endif
         var font_color = "{{config('font_color')}}"
         setActiveStyleSheet(font_color);
     </script>
