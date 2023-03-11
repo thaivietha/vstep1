@@ -90,8 +90,7 @@
                     @if(request('teacher_id') != "")
                 route = '{{route('admin.courses.get_data',['teacher_id' => request('teacher_id')])}}';
             @endif
-
-                    @if(request('cat_id') != "")
+            @if(request('cat_id') != "")
                 route = '{{route('admin.courses.get_data',['cat_id' => request('cat_id')])}}';
             @endif
 
@@ -120,9 +119,9 @@
 
                         @else
                     {
-                        data: "DT_RowIndex", name: 'DT_RowIndex', searchable: false
+                        data: "DT_RowIndex", name: 'DT_RowIndex', searchable: false, orderable: false
                     },
-                    {data: "id", name: 'id'},
+                    // {data: "id", name: 'id'},
 
                         @endif
                     {

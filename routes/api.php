@@ -124,7 +124,7 @@ Route::group(['namespace'=>'v1'],function (){
     Route::get('/baihocs/getzipfile/{idBaihoc}', 'ApiController@getzipfileIdLesson');
 
     Route::group([
-        'middleware' => 'auth:api'
+//        'middleware' => 'auth:api'
     ],function () {
         Route::post('/Account/ChangePassword/{userName?}', 'ApiController@ChangePassword');
         Route::get('/khoahocs/{userName?}', 'ApiController@coursesByUser');
