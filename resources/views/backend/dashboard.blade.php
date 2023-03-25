@@ -581,7 +581,7 @@
                                         @foreach($recent_orders as $item)
                                             <tr>
                                                 <td>
-                                                    {{$item->user->full_name}}
+                                                    {{@$item->user->full_name}}
                                                 </td>
                                                 <td>{{$item->amount.' '.$appCurrency['symbol']}}</td>
                                                 <td>{{$item->created_at->diffforhumans()}}</td>
