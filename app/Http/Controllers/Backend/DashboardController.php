@@ -74,7 +74,7 @@ class DashboardController extends Controller
 
                 }
 
-            }elseif(auth()->user()->hasRole('administrator')){
+            }elseif(auth()->user()->hasRole('administrator') ||auth()->user()->hasRole('manager') ){
                 $students_count = User::role('student')->count();
                 $teachers_count = User::role('teacher')->count();
                 $courses_count = \App\Models\Course::all()->count() + \App\Models\Bundle::all()->count();

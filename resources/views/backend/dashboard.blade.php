@@ -533,7 +533,7 @@
                                 </div>
                             </div>
 
-                        @elseif(auth()->user()->hasRole('administrator'))
+                        @elseif(auth()->user()->hasRole('administrator') || auth()->user()->hasRole('manager')   )
                             <div class="col-md-4 col-12">
                                 <div class="card text-white bg-dark text-center py-3">
                                     <div class="card-body">
