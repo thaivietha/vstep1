@@ -47,7 +47,7 @@
                             <td>
                                 @foreach($order->items as $key=>$item)
                                     @php $key++ @endphp
-                                    {{$key.'. '.$item->item->title}}<br>
+                                    {{$key.'. '.@$item->item->title}}<br>
                                 @endforeach
                             </td>
                         </tr>

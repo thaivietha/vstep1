@@ -151,8 +151,8 @@ class Course extends Model
 
     public function scopeOfTeacher($query)
     {
-        if (!Auth::user()->isAdmin()) {
-            return $query->whereHas('teachers', function ($q) {
+        if (!Auth::user()->isAdmin() && !auth()->user()->hasRole('manager') ) {
+              return $query->whereHas('teachers', function ($q) {
                 $q->where('user_id', Auth::user()->id);
             });
         }

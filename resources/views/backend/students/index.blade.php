@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', __('labels.backend.teachers.title').' | '.app_name())
+@section('title', __('labels.backend.students.title').' | '.app_name())
 @push('after-styles')
     <link rel="stylesheet" href="{{asset('assets/css/colors/switch.css')}}">
 @endpush
@@ -7,10 +7,10 @@
 
     <div class="card">
         <div class="card-header">
-                <h3 class="page-title d-inline">@lang('labels.backend.teachers.title')</h3>
+                <h3 class="page-title d-inline">@lang('labels.backend.students.title')</h3>
             @can('course_create')
                 <div class="float-right">
-                    <a href="{{ route('admin.teachers.create') }}"
+                    <a href="{{ route('admin.students.create') }}"
                        class="btn btn-success">@lang('strings.backend.general.app_add_new')</a>
 
                 </div>
@@ -80,7 +80,7 @@
 
 
 
-            var route = '{{route('admin.teachers.get_data')}}';
+            var route = '{{route('admin.students.get_data')}}';
 
             @if(request('show_deleted') == 1)
                 route = '{{route('admin.teachers.get_data',['show_deleted' => 1])}}';
@@ -121,7 +121,7 @@
                 },
             });
             @if(auth()->user()->isAdmin() || $logged_in_user->hasRole('manager'))
-            $('.actions').html('<a href="' + '{{ route('admin.teachers.mass_destroy') }}' + '" class="btn btn-xs btn-danger js-delete-selected" style="margin-top:0.755em;margin-left: 20px;">Delete selected</a>');
+            $('.actions').html('<a href="' + '{{ route('admin.students.mass_destroy') }}' + '" class="btn btn-xs btn-danger js-delete-selected" style="margin-top:0.755em;margin-left: 20px;">Delete selected</a>');
             @endif
 
 
@@ -131,7 +131,7 @@
             var id = $(this).data('id');
             $.ajax({
                 type: "POST",
-                url: "{{ route('admin.teachers.status') }}",
+                url: "{{ route('admin.students.status') }}",
                 data: {
                     _token:'{{ csrf_token() }}',
                     id: id,

@@ -15,10 +15,10 @@ Route::redirect('/', '/user/dashboard', 301);
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
-Route::group(['middleware' => 'role:teacher|administrator'], function () {
+Route::group(['middleware' => 'role:teacher|administrator|manager'], function () {
     Route::resource('orders', 'Admin\OrderController');
 });
-Route::group(['middleware' => 'role:administrator'], function () {
+Route::group(['middleware' => 'role:administrator|manager'], function () {
 
     //===== Teachers Routes =====//
     Route::resource('teachers', 'Admin\TeachersController');
@@ -28,6 +28,14 @@ Route::group(['middleware' => 'role:administrator'], function () {
     Route::delete('teachers_perma_del/{id}', ['uses' => 'Admin\TeachersController@perma_del', 'as' => 'teachers.perma_del']);
     Route::post('teacher/status', ['uses' => 'Admin\TeachersController@updateStatus', 'as' => 'teachers.status']);
 
+
+    //===== Students Routes =====//
+    Route::resource('students', 'Admin\StudentsController');
+    Route::get('get-students-data', ['uses' => 'Admin\StudentsController@getData', 'as' => 'students.get_data']);
+    Route::post('students_mass_destroy', ['uses' => 'Admin\StudentsController@massDestroy', 'as' => 'students.mass_destroy']);
+    Route::post('students_restore/{id}', ['uses' => 'Admin\StudentsController@restore', 'as' => 'students.restore']);
+    Route::delete('students_perma_del/{id}', ['uses' => 'Admin\StudentsController@perma_del', 'as' => 'students.perma_del']);
+    Route::post('student/status', ['uses' => 'Admin\StudentsController@updateStatus', 'as' => 'students.status']);
 
     //===== FORUMS Routes =====//
     Route::resource('forums-category', 'Admin\ForumController');

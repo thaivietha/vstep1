@@ -47,6 +47,7 @@ class UserController extends Controller
         $roles = Role::select('id','name')->get();
 
 
+
         return view('backend.auth.user.index',compact('roles'))
             ->withUsers($this->userRepository->getActivePaginated(25, 'id', 'asc'));
     }

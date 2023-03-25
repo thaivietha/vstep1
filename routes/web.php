@@ -29,7 +29,6 @@ Route::get('/clear', function () {
     } catch (Exception $exception) {
         dd($exception->getMessage());
     }
-
 });
 
 Route::get('/info', function () {

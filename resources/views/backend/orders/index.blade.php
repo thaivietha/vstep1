@@ -36,8 +36,8 @@
                         <th style="text-align:center;">
                             <input type="checkbox" class="mass" id="select-all"/>
                         </th>
-                        <th>@lang('labels.general.sr_no')</th>
-                        <th>@lang('labels.general.id')</th>
+{{--                        <th>@lang('labels.general.sr_no')</th>--}}
+{{--                        <th>@lang('labels.general.id')</th>--}}
                         <th>@lang('labels.backend.orders.fields.reference_no')</th>
                         <th>@lang('labels.backend.orders.fields.items')</th>
                         <th>@lang('labels.backend.orders.fields.amount') <small>(in {{$appCurrency['symbol']}})</small></th>
@@ -100,8 +100,8 @@
                             return '<input type="checkbox" class="single" name="id[]" value="' + data.id + '" />';
                         }, "orderable": false, "searchable": false, "name": "id"
                     },
-                    {data: "DT_RowIndex", name: 'DT_RowIndex', searchable: false},
-                    {data: "id", name: 'id'},
+                    // {data: "DT_RowIndex", name: 'DT_RowIndex', searchable: false},
+                    // {data: "id", name: 'id'},
                     {data: "reference_no", name: 'reference_no'},
                     {data: "items", name: 'items'},
                     {data: "amount", name: 'amount'},

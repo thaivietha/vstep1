@@ -28,6 +28,7 @@ class CoursesController extends Controller
      */
     public function index()
     {
+
         if (!Gate::allows('course_access')) {
             return abort(401);
         }
@@ -71,7 +72,6 @@ class CoursesController extends Controller
                 ->whereHas('category')
                 ->orderBy('created_at', 'desc');
         }
-
 
         if (auth()->user()->can('course_view')) {
             $has_view = true;
@@ -136,7 +136,7 @@ class CoursesController extends Controller
             ->addColumn('status', function ($q) {
                 $text = "";
                 $text = ($q->published == 1) ? "<p class='text-white mb-1 font-weight-bold text-center bg-dark p-1 mr-1' >" . trans('labels.backend.courses.fields.published') . "</p>" : "<p class='text-white mb-1 font-weight-bold text-center bg-primary p-1 mr-1' >" . trans('labels.backend.courses.fields.unpublished') . "</p>";
-                if (auth()->user()->isAdmin()) {
+                if (auth()->user()->isAdmin() || auth()->user()->hasRole('manager')) {
                     $text .= ($q->featured == 1) ? "<p class='text-white mb-1 font-weight-bold text-center bg-warning p-1 mr-1' >" . trans('labels.backend.courses.fields.featured') . "</p>" : "";
                     $text .= ($q->trending == 1) ? "<p class='text-white mb-1 font-weight-bold text-center bg-success p-1 mr-1' >" . trans('labels.backend.courses.fields.trending') . "</p>" : "";
                     $text .= ($q->popular == 1) ? "<p class='text-white mb-1 font-weight-bold text-center bg-primary p-1 mr-1' >" . trans('labels.backend.courses.fields.popular') . "</p>" : "";
@@ -431,7 +431,7 @@ class CoursesController extends Controller
             $course->save();
         }
 
-        $teachers = \Auth::user()->isAdmin() ? array_filter((array)$request->input('teachers')) : [\Auth::user()->id];
+        $teachers = (\Auth::user()->isAdmin() || auth()->user()->hasRole('manager')) ? array_filter((array)$request->input('teachers')) : [\Auth::user()->id];
         $course->teachers()->sync($teachers);
 
         return redirect()->route('admin.courses.index')->withFlashSuccess(trans('alerts.backend.general.updated'));

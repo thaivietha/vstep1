@@ -60,36 +60,37 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-12 col-lg-6 form-group">
-                    {!! Form::label('slug',trans('labels.backend.lessons.fields.slug'), ['class' => 'control-label']) !!}
-                    {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'placeholder' => trans('labels.backend.lessons.slug_placeholder')]) !!}
 
-                </div>
-                <div class="col-12 col-lg-6 form-group">
-                    {!! Form::label('lesson_image', trans('labels.backend.lessons.fields.lesson_image').' '.trans('labels.backend.lessons.max_image_size'), ['class' => 'control-label']) !!}
-                    {!! Form::file('lesson_image', ['class' => 'form-control' , 'accept' => 'image/jpeg,image/gif,image/png']) !!}
-                    {!! Form::hidden('lesson_image_max_size', 8) !!}
-                    {!! Form::hidden('lesson_image_max_width', 4000) !!}
-                    {!! Form::hidden('lesson_image_max_height', 4000) !!}
+{{--            <div class="row">--}}
+{{--                <div class="col-12 col-lg-6 form-group">--}}
+{{--                    {!! Form::label('slug',trans('labels.backend.lessons.fields.slug'), ['class' => 'control-label']) !!}--}}
+{{--                    {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'placeholder' => trans('labels.backend.lessons.slug_placeholder')]) !!}--}}
 
-                </div>
-            </div>
+{{--                </div>--}}
+{{--                <div class="col-12 col-lg-6 form-group">--}}
+{{--                    {!! Form::label('lesson_image', trans('labels.backend.lessons.fields.lesson_image').' '.trans('labels.backend.lessons.max_image_size'), ['class' => 'control-label']) !!}--}}
+{{--                    {!! Form::file('lesson_image', ['class' => 'form-control' , 'accept' => 'image/jpeg,image/gif,image/png']) !!}--}}
+{{--                    {!! Form::hidden('lesson_image_max_size', 8) !!}--}}
+{{--                    {!! Form::hidden('lesson_image_max_width', 4000) !!}--}}
+{{--                    {!! Form::hidden('lesson_image_max_height', 4000) !!}--}}
 
-            <div class="row">
-                <div class="col-12 form-group">
-                    {!! Form::label('short_text', trans('labels.backend.lessons.fields.short_text'), ['class' => 'control-label']) !!}
-                    {!! Form::textarea('short_text', old('short_text'), ['class' => 'form-control ', 'placeholder' => trans('labels.backend.lessons.short_description_placeholder')]) !!}
+{{--                </div>--}}
+{{--            </div>--}}
 
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 form-group">
-                    {!! Form::label('full_text', trans('labels.backend.lessons.fields.full_text'), ['class' => 'control-label']) !!}
-                    {!! Form::textarea('full_text', old('full_text'), ['class' => 'form-control editor', 'placeholder' => '','id' => 'editor']) !!}
+{{--            <div class="row">--}}
+{{--                <div class="col-12 form-group">--}}
+{{--                    {!! Form::label('short_text', trans('labels.backend.lessons.fields.short_text'), ['class' => 'control-label']) !!}--}}
+{{--                    {!! Form::textarea('short_text', old('short_text'), ['class' => 'form-control ', 'placeholder' => trans('labels.backend.lessons.short_description_placeholder')]) !!}--}}
 
-                </div>
-            </div>
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-12 form-group">--}}
+{{--                    {!! Form::label('full_text', trans('labels.backend.lessons.fields.full_text'), ['class' => 'control-label']) !!}--}}
+{{--                    {!! Form::textarea('full_text', old('full_text'), ['class' => 'form-control editor', 'placeholder' => '','id' => 'editor']) !!}--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
             <div class="row">
                 <div class="col-12 col-lg-6  form-group">
                     {!! Form::label('lessons_file', trans('labels.backend.lessons.fields.downloadable_files').' '.trans('labels.backend.lessons.max_file_size'), ['class' => 'control-label']) !!}

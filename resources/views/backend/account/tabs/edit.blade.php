@@ -56,174 +56,177 @@
         </div><!--form-group-->
     </div><!--col-->
 </div><!--row-->
-@if($logged_in_user->hasRole('teacher'))
-    @php
-        $teacherProfile = $logged_in_user->teacherProfile?:'';
-        $payment_details = $logged_in_user->teacherProfile?json_decode($logged_in_user->teacherProfile->payment_details):optional();
-    @endphp
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                {{ html()->label(__('labels.backend.general_settings.user_registration_settings.fields.gender'))->for('gender') }}
-                <div class="">
-                    <label class="radio-inline mr-3 mb-0">
-                        <input type="radio" name="gender" value="male" {{ $logged_in_user->gender == 'male'?'checked':'' }}> {{__('validation.attributes.frontend.male')}}
-                    </label>
-                    <label class="radio-inline mr-3 mb-0">
-                        <input type="radio" name="gender" value="female" {{ $logged_in_user->gender == 'female'?'checked':'' }}> {{__('validation.attributes.frontend.female')}}
-                    </label>
-                    <label class="radio-inline mr-3 mb-0">
-                        <input type="radio" name="gender" value="other" {{ $logged_in_user->gender == 'other'?'checked':'' }}> {{__('validation.attributes.frontend.other')}}
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                {{ html()->label(__('labels.teacher.facebook_link'))->for('facebook_link') }}
+{{--@if($logged_in_user->hasRole('teacher'))--}}
+{{--    @php--}}
+{{--        $teacherProfile = $logged_in_user->teacherProfile?:'';--}}
+{{--        $payment_details = $logged_in_user->teacherProfile?json_decode($logged_in_user->teacherProfile->payment_details):optional();--}}
+{{--    @endphp--}}
+{{--    <div class="row">--}}
+{{--        <div class="col">--}}
+{{--            <div class="form-group">--}}
+{{--                {{ html()->label(__('labels.backend.general_settings.user_registration_settings.fields.gender'))->for('gender') }}--}}
+{{--                <div class="">--}}
+{{--                    <label class="radio-inline mr-3 mb-0">--}}
+{{--                        <input type="radio" name="gender" value="male" {{ $logged_in_user->gender == 'male'?'checked':'' }}> {{__('validation.attributes.frontend.male')}}--}}
+{{--                    </label>--}}
+{{--                    <label class="radio-inline mr-3 mb-0">--}}
+{{--                        <input type="radio" name="gender" value="female" {{ $logged_in_user->gender == 'female'?'checked':'' }}> {{__('validation.attributes.frontend.female')}}--}}
+{{--                    </label>--}}
+{{--                    <label class="radio-inline mr-3 mb-0">--}}
+{{--                        <input type="radio" name="gender" value="other" {{ $logged_in_user->gender == 'other'?'checked':'' }}> {{__('validation.attributes.frontend.other')}}--}}
+{{--                    </label>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--    <div class="row">--}}
+{{--        <div class="col">--}}
+{{--            <div class="form-group">--}}
+{{--                {{ html()->label(__('labels.teacher.facebook_link'))->for('facebook_link') }}--}}
 
-                {{ html()->text('facebook_link')
-                    ->class('form-control')
-                    ->value($teacherProfile->facebook_link)
-                    ->placeholder(__('labels.teacher.facebook_link'))
-                }}
-            </div><!--form-group-->
-        </div><!--col-->
-    </div><!--row-->
+{{--                {{ html()->text('facebook_link')--}}
+{{--                    ->class('form-control')--}}
+{{--                    ->value(@$teacherProfile->facebook_link)--}}
+{{--                    ->placeholder(__('labels.teacher.facebook_link'))--}}
+{{--                }}--}}
+{{--            </div><!--form-group-->--}}
+{{--        </div><!--col-->--}}
+{{--    </div><!--row-->--}}
 
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                {{ html()->label(__('labels.teacher.twitter_link'))->for('twitter_link') }}
+{{--    <div class="row">--}}
+{{--        <div class="col">--}}
+{{--            <div class="form-group">--}}
+{{--                {{ html()->label(__('labels.teacher.twitter_link'))->for('twitter_link') }}--}}
 
-                {{ html()->text('twitter_link')
-                    ->class('form-control')
-                    ->value($teacherProfile->twitter_link)
-                    ->placeholder(__('labels.teacher.twitter_link'))
-                }}
-            </div><!--form-group-->
-        </div><!--col-->
-    </div><!--row-->
+{{--                {{ html()->text('twitter_link')--}}
+{{--                    ->class('form-control')--}}
+{{--                    ->value(@$teacherProfile->twitter_link)--}}
+{{--                    ->placeholder(__('labels.teacher.twitter_link'))--}}
+{{--                }}--}}
+{{--            </div><!--form-group-->--}}
+{{--        </div><!--col-->--}}
+{{--    </div><!--row-->--}}
 
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                {{ html()->label(__('labels.teacher.twitter_link'))->for('linkedin_link') }}
+{{--    <div class="row">--}}
+{{--        <div class="col">--}}
+{{--            <div class="form-group">--}}
+{{--                {{ html()->label(__('labels.teacher.twitter_link'))->for('linkedin_link') }}--}}
 
-                {{ html()->text('linkedin_link')
-                    ->class('form-control')
-                    ->value($teacherProfile->linkedin_link)
-                    ->placeholder(__('labels.teacher.linkedin_link'))
-                }}
-            </div><!--form-group-->
-        </div><!--col-->
-    </div><!--row-->
+{{--                {{ html()->text('linkedin_link')--}}
+{{--                    ->class('form-control')--}}
+{{--                    ->value(@$teacherProfile->linkedin_link)--}}
+{{--                    ->placeholder(__('labels.teacher.linkedin_link'))--}}
+{{--                }}--}}
+{{--            </div><!--form-group-->--}}
+{{--        </div><!--col-->--}}
+{{--    </div><!--row-->--}}
 
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                {{ html()->label(__('labels.teacher.payment_details'))->for('payment_details') }}
-                <select class="form-control" name="payment_method" id="payment_method" required>
-                    <option value="bank" {{ $teacherProfile->payment_method == 'bank'?'selected':'' }}>{{ trans('labels.teacher.bank') }}</option>
-                    <option value="paypal" {{ $teacherProfile->payment_method == 'paypal'?'selected':'' }}>{{ trans('labels.teacher.paypal') }}</option>
-                </select>
-            </div><!--form-group-->
-        </div><!--col-->
-    </div><!--row-->
-    <div class="bank_details" style="display:{{ $logged_in_user->teacherProfile->payment_method == 'bank'?'':'none' }}">
+{{--    <div class="row">--}}
+{{--        <div class="col">--}}
+{{--            <div class="form-group">--}}
+{{--                {{ html()->label(__('labels.teacher.payment_details'))->for('payment_details') }}--}}
+{{--                <select class="form-control" name="payment_method" id="payment_method" required>--}}
+{{--                    <option value="bank" {{ @$teacherProfile->payment_method == 'bank'?'selected':'' }}>{{ trans('labels.teacher.bank') }}</option>--}}
+{{--                    <option value="paypal" {{ @$teacherProfile->payment_method == 'paypal'?'selected':'' }}>{{ trans('labels.teacher.paypal') }}</option>--}}
+{{--                </select>--}}
+{{--            </div><!--form-group-->--}}
+{{--        </div><!--col-->--}}
+{{--    </div><!--row-->--}}
 
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    {{ html()->label(__('labels.teacher.bank_details.name'))->for('bank_name') }}
 
-                    {{ html()->text('bank_name')
-                        ->class('form-control')
-                        ->value($payment_details?$payment_details->bank_name:'')
-                        ->placeholder(__('labels.teacher.bank_details.name'))
-                    }}
-                </div><!--form-group-->
-            </div><!--col-->
-        </div><!--row-->
 
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    {{ html()->label(__('labels.teacher.bank_details.bank_code'))->for('ifsc_code') }}
+{{--    <div class="bank_details" style="display:{{ $logged_in_user->teacherProfile->payment_method == 'bank'?'':'none' }}">--}}
 
-                    {{ html()->text('ifsc_code')
-                        ->class('form-control')
-                        ->value($payment_details?$payment_details->ifsc_code:'')
-                        ->placeholder(__('labels.teacher.bank_details.bank_code'))
-                    }}
-                </div><!--form-group-->
-            </div><!--col-->
-        </div><!--row-->
+{{--        <div class="row">--}}
+{{--            <div class="col">--}}
+{{--                <div class="form-group">--}}
+{{--                    {{ html()->label(__('labels.teacher.bank_details.name'))->for('bank_name') }}--}}
 
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    {{ html()->label(__('labels.teacher.bank_details.account'))->for('account_number') }}
+{{--                    {{ html()->text('bank_name')--}}
+{{--                        ->class('form-control')--}}
+{{--                        ->value(@$payment_details?@$payment_details->bank_name:'')--}}
+{{--                        ->placeholder(__('labels.teacher.bank_details.name'))--}}
+{{--                    }}--}}
+{{--                </div><!--form-group-->--}}
+{{--            </div><!--col-->--}}
+{{--        </div><!--row-->--}}
 
-                    {{ html()->text('account_number')
-                        ->class('form-control')
-                        ->value($payment_details?$payment_details->account_number:'')
-                        ->placeholder(__('labels.teacher.bank_details.account'))
-                    }}
-                </div><!--form-group-->
-            </div><!--col-->
-        </div><!--row-->
+{{--        <div class="row">--}}
+{{--            <div class="col">--}}
+{{--                <div class="form-group">--}}
+{{--                    {{ html()->label(__('labels.teacher.bank_details.bank_code'))->for('ifsc_code') }}--}}
 
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    {{ html()->label(__('labels.teacher.bank_details.holder_name'))->for('account_name') }}
+{{--                    {{ html()->text('ifsc_code')--}}
+{{--                        ->class('form-control')--}}
+{{--                        ->value(@$payment_details?@$payment_details->ifsc_code:'')--}}
+{{--                        ->placeholder(__('labels.teacher.bank_details.bank_code'))--}}
+{{--                    }}--}}
+{{--                </div><!--form-group-->--}}
+{{--            </div><!--col-->--}}
+{{--        </div><!--row-->--}}
 
-                    {{ html()->text('account_name')
-                        ->class('form-control')
-                        ->value($payment_details?$payment_details->account_name:'')
-                        ->placeholder(__('labels.teacher.bank_details.holder_name'))
-                    }}
-                </div><!--form-group-->
-            </div><!--col-->
-        </div><!--row-->
+{{--        <div class="row">--}}
+{{--            <div class="col">--}}
+{{--                <div class="form-group">--}}
+{{--                    {{ html()->label(__('labels.teacher.bank_details.account'))->for('account_number') }}--}}
 
-    </div>
+{{--                    {{ html()->text('account_number')--}}
+{{--                        ->class('form-control')--}}
+{{--                        ->value(@$payment_details?$payment_details->account_number:'')--}}
+{{--                        ->placeholder(__('labels.teacher.bank_details.account'))--}}
+{{--                    }}--}}
+{{--                </div><!--form-group-->--}}
+{{--            </div><!--col-->--}}
+{{--        </div><!--row-->--}}
 
-    <div class="paypal_details" style="display:{{ $logged_in_user->teacherProfile->payment_method == 'paypal'?'':'none' }}">
+{{--        <div class="row">--}}
+{{--            <div class="col">--}}
+{{--                <div class="form-group">--}}
+{{--                    {{ html()->label(__('labels.teacher.bank_details.holder_name'))->for('account_name') }}--}}
 
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    {{ html()->label(__('labels.teacher.paypal_email'))->for('paypal_email') }}
+{{--                    {{ html()->text('account_name')--}}
+{{--                        ->class('form-control')--}}
+{{--                        ->value(@$payment_details?$payment_details->account_name:'')--}}
+{{--                        ->placeholder(__('labels.teacher.bank_details.holder_name'))--}}
+{{--                    }}--}}
+{{--                </div><!--form-group-->--}}
+{{--            </div><!--col-->--}}
+{{--        </div><!--row-->--}}
 
-                    {{ html()->text('paypal_email')
-                        ->class('form-control')
-                        ->value($payment_details?$payment_details->paypal_email:'')
-                        ->placeholder(__('labels.teacher.paypal_email'))
-                    }}
-                </div><!--form-group-->
-            </div><!--col-->
-        </div><!--row-->
+{{--    </div>--}}
 
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                {{ html()->label(__('labels.teacher.description'))->for('description') }}
+{{--    <div class="paypal_details" style="display:{{ $logged_in_user->teacherProfile->payment_method == 'paypal'?'':'none' }}">--}}
 
-                {{ html()->textarea('description')
-                    ->class('form-control')
-                    ->value($teacherProfile->description)
-                    ->placeholder(__('labels.teacher.description'))
-                }}
-            </div><!--form-group-->
-        </div><!--col-->
-    </div><!--row-->
+{{--        <div class="row">--}}
+{{--            <div class="col">--}}
+{{--                <div class="form-group">--}}
+{{--                    {{ html()->label(__('labels.teacher.paypal_email'))->for('paypal_email') }}--}}
 
-@endif
+{{--                    {{ html()->text('paypal_email')--}}
+{{--                        ->class('form-control')--}}
+{{--                        ->value(@$payment_details?$payment_details->paypal_email:'')--}}
+{{--                        ->placeholder(__('labels.teacher.paypal_email'))--}}
+{{--                    }}--}}
+{{--                </div><!--form-group-->--}}
+{{--            </div><!--col-->--}}
+{{--        </div><!--row-->--}}
+
+{{--    </div>--}}
+{{--    <div class="row">--}}
+{{--        <div class="col">--}}
+{{--            <div class="form-group">--}}
+{{--                {{ html()->label(__('labels.teacher.description'))->for('description') }}--}}
+
+{{--                {{ html()->textarea('description')--}}
+{{--                    ->class('form-control')--}}
+{{--                    ->value(@$teacherProfile->description)--}}
+{{--                    ->placeholder(__('labels.teacher.description'))--}}
+{{--                }}--}}
+{{--            </div><!--form-group-->--}}
+{{--        </div><!--col-->--}}
+{{--    </div><!--row-->--}}
+
+{{--@endif--}}
 @if ($logged_in_user->canChangeEmail())
     <div class="row">
         <div class="col">

@@ -3,7 +3,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTeachersRequest extends FormRequest
+class UpdateStudentsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,12 @@ class StoreTeachersRequest extends FormRequest
     public function rules()
     {
         return [
+            'username' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
-            'gender'              => ['required', 'in:male,female,other'],
-            'image'               => ['required', 'image'],
+//            'email' => 'required|email|unique:users,email,'.$this->route('teachers'),
+//            'gender'              => ['required', 'in:male,female,other'],
+//            'image'               => ['image'],
 //            'facebook_link'       => ['nullable', 'url'],
 //            'twitter_link'        => ['nullable', 'url'],
 //            'linkedin_link'       => ['nullable', 'url'],

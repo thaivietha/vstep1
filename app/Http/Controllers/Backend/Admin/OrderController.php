@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Admin;
 use App\Helpers\General\EarningHelper;
 use App\Http\Requests\Admin\StoreCategoriesRequest;
 use App\Http\Requests\Admin\StoreOrdersRequest;
+use App\Http\Requests\Admin\UpdateOrdersRequest;
 use App\Mail\Frontend\AdminOrederMail;
 use App\Mail\OfflineOrderMail;
 use App\Models\Auth\User;
@@ -69,9 +70,10 @@ class OrderController extends Controller
             $has_delete = true;
         }
 
+
         return DataTables::of($orders)
             ->addIndexColumn()
-            ->addColumn('actions', function ($q) use ($request) {
+            ->addColumn('actions', function ($q) use ($has_view, $has_edit, $has_delete, $request) {
                 $view = "";
                 $edit = "";
                 $delete = "";
@@ -80,19 +82,26 @@ class OrderController extends Controller
                 $view = view('backend.datatable.action-view')
                     ->with(['route' => route('admin.orders.show', ['order' => $q->id])])->render();
 
-                if ($q->status == 0) {
-                    $complete_order = view('backend.datatable.action-complete-order')
-                        ->with(['route' => route('admin.orders.complete', ['order' => $q->id])])
+                if ($has_edit) {
+                    $edit = view('backend.datatable.action-edit')
+                        ->with(['route' => route('admin.orders.edit', ['order' => $q->id])])
                         ->render();
-                    $view .= $complete_order;
+                    $view .= $edit;
                 }
 
-                if ($q->status == 0) {
+                if ($q->status == 0 || $has_delete) {
                     $delete = view('backend.datatable.action-delete')
                     ->with(['route' => route('admin.orders.destroy', ['order' => $q->id])])
                     ->render();
 
                     $view .= $delete;
+                }
+
+                if ($q->status == 0) {
+                    $complete_order = view('backend.datatable.action-complete-order')
+                        ->with(['route' => route('admin.orders.complete', ['order' => $q->id])])
+                        ->render();
+                    $view .= $complete_order;
                 }
 
                 return $view;
@@ -150,7 +159,8 @@ class OrderController extends Controller
 //        $users = User::get()->pluck('username', 'id')->prepend('Please select', '');
         $users = \App\Models\Auth\User::whereHas('roles', function ($q) {
             $q->where('role_id','<>', 1)
-                ->where('role_id', '<>',2);
+                ->where('role_id', '<>',2)
+                ->where('role_id', '<>',5);
         })->get()->pluck('name', 'id');
 
         return view('backend.orders.create', compact('courses', 'users'));
@@ -195,7 +205,7 @@ class OrderController extends Controller
                 'price' => $item->price
             ]);
 
-            array_push($items, ['number' => $counter, 'name' => $item->name, 'price' => $item->price]);
+            array_push($items, ['number' => $counter, 'name' => $item->title, 'price' => $item->price]);
         }
         $content['items'] = $items;
         $content['total'] =  number_format($amount);
@@ -334,6 +344,114 @@ class OrderController extends Controller
             return redirect()->back()->with('flash_danger', $message);
         }
         return false;
+    }
+
+    public function edit($id)
+    {
+        if (!Gate::allows('order_edit')) {
+            return abort(401);
+        }
+        $courses = Course::has('category')->ofTeacher()->get()->pluck('title', 'id');
+        $users = \App\Models\Auth\User::whereHas('roles', function ($q) {
+            $q->where('role_id','<>', 1)
+                ->where('role_id', '<>',2);
+        })->get()->pluck('name', 'id');
+        $order = Order::findOrFail($id);
+//        dd($order->user);
+        return view('backend.orders.edit', compact('order','courses','users'));
+    }
+
+
+    /**
+     * Update Category in storage.
+     *
+     * @param  \App\Http\Requests\UpdateOrdersRequest $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function update(UpdateOrdersRequest $request, $id)
+    {
+        if (!Gate::allows('order_edit')) {
+            return abort(401);
+        }
+
+        $order = Order::findOrFail($id);
+        $order->save();
+
+
+        $courses = Course::whereIN('id',$request->course_id)->get();
+//        if ($this->checkDuplicate($request->user_id,$courses)) {
+//            return $this->checkDuplicate($request->user_id,$courses);
+//        }
+        $content = [];
+        $items = [];
+        $amount = 0;
+        $counter = 0;
+
+        //Getting and Adding items
+        foreach ($courses as $item) {
+            $counter++;
+            $type = Course::class;
+            $amount += $item->price;
+            OrderItem::updateOrCreate
+            (
+                [
+                    'order_id' => $order->id,
+                    'item_id' => $item->id,
+                ],
+                [
+
+                    'item_type' => $type,
+                    'price' => $item->price
+                ]
+            );
+            array_push($items, ['number' => $counter, 'name' => $item->title, 'price' => $item->price]);
+        }
+
+
+        $existingOrderItemIds = $courses->pluck('id')->toArray();
+        OrderItem::where('order_id', $order->id)->whereNotIn('item_id', $existingOrderItemIds)->delete();
+
+        $content['items'] = $items;
+        $content['total'] =  number_format($amount);
+        $content['reference_no'] = $order->reference_no;
+
+        try {
+            $user = User::find($request->user_id);
+            \Mail::to($user->email)->send(new OfflineOrderMail($content));
+        } catch (\Exception $e) {
+            \Log::info($e->getMessage() . ' for order ' . $order->id);
+        }
+
+        $order->payment_type = 3;
+        $order->amount = $amount;
+        $order->status = 1;
+        $order->save();
+
+        try{
+            (new EarningHelper)->insert($order);
+
+            //Generating Invoice
+            generateInvoice($order);
+
+            foreach ($order->items as $orderItem) {
+                //Bundle Entries
+                if($orderItem->item_type == Bundle::class){
+                    foreach ($orderItem->item->courses as $course){
+                        $course->students()->attach($order->user_id);
+                    }
+                }
+                $orderItem->item->students()->attach($order->user_id);
+            }
+        }catch (\Exception $exception){
+            \Log::error($exception->getMessage());
+        }
+
+
+
+
+        return redirect()->route('admin.orders.index')->withFlashSuccess(trans('alerts.backend.general.updated'));
     }
 
 }

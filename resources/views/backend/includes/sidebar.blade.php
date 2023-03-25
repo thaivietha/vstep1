@@ -24,12 +24,20 @@
                     </a>
                 </li>
             @endcan
-            @if ($logged_in_user->isAdmin())
+            @if ($logged_in_user->isAdmin() || $logged_in_user->hasRole('manager')  )
                 <li class="nav-item ">
                     <a class="nav-link {{ $request->segment(2) == 'teachers' ? 'active' : '' }}"
                        href="{{ route('admin.teachers.index') }}">
                         <i class="nav-icon icon-directions"></i>
                         <span class="title">@lang('menus.backend.sidebar.teachers.title')</span>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link {{ $request->segment(2) == 'students' ? 'active' : '' }}"
+                       href="{{ route('admin.students.index') }}">
+                        <i class="nav-icon icon-directions"></i>
+                        <span class="title">@lang('menus.backend.sidebar.students.title')</span>
                     </a>
                 </li>
             @endif
@@ -487,7 +495,18 @@
                     </a>
                 </li>
 
+{{--            @elseif($logged_in_user->hasRole('manager'))--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link {{ active_class(Active::checkUriPattern('admin/auth/user*')) }}"--}}
+{{--                       href="{{ route('admin.auth.user.index') }}">--}}
+{{--                        <i class="nav-icon icon-user"></i>--}}
+{{--                        @lang('labels.backend.access.users.management')--}}
 
+{{--                        @if ($pending_approval > 0)--}}
+{{--                            <span class="badge badge-danger">{{ $pending_approval }}</span>--}}
+{{--                        @endif--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             @endif
 
 {{--            @if ($logged_in_user->hasRole('teacher'))--}}

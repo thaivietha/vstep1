@@ -15,6 +15,7 @@ return array (
         'trending' => 'Trending',
         'popular' => 'Popular',
         'teachers' => 'Teachers',
+        'students' => 'Students',
         'category' => 'Category',
         'title' => 'Title',
         'slug' => 'Slug',
@@ -37,10 +38,12 @@ return array (
         'expire_at' => 'Expire / Disable Course Date',
       ),
       'add_teachers' => 'Add Teachers',
+      'add_student' => 'Add Student',
       'add_categories' => 'Add Categories',
       'slug_placeholder' => 'Input slug or it will be generated automatically',
       'select_category' => 'Select Category',
       'select_teachers' => 'Select Teachers',
+      'select_students' => 'Select Students',
       'test' => 'Test',
       'lesson' => 'Lesson',
       'create' => 'Create Course',
@@ -805,6 +808,24 @@ return array (
       'edit' => 'Edit Teacher',
       'view' => 'View Teachers',
     ),
+
+      'students' =>
+          array (
+              'fields' =>
+                  array (
+                      'username' => 'User Name',
+                      'first_name' => 'First Name',
+                      'last_name' => 'Last Name',
+                      'email' => 'Email Address',
+                      'password' => 'Password',
+                      'image' => 'Image',
+                      'status' => 'Status',
+                  ),
+              'title' => 'Student',
+              'create' => 'Create Student',
+              'edit' => 'Edit Teacher',
+              'view' => 'View Students',
+          ),
     'testimonials' => 
     array (
       'fields' => 

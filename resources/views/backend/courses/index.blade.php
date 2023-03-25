@@ -45,7 +45,7 @@
                         @endcan
 
 
-                        @if (Auth::user()->isAdmin())
+                        @if (Auth::user()->isAdmin()|| auth()->user()->hasRole('manager'))
                             <th>@lang('labels.general.sr_no')</th>
 {{--                            <th>@lang('labels.general.id')--}}
                             <th>@lang('labels.backend.courses.fields.teachers')</th>
@@ -110,7 +110,7 @@
                         }, "orderable": false, "searchable": false, "name": "id"
                     },
                         @endif
-                        @if (Auth::user()->isAdmin())
+                        @if (Auth::user()->isAdmin()||$logged_in_user->hasRole('manager'))
                     {
                         data: "DT_RowIndex", name: 'DT_RowIndex', searchable: false, orderable: false
                     },

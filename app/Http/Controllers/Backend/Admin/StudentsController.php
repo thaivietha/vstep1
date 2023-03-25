@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Admin;
 
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Traits\FileUploadTrait;
+use App\Http\Requests\Admin\StoreStudentsRequest;
 use App\Http\Requests\Admin\StoreTeachersRequest;
 use App\Http\Requests\Admin\UpdateTeachersRequest;
 use App\Models\Auth\User;
@@ -13,7 +14,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
-class TeachersController extends Controller
+class StudentsController extends Controller
 {
     use FileUploadTrait;
 
@@ -24,7 +25,8 @@ class TeachersController extends Controller
      */
     public function index()
     {
-        return view('backend.teachers.index');
+
+        return view('backend.students.index');
     }
 
     /**
@@ -41,9 +43,9 @@ class TeachersController extends Controller
 
 
         if (request('show_deleted') == 1) {
-            $teachers = User::query()->role('teacher')->onlyTrashed()->orderBy('created_at', 'desc');
+            $students = User::query()->role('student')->onlyTrashed()->orderBy('created_at', 'desc');
         } else {
-            $teachers = User::query()->role('teacher')->orderBy('created_at', 'desc');
+            $students = User::query()->role('student')->orderBy('created_at', 'desc');
         }
 
         if (auth()->user()->isAdmin() || auth()->user()->hasRole('manager')) {
@@ -53,36 +55,36 @@ class TeachersController extends Controller
         }
 
 
-        return DataTables::of($teachers)
+        return DataTables::of($students)
             ->addIndexColumn()
             ->addColumn('actions', function ($q) use ($has_view, $has_edit, $has_delete, $request) {
                 $view = "";
                 $edit = "";
                 $delete = "";
                 if ($request->show_deleted == 1) {
-                    return view('backend.datatable.action-trashed')->with(['route_label' => 'admin.teachers', 'label' => 'id', 'value' => $q->id]);
+                    return view('backend.datatable.action-trashed')->with(['route_label' => 'admin.students', 'label' => 'id', 'value' => $q->id]);
                 }
 
 //                if ($has_view) {
 //                    $view = view('backend.datatable.action-view')
-//                        ->with(['route' => route('admin.teachers.show', ['teacher' => $q->id])])->render();
+//                        ->with(['route' => route('admin.students.show', ['student' => $q->id])])->render();
 //                }
 
                 if ($has_edit) {
                     $edit = view('backend.datatable.action-edit')
-                        ->with(['route' => route('admin.teachers.edit', ['teacher' => $q->id])])
+                        ->with(['route' => route('admin.students.edit', ['student' => $q->id])])
                         ->render();
                     $view .= $edit;
                 }
 
                 if ($has_delete) {
                     $delete = view('backend.datatable.action-delete')
-                        ->with(['route' => route('admin.teachers.destroy', ['teacher' => $q->id])])
+                        ->with(['route' => route('admin.students.destroy', ['student' => $q->id])])
                         ->render();
                     $view .= $delete;
                 }
 
-                $view .= '<a class="btn btn-warning mb-1" href="' . route('admin.courses.index', ['teacher_id' => $q->id]) . '">' . trans('labels.backend.courses.title') . '</a>';
+                $view .= '<a class="btn btn-warning mb-1" href="' . route('admin.orders.index', ['student_id' => $q->id]) . '">' . trans('labels.backend.courses.title') . '</a>';
 
                 return $view;
             })
@@ -103,49 +105,47 @@ class TeachersController extends Controller
      */
     public function create()
     {
-        return view('backend.teachers.create');
+        return view('backend.students.create');
     }
 
     /**
      * Store a newly created Category in storage.
      *
-     * @param  \App\Http\Requests\StoreTeachersRequest $request
+     * @param  \App\Http\Requests\StoreStudentsRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTeachersRequest $request)
+    public function store(StoreStudentsRequest $request)
     {
-//        $request = $this->saveFiles($request);
+        $student = User::create($request->all());
+        $student->confirmed = 1;
+//        if ($request->image) {
+//            $teacher->avatar_type = 'storage';
+//            $teacher->avatar_location = $request->image->store('/avatars', 'public');
+//        }
+        $student->active = isset($request->active)?1:0;
+        $student->save();
+        $student->assignRole('student');
 
-        $teacher = User::create($request->all());
-        $teacher->confirmed = 1;
-        if ($request->image) {
-            $teacher->avatar_type = 'storage';
-            $teacher->avatar_location = $request->image->store('/avatars', 'public');
-        }
-        $teacher->active = isset($request->active)?1:0;
-        $teacher->save();
-        $teacher->assignRole('teacher');
-
-        $payment_details = [
-            'bank_name'         => request()->payment_method == 'bank'?request()->bank_name:'',
-            'ifsc_code'         => request()->payment_method == 'bank'?request()->ifsc_code:'',
-            'account_number'    => request()->payment_method == 'bank'?request()->account_number:'',
-            'account_name'      => request()->payment_method == 'bank'?request()->account_name:'',
-            'paypal_email'      => request()->payment_method == 'paypal'?request()->paypal_email:'',
-        ];
-        $data = [
-            'user_id'           => $teacher->id,
-            'facebook_link'     => request()->facebook_link,
-            'twitter_link'      => request()->twitter_link,
-            'linkedin_link'     => request()->linkedin_link,
-            'payment_method'    => request()->payment_method,
-            'payment_details'   => json_encode($payment_details),
-            'description'       => request()->description,
-        ];
+//        $payment_details = [
+//            'bank_name'         => request()->payment_method == 'bank'?request()->bank_name:'',
+//            'ifsc_code'         => request()->payment_method == 'bank'?request()->ifsc_code:'',
+//            'account_number'    => request()->payment_method == 'bank'?request()->account_number:'',
+//            'account_name'      => request()->payment_method == 'bank'?request()->account_name:'',
+//            'paypal_email'      => request()->payment_method == 'paypal'?request()->paypal_email:'',
+//        ];
+//        $data = [
+//            'user_id'           => $student->id,
+////            'facebook_link'     => request()->facebook_link,
+////            'twitter_link'      => request()->twitter_link,
+////            'linkedin_link'     => request()->linkedin_link,
+////            'payment_method'    => request()->payment_method,
+////            'payment_details'   => json_encode($payment_details),
+//            'description'       => request()->description,
+//        ];
 //        TeacherProfile::create($data);
 
 
-        return redirect()->route('admin.teachers.index')->withFlashSuccess(trans('alerts.backend.general.created'));
+        return redirect()->route('admin.students.index')->withFlashSuccess(trans('alerts.backend.general.created'));
     }
 
 
@@ -157,8 +157,8 @@ class TeachersController extends Controller
      */
     public function edit($id)
     {
-        $teacher = User::findOrFail($id);
-        return view('backend.teachers.edit', compact('teacher'));
+        $student = User::findOrFail($id);
+        return view('backend.students.edit', compact('student'));
     }
 
     /**
@@ -189,14 +189,14 @@ class TeachersController extends Controller
         ];
         $data = [
             // 'user_id'           => $user->id,
-            'facebook_link'     => request()->facebook_link ?? '',
-            'twitter_link'      => request()->twitter_link ?? '',
-            'linkedin_link'     => request()->linkedin_link ?? '',
-            'payment_method'    => request()->payment_method ?? '',
+            'facebook_link'     => request()->facebook_link,
+            'twitter_link'      => request()->twitter_link,
+            'linkedin_link'     => request()->linkedin_link,
+            'payment_method'    => request()->payment_method,
             'payment_details'   => json_encode($payment_details),
-            'description'       => request()->description ?? '',
+            'description'       => request()->description,
         ];
-//        $teacher->teacherProfile->update($data);
+        $teacher->teacherProfile->update($data);
 
 
         return redirect()->route('admin.teachers.index')->withFlashSuccess(trans('alerts.backend.general.updated'));
@@ -211,9 +211,9 @@ class TeachersController extends Controller
      */
     public function show($id)
     {
-        $teacher = User::findOrFail($id);
+        $student = User::findOrFail($id);
 
-        return view('backend.teachers.show', compact('teacher'));
+        return view('backend.students.show', compact('student'));
     }
 
 
@@ -225,15 +225,15 @@ class TeachersController extends Controller
      */
     public function destroy($id)
     {
-        $teacher = User::findOrFail($id);
+        $student = User::findOrFail($id);
 
-        if ($teacher->courses->count() > 0) {
-            return redirect()->route('admin.teachers.index')->withFlashDanger(trans('alerts.backend.general.teacher_delete_warning'));
+        if ($student->courses->count() > 0) {
+            return redirect()->route('admin.students.index')->withFlashDanger(trans('alerts.backend.general.teacher_delete_warning'));
         } else {
-            $teacher->delete();
+            $student->delete();
         }
 
-        return redirect()->route('admin.teachers.index')->withFlashSuccess(trans('alerts.backend.general.deleted'));
+        return redirect()->route('admin.students.index')->withFlashSuccess(trans('alerts.backend.general.deleted'));
     }
 
     /**
@@ -261,10 +261,10 @@ class TeachersController extends Controller
      */
     public function restore($id)
     {
-        $teacher = User::onlyTrashed()->findOrFail($id);
-        $teacher->restore();
+        $student = User::onlyTrashed()->findOrFail($id);
+        $student->restore();
 
-        return redirect()->route('admin.teachers.index')->withFlashSuccess(trans('alerts.backend.general.restored'));
+        return redirect()->route('admin.students.index')->withFlashSuccess(trans('alerts.backend.general.restored'));
     }
 
     /**
