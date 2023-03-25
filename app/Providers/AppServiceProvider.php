@@ -58,7 +58,7 @@ class AppServiceProvider extends ServiceProvider
 
 //        URL::forceScheme('https');
 
-//        URL::forceScheme('https');
+        URL::forceScheme('https');
         Passport::routes();
         $this->commands([
             InstallCommand::class,
