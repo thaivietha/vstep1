@@ -119,7 +119,7 @@ class OrderController extends Controller
                 return $items;
             })
             ->addColumn('user_email', function ($q) {
-                return $q->user->email;
+                return @$q->user->email;
             })
             ->addColumn('date', function ($q) {
                 return $q->updated_at->diffforhumans();

@@ -38,8 +38,8 @@
                         <tr>
                             <th>@lang('labels.backend.orders.fields.ordered_by')</th>
                             <td>
-                                Name    : <b>{{$order->user->name}}</b><br>
-                                Email   : <b>{{$order->user->email}}</b>
+                                Name    : <b>{{@$order->user->name}}</b><br>
+                                Email   : <b>{{@$order->user->email}}</b>
                             </td>
                         </tr>
                         <tr>
