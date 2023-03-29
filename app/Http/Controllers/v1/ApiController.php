@@ -2627,7 +2627,7 @@ class ApiController extends Controller
                 $user = User::where('username',$userName)->first();
             }
             $courses =  $user->purchasedCourses();
-            $result = $lessons = array();
+            $lessons = array();
             if($courses){
                 foreach ($courses as $course){
                     $courseTimeline = $course->courseTimeline()->orderBy('sequence', 'asc')->get();
@@ -2641,7 +2641,6 @@ class ApiController extends Controller
                 }
             }
 //            dd($lessons);
-
 //            foreach($lessons as $arr){
 //                $result = array_merge($result , $arr->toArray());
 //            }
