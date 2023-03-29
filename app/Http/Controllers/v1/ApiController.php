@@ -2662,4 +2662,21 @@ class ApiController extends Controller
     }
 
 
+    public function getInfo(){
+        $contact_data = contact_data(config('contact_data'));
+        $dataInfo = [
+            'short_text' => $contact_data['short_text']['status'] == 1 ? $contact_data['short_text']['value'] : null,
+            'primary_address' => $contact_data['primary_address']['status'] == 1 ? $contact_data['primary_address']['value'] : null,
+            'secondary_address' => $contact_data['secondary_address']['status'] == 1 ? $contact_data['secondary_address']['value'] : null,
+            'primary_phone' => $contact_data['primary_phone']['status'] == 1 ? $contact_data['primary_phone']['value'] : null,
+            'secondary_phone' => $contact_data['secondary_phone']['status'] == 1 ? $contact_data['secondary_phone']['value'] : null,
+            'primary_email' => $contact_data['primary_email']['status'] == 1 ? $contact_data['primary_email']['value'] : null,
+            'secondary_email' => $contact_data['secondary_email']['status'] == 1 ? $contact_data['secondary_email']['value'] : null,
+            'logo_b_image' => asset('storage/logos/'.config('logo_b_image')),
+            'logo_w_image' => asset('storage/logos/'.config('logo_w_image')),
+            'logo_white_image' => asset('storage/logos/'.config('logo_white_image')),
+            'logo_popup' => asset('storage/logos/'.config('logo_popup')),
+        ];
+        return  response()->json($dataInfo);
+    }
 }
