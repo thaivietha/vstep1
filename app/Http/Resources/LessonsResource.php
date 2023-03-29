@@ -28,13 +28,13 @@ class LessonsResource extends JsonResource
 //            'file' => $this->mediaFiles ? $this->mediaFiles->name : null,
 //            'pass' => $this->downloadable_files_pass,
 //        ];
-//        dd($thisơ);
+//        dd($this);
 
         return [
             'Id' => $this['uuid'],
             'TenBaiHoc' => $this['title'],
             'IdKhoaHoc' => $this['course']['uuid'],
-////            'STT' => 1,
+            'STT' => $this['stt'],
             'Link1' => $this['backup_link_1'],
             'Link2' => $this['backup_link_2'],
             'file' => $this['lessons_files'] ? $this['lessons_files']['name'] : null,

@@ -2633,13 +2633,13 @@ class ApiController extends Controller
                     $courseTimeline = $course->courseTimeline()->orderBy('sequence', 'asc')->get();
                     foreach($courseTimeline as $key=>$item){
                         if(isset($item->model) && $item->model->published == 1){
+                            $item->model->stt = $key+1;
                             $lessons[] = $item->model->load('course','lessonsFiles');
                         }
                     }
 //                    $lessons[] = $course->publishedLessons->load('course','lessonsFiles');
                 }
             }
-
 //            dd($lessons);
 
 //            foreach($lessons as $arr){
