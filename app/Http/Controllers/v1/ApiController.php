@@ -2626,18 +2626,26 @@ class ApiController extends Controller
             }else{
                 $user = User::where('username',$userName)->first();
             }
-
             $courses =  $user->purchasedCourses();
             $result = $lessons = array();
             if($courses){
                 foreach ($courses as $course){
-                    $lessons[] = $course->publishedLessons->load('course','lessonsFiles');
+                    $courseTimeline = $course->courseTimeline()->orderBy('sequence', 'asc')->get();
+                    foreach($courseTimeline as $key=>$item){
+                        if(isset($item->model) && $item->model->published == 1){
+                            $lessons[] = $item->model->load('course','lessonsFiles');
+                        }
+                    }
+//                    $lessons[] = $course->publishedLessons->load('course','lessonsFiles');
                 }
             }
-            foreach($lessons as $arr){
-                $result = array_merge($result , $arr->toArray());
-            }
-            $lessonsResource = lessonsResource::collection($result);
+
+//            dd($lessons);
+
+//            foreach($lessons as $arr){
+//                $result = array_merge($result , $arr->toArray());
+//            }
+            $lessonsResource = lessonsResource::collection($lessons);
             return response()->json($lessonsResource);
         }catch (\Exception $e){
             \Log::error($e->getMessage().'user: '.auth()->user());
