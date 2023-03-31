@@ -2670,13 +2670,16 @@ class ApiController extends Controller
                     $query->orderBy('sequence', 'asc');
                 }])
                 ->get()
-                ->sortBy(function ($lesson) {
-                    return $lesson->courseTimeline->sequence;
+                ->groupBy('course_id')
+                ->map(function ($courseLessons) {
+                    return $courseLessons->sortBy(function ($lesson) {
+                        return $lesson->courseTimeline->sequence;
+                    })->map(function ($lesson, $key) {
+                        $lesson->stt = $key + 1;
+                        return $lesson;
+                    });
                 })
-                ->map(function ($lesson, $key) {
-                    $lesson->stt = $key + 1;
-                    return $lesson;
-                });
+                ->flatten(1);
 
             $lessonsResource = lessonsResource::collection($lessons);
             return response()->json($lessonsResource);
@@ -2685,6 +2688,7 @@ class ApiController extends Controller
             return response()->json(['error' => 'An error occurred.'], 500);
         }
     }
+
 
 
 
