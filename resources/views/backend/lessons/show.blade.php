@@ -71,7 +71,6 @@
                             <th>@lang('labels.backend.lessons.fields.downloadable_files')</th>
                             <td>
                                 @if($lesson->lessonsFiles)
-
                                     <p class="form-group">
                                         <a href="{{ $lesson->lessonsFiles->url }}"
                                            target="_blank">{{ $lesson->lessonsFiles->name }}
