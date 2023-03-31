@@ -2652,6 +2652,7 @@ class ApiController extends Controller
     }
 **/
 
+
     public function lessonsByUser($userName = null)
     {
         try {
@@ -2665,8 +2666,13 @@ class ApiController extends Controller
                 $query->where('users.id', $user->id);
             })
                 ->where('published', 1)
-                ->with('course', 'lessonsFiles')
+                ->with(['course', 'lessonsFiles', 'courseTimeline' => function ($query) {
+                    $query->orderBy('sequence', 'asc');
+                }])
                 ->get()
+                ->sortBy(function ($lesson) {
+                    return $lesson->courseTimeline->sequence;
+                })
                 ->map(function ($lesson, $key) {
                     $lesson->stt = $key + 1;
                     return $lesson;
