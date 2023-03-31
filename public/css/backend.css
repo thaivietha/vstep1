@@ -14580,6 +14580,9 @@ canvas {
 .sidebar .nav-dropdown.open .nav-link {
   color: #fff;
   border-left: 0;
+}.sidebar .nav-dropdown.open .menu-indent {
+   padding-left: 3rem; /* Điều chỉnh giá trị này theo nhu cầu của bạn */
+
 }
 
 .sidebar .nav-dropdown.open .nav-link.disabled {

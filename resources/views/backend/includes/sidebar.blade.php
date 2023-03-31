@@ -67,8 +67,8 @@
                     <ul class="nav-dropdown-items">
 
                         @can('course_access')
-                            <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'courses' ? 'active' : '' }}"
+                            <li class="nav-item">
+                                <a class="nav-link {{ $request->segment(2) == 'courses' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.courses.index') }}">
                                     <span class="title">@lang('menus.backend.sidebar.courses.title')</span>
                                 </a>
@@ -77,7 +77,7 @@
 
                         @can('lesson_access')
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'lessons' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'lessons' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.lessons.index') }}">
                                     <span class="title">@lang('menus.backend.sidebar.lessons.title')</span>
                                 </a>
@@ -144,13 +144,13 @@
                         </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(1) == 'sales' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(1) == 'sales' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.reports.sales') }}">
                                     @lang('menus.backend.sidebar.reports.sales')
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(1) == 'students' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(1) == 'students' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.reports.students') }}">@lang('menus.backend.sidebar.reports.students')
                                 </a>
                             </li>
@@ -173,7 +173,7 @@
                     <ul class="nav-dropdown-items">
                         @can('page_access')
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'pages' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'pages' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.pages.index') }}">
                                     <span class="title">@lang('menus.backend.sidebar.pages.title')</span>
                                 </a>
@@ -181,7 +181,7 @@
                         @endcan
                         @can('blog_access')
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'blogs' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'blogs' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.blogs.index') }}">
                                     <span class="title">@lang('menus.backend.sidebar.blogs.title')</span>
                                 </a>
@@ -189,7 +189,7 @@
                         @endcan
                         @can('reason_access')
                             <li class="nav-item">
-                                <a class="nav-link {{ $request->segment(2) == 'reasons' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'reasons' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.reasons.index') }}">
                                     <span class="title">@lang('menus.backend.sidebar.reasons.title')</span>
                                 </a>
@@ -197,61 +197,61 @@
                         @endcan
                         @if ($logged_in_user->isAdmin())
                             <li class="nav-item">
-                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/menu-manager')) }}"
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/menu-manager')) }} menu-indent"
                                    href="{{ route('admin.menu-manager') }}"> {{ __('menus.backend.sidebar.menu-manager.title') }}</a>
                             </li>
 
 
                             <li class="nav-item ">
-                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/sliders*')) }}"
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/sliders*')) }} menu-indent"
                                    href="{{ route('admin.sliders.index') }}">
                                     <span class="title">@lang('menus.backend.sidebar.hero-slider.title')</span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'sponsors' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'sponsors' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.sponsors.index') }}">
                                     <span class="title">@lang('menus.backend.sidebar.sponsors.title')</span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'testimonials' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'testimonials' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.testimonials.index') }}">
                                     <span class="title">@lang('menus.backend.sidebar.testimonials.title')</span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'forums-category' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'forums-category' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.forums-category.index') }}">
                                     <span class="title">@lang('menus.backend.sidebar.forums-category.title')</span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'faqs' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'faqs' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.faqs.index') }}">
                                     <span class="title">@lang('menus.backend.sidebar.faqs.title')</span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'contact' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'contact' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.contact-settings') }}">
                                     <span class="title">@lang('menus.backend.sidebar.contact.title')</span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'newsletter' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'newsletter' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.newsletter-settings') }}">
                                     <span class="title">@lang('menus.backend.sidebar.newsletter-configuration.title')</span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'footer' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'footer' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.footer-settings') }}">
                                     <span class="title">@lang('menus.backend.sidebar.footer.title')</span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ $request->segment(2) == 'sitemap' ? 'active' : '' }}"
+                                <a class="nav-link {{ $request->segment(2) == 'sitemap' ? 'active' : '' }} menu-indent"
                                    href="{{ route('admin.sitemap.index') }}">
                                     <span class="title">@lang('menus.backend.sidebar.sitemap.title')</span>
                                 </a>
@@ -265,7 +265,7 @@
             @else
                 @can('blog_access')
                     <li class="nav-item ">
-                        <a class="nav-link {{ $request->segment(2) == 'blogs' ? 'active' : '' }}"
+                        <a class="nav-link {{ $request->segment(2) == 'blogs' ? 'active' : '' }} menu-indent"
                            href="{{ route('admin.blogs.index') }}">
                             <i class="nav-icon icon-note"></i>
                             <span class="title">@lang('menus.backend.sidebar.blogs.title')</span>
@@ -274,7 +274,7 @@
                 @endcan
                 @can('reason_access')
                     <li class="nav-item">
-                        <a class="nav-link {{ $request->segment(2) == 'reasons' ? 'active' : '' }}"
+                        <a class="nav-link {{ $request->segment(2) == 'reasons' ? 'active' : '' }} menu-indent"
                            href="{{ route('admin.reasons.index') }}">
                             <i class="nav-icon icon-layers"></i>
                             <span class="title">@lang('menus.backend.sidebar.reasons.title')</span>
@@ -347,7 +347,7 @@
 {{--                </li>--}}
 {{--            @endif--}}
             <li class="nav-item ">
-                <a class="nav-link {{ $request->segment(1) == 'account' ? 'active' : '' }}"
+                <a class="nav-link {{ $request->segment(1) == 'account' ? 'active' : '' }} menu-indent"
                    href="{{ route('admin.account') }}">
                     <i class="nav-icon icon-key"></i>
                     <span class="title">@lang('menus.backend.sidebar.account.title')</span>
@@ -400,7 +400,7 @@
 
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/auth/user*')) }}"
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/auth/user*')) }} menu-indent"
                                href="{{ route('admin.auth.user.index') }}">
                                 @lang('labels.backend.access.users.management')
 
@@ -410,7 +410,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/auth/role*')) }}"
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/auth/role*')) }} menu-indent"
                                href="{{ route('admin.auth.role.index') }}">
                                 @lang('labels.backend.access.roles.management')
                             </a>
@@ -430,19 +430,19 @@
 
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/settings')) }}"
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/settings')) }} menu-indent"
                                href="{{ route('admin.general-settings') }}">
                                 @lang('menus.backend.sidebar.settings.general')
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}"
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }} menu-indent"
                                href="{{ route('admin.social-settings') }}">
                                 @lang('menus.backend.sidebar.settings.social-login')
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/settings/zoom-settings*')) }}"
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/settings/zoom-settings*')) }} menu-indent"
                                href="{{ route('admin.zoom-settings') }}">
                                 @lang('menus.backend.sidebar.settings.zoom_setting')
                             </a>
@@ -458,13 +458,13 @@
 
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer')) }}"
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer')) }} menu-indent"
                                href="{{ route('log-viewer::dashboard') }}">
                                 @lang('menus.backend.log-viewer.dashboard')
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}"
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }} menu-indent"
                                href="{{ route('log-viewer::logs.list') }}">
                                 @lang('menus.backend.log-viewer.logs')
                             </a>
