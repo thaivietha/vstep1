@@ -102,7 +102,7 @@
         {!! script(mix('js/manifest.js')) !!}
         {!! script(mix('js/vendor.js')) !!}
         {!! script(mix('js/backend.js')) !!}
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{--        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
         <script>
             //Route for message notification
             var messageNotificationRoute = '{{route('admin.messages.unread')}}'
