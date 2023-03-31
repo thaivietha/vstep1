@@ -246,7 +246,7 @@ class LessonsController extends Controller
             $sequence = $lesson->course->courseTimeline->max('sequence');
             $sequence = $sequence + 1;
         }
-
+/**
         if ($lesson->published == 1) {
             $timeline = CourseTimeline::where('model_type', '=', Lesson::class)
                 ->where('model_id', '=', $lesson->id)
@@ -259,6 +259,20 @@ class LessonsController extends Controller
             $timeline->model_type = Lesson::class;
             $timeline->sequence = $sequence;
             $timeline->save();
+        }
+**/
+        if ((int)$request->published == 1) {
+            CourseTimeline::updateOrCreate(
+                [
+                    'model_id' => $lesson->id,
+                    'model_type' => Lesson::class,
+                ],
+                [
+                    'course_id' => $request->course_id,
+                    'sequence' => $sequence
+                ]
+
+            );
         }
 
         return redirect()->route('admin.lessons.index', ['course_id' => $request->course_id])->withFlashSuccess(__('alerts.backend.general.created'));
@@ -401,26 +415,25 @@ class LessonsController extends Controller
             $media->save();
         }
         $sequence = 1;
+
         if (count($lesson->course->courseTimeline) > 0) {
             $sequence = $lesson->course->courseTimeline->max('sequence');
             $sequence = $sequence + 1;
         }
 
         if ((int)$request->published == 1) {
-            $timeline = CourseTimeline::where('model_type', '=', Lesson::class)
-                ->where('model_id', '=', $lesson->id)
-                ->where('course_id', $request->course_id)->first();
-            if ($timeline == null) {
-                $timeline = new CourseTimeline();
-            }
-            $timeline->course_id = $request->course_id;
-            $timeline->model_id = $lesson->id;
-            $timeline->model_type = Lesson::class;
-            $timeline->sequence = $sequence;
-            $timeline->save();
+            CourseTimeline::updateOrCreate(
+                [
+                    'model_id' => $lesson->id,
+                    'model_type' => Lesson::class,
+                ],
+                [
+                    'course_id' => $request->course_id,
+                    'sequence' => $sequence
+                ]
+
+            );
         }
-
-
         return redirect()->route('admin.lessons.index', ['course_id' => $request->course_id])->withFlashSuccess(__('alerts.backend.general.updated'));
     }
 

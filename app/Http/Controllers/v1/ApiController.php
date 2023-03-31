@@ -2675,7 +2675,7 @@ class ApiController extends Controller
                     return $courseLessons->sortBy(function ($lesson) {
                         return $lesson->courseTimeline->sequence;
                     })->map(function ($lesson, $key) {
-                        $lesson->stt = $key + 1;
+                        $lesson->stt = $lesson->courseTimeline->sequence;
                         return $lesson;
                     });
                 })

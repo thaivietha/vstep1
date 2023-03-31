@@ -146,7 +146,6 @@
                         <p class="mb-0">@lang('labels.backend.courses.listing_note')</p>
                         <p class="">@lang('labels.backend.courses.timeline_description')</p>
                         <ul class="sorter d-inline-block">
-
                             @foreach($courseTimeline as $key=>$item)
 
                                 @if(isset($item->model) && $item->model->published == 1)
