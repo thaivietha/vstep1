@@ -55,6 +55,10 @@
                 <div class="col-12">
                     <table class="table table-bordered table-striped">
                         <tr>
+                            <th>Uuid</th>
+                            <td>{{ $course->uuid }}</td>
+                        </tr>
+                        <tr>
                             <th>@lang('labels.backend.courses.fields.teachers')</th>
                             <td>
                                 @foreach ($course->teachers as $singleTeachers)
