@@ -12,13 +12,14 @@
                 <div class="col-md-12">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <th>@lang('labels.backend.lessons.fields.course')</th>
-                            <td>{{ $lesson->course->title or '' }} - {{$lesson->course->uuid}}</td>
-                        </tr>
-                        <tr>
                             <th>Uuid</th>
                             <td>{{ $lesson->uuid }}</td>
                         </tr>
+                        <tr>
+                            <th>@lang('labels.backend.lessons.fields.course')</th>
+                            <td>{{ $lesson->course->title }} - {{$lesson->course->uuid}}</td>
+                        </tr>
+
                         <tr>
                             <th>@lang('labels.backend.lessons.fields.title')</th>
                             <td>{{ $lesson->title }}</td>
