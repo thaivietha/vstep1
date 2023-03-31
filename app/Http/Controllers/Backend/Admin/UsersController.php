@@ -173,7 +173,7 @@ class UsersController extends Controller
 
         $users = \App\Models\Auth\User::select('id', 'username', 'email')
             ->whereHas('roles', function ($q) {
-                $q->whereIn('role_id', [1, 2, 5]);
+                $q->whereNotIn('role_id', [1, 2, 5]);
             })
             ->where(function ($query) use ($searchTerm) {
                 $query->where('username', 'like', '%' . $searchTerm . '%')
