@@ -27,6 +27,10 @@
 
             <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css" rel="stylesheet" />
+
+
+
             <link rel="stylesheet"
 {{--                  href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css"/>--}}
                   href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css"/>
@@ -98,6 +102,7 @@
         {!! script(mix('js/manifest.js')) !!}
         {!! script(mix('js/vendor.js')) !!}
         {!! script(mix('js/backend.js')) !!}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             //Route for message notification
             var messageNotificationRoute = '{{route('admin.messages.unread')}}'
@@ -118,7 +123,12 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
-        <script src="{{asset('js/select2.full.min.js')}}" type="text/javascript"></script>
+
+
+
+        {{--        <script src="{{asset('js/select2.full.min.js')}}" type="text/javascript"></script>--}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
+
         <script src="{{asset('js/main.js')}}" type="text/javascript"></script>
         <script>
             window._token = '{{ csrf_token() }}';

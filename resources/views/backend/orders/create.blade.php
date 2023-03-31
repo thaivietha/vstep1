@@ -55,16 +55,14 @@
             <div class="row">
                 <div class="col-12 col-lg-12 form-group">
                     {!! Form::label('user_id', trans('labels.backend.orders.fields.user'), ['class' => 'control-label']) !!}
-                    {!! Form::select('user_id', $users,  (request('user_id')) ? request('user_id') : old('user_id'), ['class' => 'form-control select2']) !!}
+                    {!! Form::select('user_id', [], (request('user_id')) ? request('user_id') : old('user_id'), ['class' => 'form-control user-search']) !!}
+{{--                    {!! Form::select('user_id', $users,  (request('user_id')) ? request('user_id') : old('user_id'), ['class' => 'form-control select2']) !!}--}}
                 </div>
 
                 <div class="col-12 col-lg-12 form-group">
                     {!! Form::label('course_id', trans('labels.backend.orders.fields.course'), ['class' => 'control-label']) !!}
                     {!! Form::select('course_id[]', $courses, old('course_id'), ['class' => 'form-control select2 js-example-placeholder-multiple', 'multiple' => 'multiple', 'required' => true]) !!}
                 </div>
-
-
-
             </div>
 
             <div class="row">
@@ -73,8 +71,6 @@
                     {!! Form::submit(trans('strings.backend.general.app_save'), ['class' => 'btn btn-lg btn-danger']) !!}
                 </div>
             </div>
-
-
         </div>
     </div>
 
@@ -85,5 +81,52 @@
 @stop
 
 @push('after-scripts')
+    <!-- Select2 -->
+    <script>
+        $(document).ready(function () {
+            function formatRepo (repo) {
+                if (repo.loading) {
+                    return repo.text;
+                }
+                return repo.text;
+            }
 
+            function formatRepoSelection (repo) {
+                return repo.text || repo.username;
+            }
+
+            $('.user-search').select2({
+                ajax: {
+                    url: '{{asset('user/auth/user/search')}}', // thay bằng URL đúng của route tìm kiếm người dùng
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term || '', // tìm kiếm theo từ khóa
+                            page: params.page || 1
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data.results,
+                            pagination: {
+                                more: data.pagination.more
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 0,
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection,
+                placeholder: 'Tìm kiếm người dùng',
+            }).on('select2:open', function (e) {
+                if (!$(this).data('preloaded')) {
+                    $(this).data('preloaded', true);
+                    $('.user-search').select2('search', '');
+                }
+            });
+        });
+    </script>
 @endpush

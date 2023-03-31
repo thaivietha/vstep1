@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Admin\UsersController;
 use App\Http\Controllers\Backend\Auth\Role\RoleController;
 use App\Http\Controllers\Backend\Auth\User\UserController;
 use App\Http\Controllers\Backend\Auth\User\UserAccessController;
@@ -36,6 +37,8 @@ Route::group([
         Route::get('user/create', [UserController::class, 'create'])->name('user.create');
         Route::post('user/get-data', [UserController::class, 'getData'])->name('user.getData');
         Route::post('user', [UserController::class, 'store'])->name('user.store');
+        Route::get('user/search', [UsersController::class, 'search'])->name('users.search');
+
 
         /*
          * Specific User

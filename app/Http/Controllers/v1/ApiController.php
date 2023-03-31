@@ -2619,7 +2619,9 @@ class ApiController extends Controller
 
     }
 
-    public function lessonsByUser($userName = null){
+
+/**
+    public function lessonsByUser2($userName = null){
         try {
             if(!$userName){
                 $user = auth()->user();
@@ -2635,21 +2637,50 @@ class ApiController extends Controller
                         if(isset($item->model) && $item->model->published == 1){
                             $item->model->stt = $key+1;
                             $lessons[] = $item->model->load('course','lessonsFiles');
+
+
                         }
                     }
-//                    $lessons[] = $course->publishedLessons->load('course','lessonsFiles');
                 }
             }
-//            dd($lessons);
-//            foreach($lessons as $arr){
-//                $result = array_merge($result , $arr->toArray());
-//            }
+
             $lessonsResource = lessonsResource::collection($lessons);
             return response()->json($lessonsResource);
         }catch (\Exception $e){
-            \Log::error($e->getMessage().'user: '.auth()->user());
+            \Log::error('lessonsByUser: '.$e->getMessage().'user: '.auth()->user());
         }
     }
+**/
+
+    public function lessonsByUser($userName = null)
+    {
+        try {
+            $user = $userName ? User::where('username', $userName)->first() : auth()->user();
+
+            if (!$user) {
+                return response()->json(['error' => 'User not found.'], 404);
+            }
+
+            $lessons = Lesson::whereHas('course.students', function ($query) use ($user) {
+                $query->where('users.id', $user->id);
+            })
+                ->where('published', 1)
+                ->with('course', 'lessonsFiles')
+                ->get()
+                ->map(function ($lesson, $key) {
+                    $lesson->stt = $key + 1;
+                    return $lesson;
+                });
+
+            $lessonsResource = lessonsResource::collection($lessons);
+            return response()->json($lessonsResource);
+        } catch (\Exception $e) {
+            \Log::error('lessonsByUser: '.$e->getMessage().'user: '.auth()->user());
+            return response()->json(['error' => 'An error occurred.'], 500);
+        }
+    }
+
+
 
     public function getzipfileIdLesson($id){
         try {

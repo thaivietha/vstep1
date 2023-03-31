@@ -159,4 +159,38 @@ class UsersController extends Controller
         }
     }
 
+
+    /**
+     * Search User.
+     *
+     * @param Request $request
+     */
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('q');
+        $page = $request->input('page', 1);
+        $perPage = 10; // Số người dùng trên mỗi trang
+
+        $users = \App\Models\Auth\User::select('id', 'username', 'email')
+            ->whereHas('roles', function ($q) {
+                $q->whereIn('role_id', [1, 2, 5]);
+            })
+            ->where(function ($query) use ($searchTerm) {
+                $query->where('username', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('email', 'like', '%' . $searchTerm . '%');
+            })
+            ->orderBy('username', 'asc')
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+
+        $formattedUsers = $users->map(function ($user) {
+            return ['id' => $user->id, 'text' => $user->username . ' - (' . $user->email . ')'];
+        });
+
+        $moreResults = count($formattedUsers) === $perPage;
+
+        return response()->json(['results' => $formattedUsers, 'pagination' => ['more' => $moreResults]]);
+    }
+
 }

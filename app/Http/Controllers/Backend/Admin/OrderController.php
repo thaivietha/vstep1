@@ -17,6 +17,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use mysql_xdevapi\Exception;
 use Yajra\DataTables\Facades\DataTables;
@@ -157,13 +158,35 @@ class OrderController extends Controller
         }
         $courses = Course::has('category')->ofTeacher()->get()->pluck('title', 'id');
 //        $users = User::get()->pluck('username', 'id')->prepend('Please select', '');
-        $users = \App\Models\Auth\User::whereHas('roles', function ($q) {
-            $q->where('role_id','<>', 1)
-                ->where('role_id', '<>',2)
-                ->where('role_id', '<>',5);
-        })->get()->pluck('name', 'id');
+//        $users = \App\Models\Auth\User::whereHas('roles', function ($q) {
+//            $q->where('role_id', '<>', 1)
+//                ->where('role_id', '<>', 2)
+//                ->where('role_id', '<>', 5);
+//        })
+////            ->get()->pluck(['username'], 'id');
+//        ->get()
+//            ->pluck('email', 'username')
+//            ->mapWithKeys(function ($email, $username) {
+//                $user = \App\Models\Auth\User::where('username', $username)->first();
+//                return [$user->id => $username . ' - (' . $email . ')'];
+//            })
+//            ->toArray();
 
-        return view('backend.orders.create', compact('courses', 'users'));
+
+//        $users = \App\Models\Auth\User::select('id', 'username', 'email')
+//            ->whereHas('roles', function ($q) {
+//                $q->select('role_id')->whereNotIn('role_id', [1, 2, 5]);
+//            })
+//            ->get()
+//            ->mapWithKeys(function ($user) {
+//                return [$user->id => $user->username . ' - (' . $user->email . ')'];
+//            })
+//            ->toArray();
+//
+//
+//        dd($users);
+
+        return view('backend.orders.create', compact('courses'));
     }
 
     /**
